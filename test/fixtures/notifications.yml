@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  end_user: one
+  subject: one
+  action_type: 1
+  checked: false
+
+two:
+  end_user: two
+  subject: two
+  action_type: 1
+  checked: false
