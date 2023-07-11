@@ -14,7 +14,8 @@
     date_of_dirth:  "value" "2017-07-19",
     introduction:   "#{n + 1}よろしくお願いします！",
     private_status: true,
-    is_deleted:     false
+    is_deleted:     false,
+    profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/no_image.jpg"),filename: "no_imege.jpg")
   )
 end
 

@@ -12,7 +12,7 @@ class EndUser < ApplicationRecord
   has_one_attached :profile_image
   has_many :posts, dependent: :destroy
   
-  
+  # emailかuniqur_idどちらか選べるようにしている
   def login
     @login || self.unique_id || self.email
   end
@@ -25,11 +25,13 @@ class EndUser < ApplicationRecord
       where(conditions.to_h).first
     end
   end
-  
+  # emailかuniqur_idどちらかあるか？
   def validate_unique_id
-  if EndUser.where(email: unique_id).exists?
-    errors.add(:unique_id, :invalid)
+    if EndUser.where(email: unique_id).exists?
+      errors.add(:unique_id, :invalid)
+    end
   end
-end
+  
+
   
 end
