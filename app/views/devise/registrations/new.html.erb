@@ -1,34 +1,49 @@
-<h2>新規登録</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 bg-primary rounded mt-5">
+      <div class="mx-auto" style="width: 80%;">
+        <h2 class="text-center text-light mt-3">新規登録</h2>
+        <%= form_with model: @end_user, url: end_user_registration_path do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_with model: @end_user, url: end_user_registration_path do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="mb-3">
+            <%= f.label :表示名, class: 'form-label text-light' %>
+            <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder:"サイトで表示される名前です" %>
+          </div>
+          
+          <div class="mb-3">
+            <%= f.label :ユーザ名, class: 'form-label text-light' %>
+            <%= f.text_field :unique_id, class: 'form-control', placeholder:"英数字、アンダースコア、句読点のみ使用できます" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, autofocus: true %>
+          <div class="mb-3">
+            <%= f.label :メールアドレス, class: 'form-label text-light' %>
+            <%= f.email_field :email, autocomplete: "email", class: 'form-control', placeholder:"name@example.com" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :パスワード, class: 'form-label text-light' %>
+            <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder:"6文字以上で、半角英数を両方含む必要があります" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :パスワード（再確認）, class: 'form-label text-light' %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+          </div>
+
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">この情報で登録します</label>
+          </div>
+
+          <div class="actions mx-auto w-50 mt-5" style="height: 65px;">
+            <%= f.submit "登録する", class: 'btn btn-info btn-lg w-100 h-100 fs-5' %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
   </div>
-  
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br>
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

@@ -3,9 +3,14 @@ class EndUser < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  before_create :default_image
   attr_writer :login
+
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります'}
+  
   validates :unique_id, presence: true, uniqueness: { case_sensitive: false }
-  # 文字、数字、アンダースコア、句読点のみ使用できます
+  # unique_idは英数字、アンダースコア、句読点のみ使用できます
   validates_format_of :unique_id, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validate :validate_unique_id
   
@@ -31,7 +36,13 @@ class EndUser < ApplicationRecord
       errors.add(:unique_id, :invalid)
     end
   end
-  
+  # ユーザが新規登録される際にデフォルト画像を追加する
+  def default_image
+    if !self.profile_image.attached?
+      self.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/no_image.jpg')), filename: 'no_image.jpg', content_type: 'image/jpeg')
+    end
+  end
+
 
   
 end

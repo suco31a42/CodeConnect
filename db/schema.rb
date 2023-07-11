@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 2023_07_11_100143) do
     t.datetime "remember_created_at"
     t.string "name", null: false
     t.string "unique_id", null: false
-    t.date "date_of_dirth", null: false
-    t.string "introduction", null: false
+    t.date "date_of_dirth"
+    t.string "introduction"
     t.boolean "private_status", default: true, null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false

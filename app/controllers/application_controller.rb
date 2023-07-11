@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # メールアドレスまたはユニークIDとパスワードでログインできる
   def configure_permitted_parameters
-    # メールアドレスまたはユニークIDとパスワードでログインできる
-    added_attrs = [:unique_id, :email, :password, :password_confirmation]
+    added_attrs = [:name, :unique_id, :email, :password, :password_confirmation]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :sign_in, keys: [:login, :password]
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
