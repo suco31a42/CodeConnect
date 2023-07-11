@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_10_090729) do
+ActiveRecord::Schema.define(version: 2023_07_11_100143) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -85,21 +85,21 @@ ActiveRecord::Schema.define(version: 2023_07_10_090729) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.string "end_user_type"
-    t.integer "end_user_id"
+    t.string "subject_type"
     t.integer "subject_id"
-    t.integer "action_type"
+    t.integer "end_user_id"
+    t.integer "action_type", null: false
     t.boolean "checked"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["end_user_type", "end_user_id"], name: "index_notifications_on_end_user"
-    t.index ["subject_id"], name: "index_notifications_on_subject_id"
+    t.index ["end_user_id"], name: "index_notifications_on_end_user_id"
+    t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject"
   end
 
   create_table "post_comments", force: :cascade do |t|
     t.integer "end_user_id", null: false
     t.integer "post_id", null: false
-    t.string "body"
+    t.string "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_post_comments_on_end_user_id"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2023_07_10_090729) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "end_user_id", null: false
-    t.string "body"
+    t.string "body", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["end_user_id"], name: "index_posts_on_end_user_id"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 2023_07_10_090729) do
   add_foreign_key "bookmarks", "end_users"
   add_foreign_key "likes", "end_users"
   add_foreign_key "likes", "posts"
-  add_foreign_key "notifications", "subjects"
+  add_foreign_key "notifications", "end_users"
   add_foreign_key "post_comments", "end_users"
   add_foreign_key "post_comments", "posts"
   add_foreign_key "posts", "end_users"

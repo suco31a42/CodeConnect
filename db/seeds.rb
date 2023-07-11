@@ -17,3 +17,8 @@
     is_deleted:     false
   )
 end
+
+Post.create(
+  end_user_id: 1,
+  body: "テキストテキストテキストテキスト"
+)

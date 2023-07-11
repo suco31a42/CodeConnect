@@ -1,2 +1,30 @@
 <%= render 'layouts/header' %>
 <%= render 'layouts/navigation' %>
+<div class="container-xxl">
+  <div class="row">
+    <div class="col-md-1 col-lg-2"></div>
+    <div class="col-md-10 col-lg-10">
+    <%= flash[:notice] %>
+    <% if @post.errors.any? %>
+  <div class="error">
+    <% @post.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>
+
+
+
+
+
+     <% @posts.each do |post_list| %>
+      <div>
+        <% if post_list.post_image.attached? %>
+          <%= image_tag post_list.post_image %>
+        <% end %>
+        <p>本文：<%= post_list.body %></p>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

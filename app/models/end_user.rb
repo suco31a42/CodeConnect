@@ -9,6 +9,9 @@ class EndUser < ApplicationRecord
   validates_format_of :unique_id, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validate :validate_unique_id
   
+  has_one_attached :profile_image
+  has_many :posts, dependent: :destroy
+  
   
   def login
     @login || self.unique_id || self.email
