@@ -1,5 +1,8 @@
 class EndUsersController < ApplicationController
   def show
+    @post = Post.new
+    @end_user = EndUser.find(params[:id])
+    @end_user_posts = @end_user.posts
   end
 
   def edit

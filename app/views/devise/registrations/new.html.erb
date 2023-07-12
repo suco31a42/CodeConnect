@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-lg-2"></div>
     <div class="col-lg-8 bg-primary rounded mt-5">
-      <div class="mx-auto" style="width: 80%;">
-        <h2 class="text-center text-light mt-3">新規登録</h2>
+      <div class="mx-auto m-5" style="width: 80%;">
+        <h2 class="text-center text-light mt-3 mb-5">新規登録</h2>
         <%= form_with model: @end_user, url: end_user_registration_path do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -11,7 +11,7 @@
             <%= f.label :表示名, class: 'form-label text-light' %>
             <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder:"サイトで表示される名前です" %>
           </div>
-          
+
           <div class="mb-3">
             <%= f.label :ユーザ名, class: 'form-label text-light' %>
             <%= f.text_field :unique_id, class: 'form-control', placeholder:"英数字、アンダースコア、句読点のみ使用できます" %>
@@ -34,15 +34,18 @@
 
           <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">この情報で登録します</label>
+            <label class="form-check-label text-light" for="exampleCheck1">この情報で登録します</label>
           </div>
 
           <div class="actions mx-auto w-50 mt-5" style="height: 65px;">
-            <%= f.submit "登録する", class: 'btn btn-info btn-lg w-100 h-100 fs-5' %>
+            <%= f.submit "登録する", class: 'btn btn-info btn-lg w-100 h-100 fs-5 text-dark fw-bold' %>
           </div>
         <% end %>
-
-        <%= render "devise/shared/links" %>
+        <div class="mx-auto mt-5 text-center" style="width: 260px;">
+          <p class="d-inline text-light">
+            登録がお済みの方は　<%= link_to "こちら", new_session_path(resource_name), class: "text-light fw-bold" %>
+          </p>
+        </div>
       </div>
     </div>
   </div>
