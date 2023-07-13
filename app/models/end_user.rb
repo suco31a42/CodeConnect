@@ -7,7 +7,7 @@ class EndUser < ApplicationRecord
   attr_writer :login
 
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります'}
+  validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります'}, allow_blank: true
   
   validates :unique_id, presence: true, uniqueness: { case_sensitive: false }
   # unique_idは英数字、アンダースコア、句読点のみ使用できます

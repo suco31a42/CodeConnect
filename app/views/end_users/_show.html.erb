@@ -1,8 +1,8 @@
-<% end_user.eager_load(:posts).all.each do |post_list| %>
-  <div class="container-fuild border bg-light p-3 ">
+<% end_user_posts.each do |post_list| %>
+  <div class="container-fuild border p-3 ">
     <div class="row">
       <div class="col-1">
-        <%= image_tag post_list.end_user.profile_image, size:'60x60', class:"rounded-circle" %>
+        <%= image_tag post_list.end_user.profile_image, size:'60x60', class:"rounded-circle shadow-sm" %>
       </div>
       <div class="col-10">
         <div class="post-user">
@@ -11,17 +11,31 @@
             <%= post_list.end_user.unique_id %>
           </p>
         </div>
-        
+
         <div class="post-body">
           <p><%= post_list.body %></p>
           <% if post_list.post_image.attached? %>
             <%= image_tag post_list.post_image, size:'300x300' %>
           <% end %>
         </div>
-        
+
         <div class="post-actions">
-          
+
         </div>
+      </div>
+      <div class="col-1">
+        <% if post_list.end_user.id == current_end_user.id %>
+        <div class="dropdown">
+          <a class="text-dark fs-4" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-three-dots fs-4 text-dark"></i>
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><%= link_to "投稿を編集する", edit_post_path(post_list), class:"text-dark dropdown-item fs-6" %></li>
+            <li><%= link_to "投稿を削除する", edit_post_path(post_list), class:"text-dark dropdown-item fs-6" %></li>
+          </ul>
+        </div>
+        <% end %>
       </div>
     </div>
   </div>

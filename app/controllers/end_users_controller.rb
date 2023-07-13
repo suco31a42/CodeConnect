@@ -2,10 +2,26 @@ class EndUsersController < ApplicationController
   def show
     @post = Post.new
     @end_user = EndUser.find(params[:id])
+    expires_now
     @end_user_posts = @end_user.posts
   end
 
   def edit
+    @post = Post.new
+    @end_user = EndUser.find(params[:id])
+  end
+
+  def update
+    @end_user = EndUser.find(params[:id])
+    if @end_user.update(end_user_params)
+      redirect_to end_user_path(@end_user.id)
+      flash[:notice] = "編集が成功しました"
+    else
+      @post = Post.new
+      render 'edit'
+      flash[:notice] = "編集は失敗しました"
+    end
+
   end
 
   def confirm
@@ -13,14 +29,14 @@ class EndUsersController < ApplicationController
 
   def withdraw
   end
-  
+
 private
 
   def end_user_params
     params.require(:end_user)
-    .permit(:name, :unipue_id, :email, :encrypted_password, :date_of_dirth, 
+    .permit(:name, :unique_id, :email, :date_of_dirth,
             :introduction, :private_status, :is_deleted, :profile_image)
   end
-  
-  
+
+
 end
