@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   end
   
   resources :posts, only: %i[index create edit update destroy] do
+    member do
+      delete :delete_image
+    end
     resources :likes, only: %i[create destroy]
     resources :bookmarks, only: %i[create destroy]
     resources :post_comments, only: %i[create destroy]

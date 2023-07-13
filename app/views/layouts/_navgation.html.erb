@@ -11,7 +11,7 @@
         <h4>本文</h4>
         <%= f.text_area :body, class:"form-control" %>
         <h4>画像</h4>
-        <%= f.file_field :post_image, accept: "image/*", class:"form-control-lg", style:"width: 450px; height: 200px;" %>
+        <%= f.file_field :post_images, accept: "image/*", multiple: true, class:"form-control-lg", style:"width: 450px; height: 200px;" %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary fs-6" data-bs-dismiss="modal">閉じる</button>

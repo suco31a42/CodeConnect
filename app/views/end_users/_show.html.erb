@@ -14,8 +14,10 @@
 
         <div class="post-body">
           <p><%= post_list.body %></p>
-          <% if post_list.post_image.attached? %>
-            <%= image_tag post_list.post_image, size:'300x300' %>
+          <% if post_list.post_images.attached? %>
+            <% post_list.post_images.each do |image| %>
+              <%= image_tag image.variant(resize:'385x300') %>
+            <% end %>
           <% end %>
         </div>
 

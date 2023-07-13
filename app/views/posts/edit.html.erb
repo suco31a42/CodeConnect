@@ -1,2 +1,45 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<%= render 'layouts/header' %>
+<%= render 'layouts/navgation' %>
+
+<div class="container-xl">
+  <div class="row">
+    <div style="width: 16%; height: 700px;"></div>
+    <div class="col-md-8 col-xl-9 m-3">
+      <%= flash[:notice] %>
+      <%= render 'layouts/errors', obj: @post %>
+      <%= render 'layouts/errors', obj: @post_edit %>
+      <h2 class="text-center">投稿を編集する</h2>
+      <%= form_with model: @post_edit do |f| %>
+        <div class="mb-3">
+          <%= f.label :本文, class: 'form-label text-dark' %>
+          <%= f.text_area :body, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :投稿画像, class: 'form-label text-dark' %>
+          <%= f.file_field :post_images, class: 'form-control', id: "formFile", accept: "image/*", multiple: true %>
+        </div>
+
+        <% if @post_edit.post_images.attached? %>
+          <p>選択済みの画像（削除する画像にチェックをつけてください）</p>
+          <div class="d-flex flex-wrap" style="width: 750px;">
+          <% @post_edit.post_images.each do |image| %>
+            <div class="d-flex m-3">
+              <div class="mb-auto">
+              <%= link_to "削除", delete_image_post_path(image.id), method: :delete, date: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+              </div>
+              <label for="post_image_ids_<%= image.id %>" >
+                <%= image_tag image, size: '300x200' %>
+              </label>
+            </div>
+          <% end %>
+          </div>
+        <% end %>
+
+        <div class="actions mx-auto w-50 mt-5 mb-5" style="height: 65px;">
+          <%= f.submit "編集を保存する", class: 'btn btn-primary btn-lg w-100 h-100 fs-5 fw-bold' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

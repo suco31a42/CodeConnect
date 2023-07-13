@@ -6,13 +6,7 @@
     <div class="" style="width: 16%; height: 700px;"></div>
     <div class="col-md-8 col-xl-9 ps-0">
       <%= flash[:notice] %>
-      <% if @post.errors.any? %>
-        <div class="error">
-          <% @post.errors.full_messages.each do |message| %>
-            <p><%= message %></p>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render 'layouts/errors', obj: @post %>
       <ul class="nav nav-tabs">
         <li class="nav-item text-center" style="width: 34%;">
           <a class="nav-link active bg-light fs-6" aria-current="page" href="#">新着</a>

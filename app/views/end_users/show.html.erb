@@ -6,13 +6,7 @@
     <div style="width: 16%; height: 700px;"></div>
     <div class="col-md-8 col-xl-9 ps-0">
       <%= flash[:notice] %>
-      <% if @post.errors.any? %>
-        <div class="error">
-          <% @post.errors.full_messages.each do |message| %>
-            <p><%= message %></p>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render 'layouts/errors', obj: @post %>
       <%= render 'profile', end_user: @end_user %>
       
       <ul class="nav nav-tabs">

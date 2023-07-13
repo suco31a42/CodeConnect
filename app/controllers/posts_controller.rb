@@ -20,12 +20,31 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.new
+    @post_edit = Post.find(params[:id])
   end
-  
+
   def update
     @post = Post.find(params[:id])
+    # ActiveStorageで紐づけたblobファイルを削除する
+    # if params[:post][:post_image_ids]
+    #   params[:post][:post_image_ids].each do |image_id|
+    #     image = @post.post_images.find(image_id)
+    #     image.purge
+    #   end
+    # end
+    # respond_to do |format|
+    #   if @post.update(post_params)
+    #     format.html { redirect_to edit_post_path(@post.id), notice: "User was successfully updated." }
+    #     format.json { render :show, status: :ok, location: @post }
+    #   else
+    #     format.html { render :edit, status: :unprocessable_entity }
+    #     format.json { render json: @post.errors, status: :unprocessable_entity }
+    #   end
+    # end
+    
     if @post.update(post_params)
-      redirect_to post_path(@post.id)
+      redirect_to edit_post_path(@post.id)
       flash[:notice] = "編集が成功しました"
     else
       @post = Post.new
@@ -33,7 +52,7 @@ class PostsController < ApplicationController
       flash[:notice] = "編集は失敗しました"
     end
   end
-  
+
   def destroy
     @post = Post.find(params[:id])
     if @post.destroy
@@ -46,12 +65,18 @@ class PostsController < ApplicationController
       flash[:notice] = "削除は失敗しました"
     end
   end
+  
+  def delete_image
+    @post = ActiveStorage::Blob.find_signed(params[:id])
+    @post.purge
+    redirect_to 'edit'
+  end
 
   private
 
   def post_params
-  params.require(:post).permit(:body, :post_image)
-end
+    params.require(:post).permit(:body, post_images: [])
+  end
 
 
 end

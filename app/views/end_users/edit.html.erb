@@ -6,13 +6,8 @@
     <div style="width: 16%; height: 700px;"></div>
     <div class="col-md-8 col-xl-9 m-3">
       <%= flash[:notice] %>
-      <% if @end_user.errors.any? %>
-        <div class="error">
-          <% @end_user.errors.full_messages.each do |message| %>
-            <p><%= message %></p>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render 'layouts/error', obj: @post %>
+      <%= render 'layouts/error', obj: @end_user %>
 
       <h2 class="text-center">プロフィール編集</h2>
       <%= form_with model: @end_user do |f| %>
