@@ -16,6 +16,8 @@ class EndUser < ApplicationRecord
   
   has_one_attached :profile_image
   has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
   
   # emailかuniqur_idどちらか選べるようにしている
   def login

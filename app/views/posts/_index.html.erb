@@ -27,7 +27,9 @@
         </div>
 
         <div class="post-actions">
-
+          <div class="like" id="like-btn-<%= post_list.id %>">
+            <%= render 'likes/btn', post: post_list %>
+          </div>
         </div>
       </div>
       <div class="col-1">

@@ -42,7 +42,7 @@ class PostsController < ApplicationController
     #     format.json { render json: @post.errors, status: :unprocessable_entity }
     #   end
     # end
-    
+
     if @post.update(post_params)
       redirect_to edit_post_path(@post.id)
       flash[:notice] = "編集が成功しました"
@@ -65,7 +65,7 @@ class PostsController < ApplicationController
       flash[:notice] = "削除は失敗しました"
     end
   end
-  
+
   def delete_image
     @post = ActiveStorage::Blob.find_signed(params[:id])
     @post.purge

@@ -6,8 +6,8 @@
     <div style="width: 16%; height: 700px;"></div>
     <div class="col-md-8 col-xl-9 m-3">
       <%= flash[:notice] %>
-      <%= render 'layouts/error', obj: @post %>
-      <%= render 'layouts/error', obj: @end_user %>
+      <%= render 'layouts/errors', obj: @post %>
+      <%= render 'layouts/errors', obj: @end_user %>
 
       <h2 class="text-center">プロフィール編集</h2>
       <%= form_with model: @end_user do |f| %>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="actions mx-auto w-50 mt-5 mb-5" style="height: 65px;">
-          <%= f.submit "編集を保存する", class: 'btn btn-primary btn-lg w-100 h-100 fs-5  fw-bold' %>
+          <%= f.submit "編集を保存する", class: 'btn btn-primary btn-lg w-100 h-100 fs-5 fw-bold' %>
         </div>
       <% end %>
     </div>

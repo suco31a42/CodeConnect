@@ -27,7 +27,9 @@
         </div>
 
         <div class="post-actions">
-
+          <div class="like" id="like-btn-<%= post_list.id %>">
+            <%= render 'likes/btn', post: post_list %>
+          </div>
         </div>
       </div>
       <div class="col-1">
@@ -39,7 +41,7 @@
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li><%= link_to "投稿を編集する", edit_post_path(post_list), class:"text-dark dropdown-item fs-6" %></li>
-            <li><%= link_to "投稿を削除する", edit_post_path(post_list), class:"text-dark dropdown-item fs-6" %></li>
+            <li><%= link_to "投稿を削除する", post_path(post_list), method: :delete, "data-confirm" => "本当に削除しますか？", class:"text-dark dropdown-item fs-6" %></li>
           </ul>
         </div>
         <% end %>
