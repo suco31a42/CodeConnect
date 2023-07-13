@@ -25,7 +25,8 @@
 
     <div class="col-md-1 col-xl-2 d-flex flex-column flex-shrink-0 p-3 text-bg-dark fixed-top ms-5" style="width: 16%; height: 700px;">
       <%= link_to end_user_path(current_end_user.id), class: 'd-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none' do %>
-        <%= image_tag current_end_user.profile_image, size:'60x60', class:"rounded-circle", cache: false %>
+        <!--画像を加工し、加工済みのデータが有る場合はそのデータを表示する-->
+        <%= image_tag current_end_user.profile_image.variant(resize:'60x60').processed, class:"rounded-circle", cache: false  %>
         <p class="fs-6 text-secondary pt-3 ps-2">
           <span class="text-light"><%= current_end_user.name %></span>
           <%= current_end_user.unique_id %>

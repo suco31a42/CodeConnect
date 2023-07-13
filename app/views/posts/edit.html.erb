@@ -12,7 +12,7 @@
       <%= form_with model: @post_edit do |f| %>
         <div class="mb-3">
           <%= f.label :本文, class: 'form-label text-dark' %>
-          <%= f.text_area :body, class: 'form-control' %>
+          <%= f.text_area :body, class: 'form-control' , rows:8 %>
         </div>
 
         <div class="mb-3">
@@ -22,9 +22,9 @@
 
         <% if @post_edit.post_images.attached? %>
           <p>選択済みの画像（削除する画像にチェックをつけてください）</p>
-          <div class="d-flex flex-wrap" style="width: 750px;">
+          <div class="d-flex flex-wrap w-10">
           <% @post_edit.post_images.each do |image| %>
-            <div class="d-flex m-3">
+            <div class="d-flex flex-wrap m-3">
               <div class="mb-auto">
               <%= link_to "削除", delete_image_post_path(image.id), method: :delete, date: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
               </div>
