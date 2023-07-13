@@ -21,7 +21,6 @@ class EndUsersController < ApplicationController
       render 'edit'
       flash[:notice] = "編集は失敗しました"
     end
-
   end
 
   def confirm

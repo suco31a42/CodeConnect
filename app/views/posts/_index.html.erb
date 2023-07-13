@@ -11,16 +11,16 @@
             <%= post_list.end_user.unique_id %>
           </p>
         </div>
-        
+
         <div class="post-body">
           <p><%= post_list.body %></p>
           <% if post_list.post_image.attached? %>
             <%= image_tag post_list.post_image, size:'300x300' %>
           <% end %>
         </div>
-        
+
         <div class="post-actions">
-          
+
         </div>
       </div>
       <div class="col-1">
@@ -29,10 +29,10 @@
           <a class="text-dark fs-4" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-three-dots fs-4 text-dark"></i>
           </a>
-        
+
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li><%= link_to "投稿を編集する", edit_post_path(post_list), class:"text-dark dropdown-item fs-6" %></li>
-            <li><%= link_to "投稿を削除する", edit_post_path(post_list), class:"text-dark dropdown-item fs-6" %></li>
+            <li><%= link_to "投稿を削除する", post_path(post_list), method: :delete, "data-confirm" => "本当に削除しますか？", class:"text-dark dropdown-item fs-6" %></li>
           </ul>
         </div>
         <% end %>
