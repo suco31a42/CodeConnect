@@ -8,7 +8,11 @@
     <div class="col-md-8 col-xl-9 ps-0">
       <%= flash[:notice] %>
       <%= render 'layouts/errors', obj: @post %>
-      <%= render 'index', posts: @post_id %>
+      <% if current_end_user.bookmarks.empty? %>
+        <p class="fs-4 text-center mt-5">ブックマークしている投稿はありません。</p>
+      <% else %>
+        <%= render 'index', posts: @post_id %>
+      <% end %>
     </div>
   </div>
 </div>
