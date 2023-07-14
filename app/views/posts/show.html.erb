@@ -1,0 +1,16 @@
+<%= render 'layouts/header' %>
+<%= render 'layouts/navgation' %>
+
+<div class="container-xl">
+  <div class="row">
+    <div class="" style="width: 16%; height: 700px;"></div>
+    <div class="col-md-8 col-xl-9 ps-0">
+      <%= flash[:notice] %>
+      <%= render 'layouts/errors', obj: @post %>
+      <%= render 'layouts/errors', obj: @post_comment %>
+      
+      <%= render 'show', post: @post_id %>
+      <%= render 'post_comments/comment', post: @post_id %>
+    </div>
+  </div>
+</div>

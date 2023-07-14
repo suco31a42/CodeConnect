@@ -18,6 +18,12 @@ class PostsController < ApplicationController
     @posts = Post.all
     expires_now
   end
+  
+  def show
+    @post = Post.new
+    @post_id = Post.find(params[:id])
+    @post_comment = current_end_user.post_comments.new
+  end
 
   def edit
     @post = Post.new
@@ -26,22 +32,6 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    # ActiveStorageで紐づけたblobファイルを削除する
-    # if params[:post][:post_image_ids]
-    #   params[:post][:post_image_ids].each do |image_id|
-    #     image = @post.post_images.find(image_id)
-    #     image.purge
-    #   end
-    # end
-    # respond_to do |format|
-    #   if @post.update(post_params)
-    #     format.html { redirect_to edit_post_path(@post.id), notice: "User was successfully updated." }
-    #     format.json { render :show, status: :ok, location: @post }
-    #   else
-    #     format.html { render :edit, status: :unprocessable_entity }
-    #     format.json { render json: @post.errors, status: :unprocessable_entity }
-    #   end
-    # end
 
     if @post.update(post_params)
       redirect_to edit_post_path(@post.id)
@@ -77,6 +67,11 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:body, post_images: [])
   end
+  
+  def post_comment_params
+    params.require(:post_comment).permit(:body)
+  end
+
 
 
 end

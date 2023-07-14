@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :end_user
   has_many :likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
 
   validate :image_type, :image_size, :image_length
 

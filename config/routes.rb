@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :notifications, only: %i[index]
   end
   
-  resources :posts, only: %i[index create edit update destroy] do
+  resources :posts, only: %i[index create show edit update destroy] do
     member do
       delete :delete_image
     end
