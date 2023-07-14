@@ -1,0 +1,13 @@
+<% if post.bookmarked_by?(current_end_user) %>
+  <p>
+    <%= link_to post_bookmark_path(post, post.bookmarks), remote: true, method: :delete do %>
+      <i class="bi bi-bookmark-check-fill"></i> <%= post.bookmarks.count %>
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <%= link_to post_bookmarks_path(post), remote: true, method: :post do %>
+      <i class="bi bi-bookmark"></i> <%= post.bookmarks.count %>
+    <% end %>
+  </p>
+<% end %>

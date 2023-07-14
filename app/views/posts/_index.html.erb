@@ -19,21 +19,24 @@
               <% post_list.post_images.each do |image| %>
                 <!--画像をクリックすると画像のリンクに遷移する-->
                 <div class="w-50">
-                  <%= link_to image_tag(image, size:'320x250'), url_for(image) %>
+                  <%= link_to image_tag(image, size:'300x220'), url_for(image) %>
                 </div>
               <% end %>
             <% end %>
           </div>
         </div>
 
-        <div class="post-actions">
-          <div class="like" id="like-btn-<%= post_list.id %>">
-            <%= render 'likes/btn', post: post_list %>
-          </div>
-          <div class="comment-btn">
+        <div class="post-actions d-flex">
+          <div class="comment-btn d-inline-block w-33">
             <%= link_to post_path(post_list.id) do %>
               <i class="bi bi-chat-left-dots-fill"></i><%= post_list.post_comments.count %>
             <% end %>
+          </div>
+          <div class="like d-inline-block w-34" id="like-btn-<%= post_list.id %>">
+            <%= render 'likes/btn', post: post_list %>
+          </div>
+          <div class="bookmark d-inline-block w-34" id="bookmark-btn-<%= post_list.id %>">
+            <%= render 'bookmarks/btn', post: post_list %>
           </div>
         </div>
       </div>

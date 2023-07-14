@@ -18,6 +18,8 @@ class EndUser < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  # ブックマークした投稿を習得
+  has_many :bookmark_posts, through: :bookmarks, source: :post
   has_many :post_comments, dependent: :destroy
   
   # emailかuniqur_idどちらか選べるようにしている

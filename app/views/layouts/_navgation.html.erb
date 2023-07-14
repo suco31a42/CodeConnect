@@ -23,19 +23,19 @@
 </div>
 
 
-    <div class="col-md-1 col-xl-2 d-flex flex-column flex-shrink-0 p-3 text-bg-dark fixed-top ms-5" style="width: 16%; height: 700px;">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark fixed-top" style="width: 16%; height: 700px;">
       <%= link_to end_user_path(current_end_user.id), class: 'd-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none' do %>
         <!--画像を加工し、加工済みのデータが有る場合はそのデータを表示する-->
-        <%= image_tag current_end_user.profile_image.variant(resize:'60x60').processed, class:"rounded-circle", cache: false  %>
-        <p class="fs-6 text-secondary pt-3 ps-2">
+        <%= image_tag current_end_user.profile_image.variant(resize:'50x50').processed, class:"rounded-circle align-top mb-auto", cache: false  %>
+        <p class="fs-6 text-secondary mb-0 ml-2">
           <span class="text-light"><%= current_end_user.name %></span>
           <%= current_end_user.unique_id %>
         </p>
       <% end %>
       </a>
       <hr>
-      <ul class="nav flex-column mb-auto">
-        <li class="nav-item">
+      <ul class="nav flex-column mb-auto mt-2">
+        <li class="nav-item mt-3">
           <%= link_to posts_path,  class: 'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;', style:'font-size: 15px;' do %>
             <i class="bi bi-house fs-4"></i> ホーム
           <% end %>
@@ -46,7 +46,7 @@
           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to end_user_bookmarks_path(current_end_user.id) , class: 'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;' do %>
+          <%= link_to bookmarks_posts_path , class: 'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;' do %>
             <i class="bi bi-bookmarks fs-4"></i> ブックマーク
           <% end %>
         </li>

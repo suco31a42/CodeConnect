@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   belongs_to :end_user
   has_many :likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  # ブックマークした投稿を習得
+  has_many :bookmark_posts, through: :bookmarks, source: :post
   has_many :post_comments, dependent: :destroy
 
   validate :image_type, :image_size, :image_length
@@ -12,6 +14,10 @@ class Post < ApplicationRecord
   # likesの中にend_user.idがあるか聞いている
   def liked_by?(end_user)
     likes.exists?(end_user_id: end_user.id)
+  end
+  
+  def bookmarked_by?(end_user)
+    bookmarks.exists?(end_user_id: end_user.id)
   end
 
   private

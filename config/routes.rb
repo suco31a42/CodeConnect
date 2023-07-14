@@ -7,7 +7,6 @@ Rails.application.routes.draw do
       get 'confirm', 'withdraw', 'follows', 'followers'
     end
     resources :relationships, only: %i[create destroy]
-    resources :bookmarks, only: %i[index]
     resources :notifications, only: %i[index]
   end
   
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
     member do
       delete :delete_image
     end
+    get :bookmarks, on: :collection
     resources :likes, only: %i[create destroy]
     resources :bookmarks, only: %i[create destroy]
     resources :post_comments, only: %i[create destroy]
