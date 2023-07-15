@@ -1,0 +1,19 @@
+<% content_for(:title, '検索結果') %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/navgation' %>
+
+<div class="container-xl">
+  <div class="row">
+    <div class="" style="width: 16%; height: 700px;"></div>
+    <div class="col-md-8 col-xl-9 ps-0">
+      <%= flash[:notice] %>
+      <%= render 'layouts/errors', obj: @post %>
+      <ul class="nav nav-tabs mt-3">
+        <li class="nav-item text-center w-100">
+          <%= sort_link(@search, :created_at, "投稿順", {default_order: :desc}, {class:"nav-link fs-5 text-dark"}) %>
+      </ul>
+      
+      <%= render 'index', posts: @post_result %>
+    </div>
+  </div>
+</div>

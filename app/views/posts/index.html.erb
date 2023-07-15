@@ -9,13 +9,13 @@
       <%= render 'layouts/errors', obj: @post %>
       <ul class="nav nav-tabs">
         <li class="nav-item text-center" style="width: 34%;">
-          <a class="nav-link active bg-light fs-6" aria-current="page" href="#">新着</a>
+          <%= link_to "新着順", posts_path(latest: "true"), class:"nav-link active bg-light fs-6"%>
         </li>
         <li class="nav-item text-center" style="width: 33%;">
           <a class="nav-link" href="#">フォロー中</a>
         </li>
         <li class="nav-item text-center" style="width: 33%;">
-          <a class="nav-link" href="#">注目</a>
+          <%= link_to "評価順", posts_path(like_count: "true"), class:"nav-link" %>
         </li>
       </ul>
       <%= render 'index', posts: @posts %>

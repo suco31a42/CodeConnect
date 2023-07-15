@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     member do
       delete :delete_image
     end
+    collection do
+      get 'search'
+    end
     get :bookmarks, on: :collection
     resources :likes, only: %i[create destroy]
     resources :bookmarks, only: %i[create destroy]

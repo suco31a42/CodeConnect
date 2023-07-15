@@ -2,20 +2,29 @@ class Post < ApplicationRecord
   has_many_attached :post_images
   belongs_to :end_user
   has_many :likes, dependent: :destroy
+  has_many :liked_end_users, through: :likes, source: :end_user 
   has_many :bookmarks, dependent: :destroy
   # ブックマークした投稿を習得
   has_many :bookmark_posts, through: :bookmarks, source: :post
   has_many :post_comments, dependent: :destroy
 
   validate :image_type, :image_size, :image_length
-
-
-
+  
+  scope :latest,     -> {order(created_at: :desc)}
+  # 一ヶ月以内に作成された投稿を対象にいいねが多い順に並べる
+  scope :like_count, -> do
+    to = Time.current.at_end_of_day
+    from = 1.month.ago.beginning_of_day
+    left_outer_joins(:likes)
+    .where(likes: { created_at: from..to })
+    .order(likes_count: :desc)
+    .includes(:end_user)
+    .or(left_outer_joins(:likes).where(likes: { id: nil }))
+  end
   # likesの中にend_user.idがあるか聞いている
   def liked_by?(end_user)
     likes.exists?(end_user_id: end_user.id)
   end
-  
   def bookmarked_by?(end_user)
     bookmarks.exists?(end_user_id: end_user.id)
   end
@@ -47,5 +56,8 @@ class Post < ApplicationRecord
     end
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["body", "created_at"]
+  end
 
 end

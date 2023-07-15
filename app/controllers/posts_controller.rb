@@ -15,13 +15,19 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.all.order(created_ad: :desc)
+    if    params[:latest]
+      @posts = Post.latest
+    elsif params[:like_count]
+      @posts = Post.like_count
+    else
+      @posts = Post.all.order(created_at: :desc)
+    end
     expires_now
   end
   
   def show
     @post = Post.new
-    @post_id = Post.find(params[:id]).order(created_ad: :desc)
+    @post_id = Post.find(params[:id])
     @post_comment = current_end_user.post_comments.new
   end
 
@@ -64,7 +70,7 @@ class PostsController < ApplicationController
   
   def bookmarks
     @post = Post.new
-    @post_id = current_end_user.bookmark_posts.includes(:end_user).order(created_ad: :desc)
+    @post_id = current_end_user.bookmark_posts.includes(:end_user).order(created_at: :desc)
   end
 
   private
@@ -76,7 +82,5 @@ class PostsController < ApplicationController
   def post_comment_params
     params.require(:post_comment).permit(:body)
   end
-
-
 
 end

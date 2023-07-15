@@ -26,16 +26,16 @@
           </div>
         </div>
 
-        <div class="post-actions d-flex">
+        <div class="post-actions d-flex mt-3">
           <div class="comment-btn d-inline-block w-33">
-            <%= link_to post_path(post_list.id) do %>
-              <i class="bi bi-chat-left-dots-fill"></i><%= post_list.post_comments.count %>
+            <%= link_to post_path(post_list.id), class:"text-primary fs-5 text-decoration-none" do %>
+              <i class="bi bi-chat-left-dots-fill fs-3"></i> <span class="fs-6"><%= post_list.post_comments.count %></span>
             <% end %>
           </div>
-          <div class="like d-inline-block w-34" id="like-btn-<%= post_list.id %>">
+          <div class="like d-inline-block w-34 text-center" id="like-btn-<%= post_list.id %>">
             <%= render 'likes/btn', post: post_list %>
           </div>
-          <div class="bookmark d-inline-block w-34" id="bookmark-btn-<%= post_list.id %>">
+          <div class="bookmark d-inline-block w-33 text-right" id="bookmark-btn-<%= post_list.id %>">
             <%= render 'bookmarks/btn', post: post_list %>
           </div>
         </div>

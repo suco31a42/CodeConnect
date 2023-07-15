@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_search
   
   def after_sign_in_path_for(resource)
     posts_path
@@ -9,7 +10,12 @@ class ApplicationController < ActionController::Base
     root_path
   end
   
-
+  def set_search
+    @search = Post.ransack(params[:q])
+    @post_result = @search.result
+    @post = Post.new
+  end
+  
   protected
 
   # メールアドレスまたはユニークIDとパスワードでログインできる
