@@ -1,4 +1,4 @@
-<div class="container-fuild m-3">
+<div class="container-fuild m-3 mb-0">
   <div class="row">
     <div class="col-3">
       <%= image_tag end_user.profile_image, size:'150x150', class:"rounded-circle shadow-sm" %>
@@ -10,6 +10,10 @@
     <div class="col-4">
       <% if end_user.id == current_end_user.id %>
         <%= link_to "プロフィール編集", edit_end_user_path(current_end_user.id), class:"btn btn-primary btn-lg rounded-pill fs-6" %>
+      <% else %>
+        <div class="ml-5" id="follow-<%= current_end_user.id %>">
+          <%= render 'relationships/btn', end_user: @end_user %>
+        </div>
       <% end %>
     </div>
 
@@ -18,7 +22,12 @@
     </div>
 
     <div class="col-5">
-
+      <%= link_to follows_end_user_path(end_user), class:"text-decoration-none" do %>
+        <p class="d-inline-block link-secondary">フォロー <%= @end_user.followers.count %></p>
+      <% end %>
+      <%= link_to followers_end_user_path(end_user), class:"text-decoration-none ml-4" do %>
+        <p class="d-inline-block link-secondary">フォロワー <%= @end_user.followeds.count %></p>
+      <% end %>
     </div>
   </div>
 

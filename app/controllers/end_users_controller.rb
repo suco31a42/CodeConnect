@@ -2,7 +2,6 @@ class EndUsersController < ApplicationController
   def show
     @post = Post.new
     @end_user = EndUser.find(params[:id])
-    expires_now
     @end_user_posts = @end_user.posts
   end
 
@@ -27,6 +26,18 @@ class EndUsersController < ApplicationController
   end
 
   def withdraw
+  end
+
+  def follows
+    @post = Post.new
+    @end_user = EndUser.find(params[:id])
+    @end_users = @end_user.following_end_users
+  end
+
+  def followers
+    @post = Post.new
+    @end_user = EndUser.find(params[:id])
+    @end_users = @end_user.follower_end_users
   end
 
 private

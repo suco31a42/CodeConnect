@@ -16,15 +16,15 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     if    params[:latest]
-      @posts = Post.latest
+      @posts = Post.public_posts.latest
     elsif params[:like_count]
-      @posts = Post.like_count
+      @posts = Post.public_posts.like_count
     else
-      @posts = Post.all.order(created_at: :desc)
+      @posts = Post.public_posts.order(created_at: :desc)
     end
     expires_now
   end
-  
+
   def show
     @post = Post.new
     @post_id = Post.find(params[:id])
@@ -67,7 +67,7 @@ class PostsController < ApplicationController
     @post.purge
     redirect_to 'edit'
   end
-  
+
   def bookmarks
     @post = Post.new
     @post_id = current_end_user.bookmark_posts.includes(:end_user).order(created_at: :desc)
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:body, post_images: [])
   end
-  
+
   def post_comment_params
     params.require(:post_comment).permit(:body)
   end

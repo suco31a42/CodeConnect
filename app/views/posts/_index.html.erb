@@ -18,8 +18,8 @@
             <% if post_list.post_images.attached? %>
               <% post_list.post_images.each do |image| %>
                 <!--画像をクリックすると画像のリンクに遷移する-->
-                <div class="w-50">
-                  <%= link_to image_tag(image, size:'300x220'), url_for(image) %>
+                <div class="w-50 mb-1">
+                  <%= link_to image_tag(image, size:'380x200'), url_for(image) %>
                 </div>
               <% end %>
             <% end %>

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     member do
       get 'confirm', 'withdraw', 'follows', 'followers'
     end
-    resources :relationships, only: %i[create destroy]
+    resource :relationships, only: %i[create destroy]
     resources :notifications, only: %i[index]
   end
   
@@ -18,11 +18,10 @@ Rails.application.routes.draw do
       get 'search'
     end
     get :bookmarks, on: :collection
-    resources :likes, only: %i[create destroy]
-    resources :bookmarks, only: %i[create destroy]
+    resource :likes, only: %i[create destroy]
+    resource :bookmarks, only: %i[create destroy]
     resources :post_comments, only: %i[create destroy]
   end
-  
   resources :informations, only: %i[index show]
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

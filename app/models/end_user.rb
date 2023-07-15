@@ -13,14 +13,21 @@ class EndUser < ApplicationRecord
   # unique_idは英数字、アンダースコア、句読点のみ使用できます
   validates_format_of :unique_id, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
   validate :validate_unique_id
+  validates :private_status, inclusion: { in:[true, false]}
   
   has_one_attached :profile_image
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  # ブックマークした投稿を習得
-  has_many :bookmark_posts, through: :bookmarks, source: :post
+  has_many :bookmark_posts, through: :bookmarks, source: :post # ブックマークした投稿を習得
   has_many :post_comments, dependent: :destroy
+  has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy #フォローした
+  has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy #フォローされた
+  has_many :following_end_users, through: :followers, source: :followed #フォロー画面
+  has_many :follower_end_users,  through: :followeds, source: :follower #フォロワー画面
+  # 公開、非公開に切り替える
+  scope :pulished, -> {where(private_status: true)}
+  scope :unpulished, -> {where(private_status: false)}
   
   # emailかuniqur_idどちらか選べるようにしている
   def login
@@ -47,7 +54,17 @@ class EndUser < ApplicationRecord
       self.profile_image.attach(io: File.open(Rails.root.join('app/assets/images/no_image.jpg')), filename: 'no_image.jpg', content_type: 'image/jpeg')
     end
   end
-
-
+  # フォローする
+  def follow(end_user_id)
+    followers.create(followed_id: end_user_id)
+  end
+  # フォロー解除
+  def unfollow(end_user_id)
+    followers.find_by(followed_id: end_user_id).destroy
+  end
+  # フォローしているか確認
+  def following?(end_user)
+    following_end_users.include?(end_user)
+  end
   
 end

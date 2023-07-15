@@ -10,6 +10,7 @@ class Post < ApplicationRecord
 
   validate :image_type, :image_size, :image_length
   
+  scope :public_posts, -> { joins(:end_user).where(end_users: { private_status: true}) }
   scope :latest,     -> {order(created_at: :desc)}
   # 一ヶ月以内に作成された投稿を対象にいいねが多い順に並べる
   scope :like_count, -> do

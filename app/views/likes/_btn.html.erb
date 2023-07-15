@@ -1,10 +1,9 @@
 <% if post.liked_by?(current_end_user) %>
-    <%= link_to post_like_path(post, post.likes), remote: true, method: :delete, class:"text-primary fs-5 text-decoration-none"  do %>
-      <i class="bi bi-heart-fill"></i> <span class="fs-6"><%= post.likes.count %></span>
-    <% end %>
+  <%= link_to post_likes_path(post), remote: true, method: :delete, class:"text-primary fs-5 text-decoration-none" do %>
+    <i class="bi bi-heart-fill"></i> <span class="fs-6"><%= post.likes.count %></span>
+  <% end %>
 <% else %>
-  
-    <%= link_to post_likes_path(post), remote: true, method: :post, class:"text-primary fs-5 text-decoration-none"  do %>
-      <i class="bi bi-heart"></i> <span class="fs-6"><%= post.likes.count %></span>
-    <% end %>
+  <%= link_to post_likes_path(post), remote: true, method: :post, class:"text-primary fs-5 text-decoration-none" do %>
+    <i class="bi bi-heart"></i> <span class="fs-6"><%= post.likes.count %></span>
+  <% end %>
 <% end %>
