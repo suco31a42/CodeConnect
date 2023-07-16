@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for?(:title) ? yield(:title) : "でふぉると" %></title>
+    <%= favicon_link_tag('favicon.ico') %>
+    <title><%= content_for?(:title) ? yield(:title) : "でふぉると" %> CodeConnect</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>

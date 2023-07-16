@@ -29,7 +29,7 @@
         <div class="post-actions d-flex mt-3">
           <div class="comment-btn d-inline-block w-33">
             <%= link_to post_path(post_list.id), class:"text-primary fs-5 text-decoration-none" do %>
-              <i class="bi bi-chat-left-dots-fill fs-3"></i> <span class="fs-6"><%= post_list.post_comments.count %></span>
+              <i class="bi bi-chat-left-dots"></i> <span class="fs-6"><%= post_list.post_comments.count %></span>
             <% end %>
           </div>
           <div class="like d-inline-block w-34 text-center" id="like-btn-<%= post_list.id %>">

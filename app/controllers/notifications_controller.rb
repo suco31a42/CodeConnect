@@ -7,8 +7,8 @@ class NotificationsController < ApplicationController
     end
   end
   
-  def destroy
-    @notifications = current_end_user.notifications.destroy_all
+  def destroy_all
+    current_end_user.notifications.destroy_all
     redirect_to notifications_path
   end
 end

@@ -12,7 +12,7 @@ class EndUser < ApplicationRecord
   validates :unique_id, presence: true, uniqueness: { case_sensitive: false }
   # unique_idは英数字、アンダースコア、句読点のみ使用できます
   validates_format_of :unique_id, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
-  validate :validate_unique_id
+  validate  :validate_unique_id
   validates :private_status, inclusion: { in:[true, false]}
   
   has_one_attached :profile_image
@@ -25,8 +25,9 @@ class EndUser < ApplicationRecord
   has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy #フォローされた
   has_many :following_end_users, through: :followers, source: :followed #フォロー画面
   has_many :follower_end_users,  through: :followeds, source: :follower #フォロワー画面
+  has_many :notifications
   # 公開、非公開に切り替える
-  scope :pulished, -> {where(private_status: true)}
+  scope :pulished,   -> {where(private_status: true)}
   scope :unpulished, -> {where(private_status: false)}
   
   # emailかuniqur_idどちらか選べるようにしている

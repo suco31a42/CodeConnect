@@ -1,2 +1,27 @@
-<h1>Notifications#index</h1>
-<p>Find me in app/views/notifications/index.html.erb</p>
+<% content_for(:title, '通知') %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/navgation' %>
+
+<div class="container-xl">
+  <div class="row">
+    <div style="width: 16%; height: 700px;"></div>
+    <div class="col-md-8 col-xl-9 ps-0">
+      <%= flash[:notice] %>
+      <%= render 'layouts/errors', obj: @post %>
+
+      <ul class="nav nav-tabs">
+        <li class="nav-item text-center w-100">
+          <a class="nav-link active fs-6 text-secondary" aria-current="page" href="#">通知一覧</a>
+        </li>
+      </ul>
+      <% if @notifications.present? %>
+        <%= link_to "全削除", notifications_path(@notifications), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-light" %>
+        <% @notifications.each do |notification| %>
+          <%= render "#{notification.action_type}", notification: notification %>
+        <% end %>
+      <% else %>
+        <p>通知はありません</p>
+      <% end %>
+    </div>
+  </div>
+</div>

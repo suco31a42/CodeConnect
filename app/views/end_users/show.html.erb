@@ -1,3 +1,8 @@
+<% if @end_user.id == current_end_user.id %>
+  <% content_for(:title, 'マイページ') %>
+<% else %>
+  <% content_for(:title, "#{@end_user.name} さんのプロフィール") %>
+<% end %>
 <%= render 'layouts/header' %>
 <%= render 'layouts/navgation' %>
 

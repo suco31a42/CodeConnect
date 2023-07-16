@@ -9,7 +9,7 @@
       <%= form_with model: @post, url: posts_path do |f| %>
       <div class="modal-body">
         <h6>画像</h6>
-        <%= f.file_field :post_images, accept: "image/*", multiple: true, class:"form-control"%>
+        <%= f.file_field :post_images, accept: "image/*", multiple: true, class:"form-control-sm"%>
         <h6>本文</h6>
         <%= f.text_area :body, class:"form-control", style:"height: 400px;"  %>
       </div>
@@ -26,7 +26,7 @@
     <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark fixed-top" style="width: 16%; height: 700px;">
       <%= link_to end_user_path(current_end_user.id), class: 'd-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none' do %>
         <!--画像を加工し、加工済みのデータが有る場合はそのデータを表示する-->
-        <%= image_tag current_end_user.profile_image.variant(resize:'50x50').processed, class:"rounded-circle align-top mb-auto", cache: false  %>
+        <%= image_tag current_end_user.profile_image.variant(resize:'50x50').processed, class:"rounded-circle align-top mb-auto" %>
         <p class="fs-6 text-secondary mb-0 ml-2">
           <span class="text-light"><%= current_end_user.name %></span>
           <%= current_end_user.unique_id %>

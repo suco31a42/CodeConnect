@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   # ブックマークした投稿を習得
   has_many :bookmark_posts, through: :bookmarks, source: :post
   has_many :post_comments, dependent: :destroy
+  has_one  :notification, as: :subject, dependent: :destroy
 
   validate :image_type, :image_size, :image_length
   
