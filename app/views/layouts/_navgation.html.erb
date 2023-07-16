@@ -24,7 +24,7 @@
 
 
     <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark fixed-top" style="width: 16%; height: 700px;">
-      <%= link_to end_user_path(current_end_user.id), class: 'd-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none' do %>
+      <%= link_to end_user_path(current_end_user.id), class:'d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none' do %>
         <!--画像を加工し、加工済みのデータが有る場合はそのデータを表示する-->
         <%= image_tag current_end_user.profile_image.variant(resize:'50x50').processed, class:"rounded-circle align-top mb-auto" %>
         <p class="fs-6 text-secondary mb-0 ml-2">
@@ -36,22 +36,32 @@
       <hr>
       <ul class="nav flex-column mb-auto mt-2">
         <li class="nav-item mt-3">
-          <%= link_to posts_path,  class: 'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;', style:'font-size: 15px;' do %>
+          <%= link_to posts_path,  class:'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;', style:'font-size: 15px;' do %>
             <i class="bi bi-house fs-4"></i> ホーム
           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to end_user_path(current_end_user.id),  class: 'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;' do %>
-            <i class="bi bi-person-fill fs-4"></i> プロフィール
+          <%= link_to notifications_path, class:'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;', style:'font-size: 15px;'  do %>
+            <% if current_end_user.notifications.where(checked: false).exists? %>
+              <i class="bi bi-bell-fill fs-4"></i>
+              <%= current_end_user.notifications.where(checked: false).count %> 通知
+            <% else %>
+              <i class="bi bi-bell-slash fs-4"></i> 通知
+            <% end %>
+          <% end %>
+          </li>
+        <li class="nav-item">
+          <%= link_to end_user_path(current_end_user.id),  class:'nav-link text-light mb-3 pe-1 ps-1', style:'font-size: 15px;' do %>
+            <i class="bi bi-person fs-3"></i> プロフィール
           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to bookmarks_posts_path , class: 'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;' do %>
+          <%= link_to bookmarks_posts_path , class:'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;' do %>
             <i class="bi bi-bookmarks fs-4"></i> ブックマーク
           <% end %>
         </li>
         <li class="nav-item">
-          <%= button_to destroy_end_user_session_path, method: :delete,  class: 'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;' do %>
+          <%= button_to destroy_end_user_session_path, method: :delete,  class:'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;' do %>
             <i class="bi bi-box-arrow-right fs-4"></i> ログアウト
           <% end %>
         </li>

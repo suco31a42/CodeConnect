@@ -1,25 +1,18 @@
   <div class="container-fuild">
     <div class="row">
       <div class="col-12">
-          <nav class="navbar navbar-dark bg-dark" style="height: 90px;">
-            <div class="container-fluid">
-              <div class="mx-auto">
-                <%= search_form_for @search, url: search_posts_path, class:"d-flex" do |f| %>
-                  <%= f.search_field :body_cont, class:"form-control mx-auto", placeholder:"検索…", required:"required" %>
-                  <%= f.button :type => "submit", class:"btn btn-primary btn-sm ml-3", style:"width: 20%;"  do %>
-                    <i class="bi bi-search fs-6 text-light"></i>
-                  <% end %>
+        <nav class="navbar navbar-dark bg-dark" style="height: 90px;">
+          <div class="container-fluid">
+            <div class="mx-auto d-inline-block">
+              <%= search_form_for @search, url: search_posts_path, class:"d-flex" do |f| %>
+                <%= f.search_field :body_cont, class:"form-control mx-auto", placeholder:"検索…", required:"required" %>
+                <%= f.button :type => "submit", class:"btn btn-primary btn-sm ml-3", style:"width: 20%;"  do %>
+                  <i class="bi bi-search fs-6 text-light"></i>
                 <% end %>
-              </div>
-              <%= link_to notifications_path, class:"" do %>
-                <% if current_end_user.notifications.where(checked: false).exists? %>
-                  <i class="bi bi-bell-fill"></i>
-                <% else %>
-                  <i class="bi bi-bell-slash"></i>
-                <% end %>
-                通知
               <% end %>
-          </nav>
+            </div>
+          </div>
+        </nav>
       </div>
     </div>
   </div>

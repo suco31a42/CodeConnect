@@ -1,16 +1,18 @@
 class Post < ApplicationRecord
   has_many_attached :post_images
   belongs_to :end_user
-  has_many :likes, dependent: :destroy
-  has_many :liked_end_users, through: :likes, source: :end_user 
-  has_many :bookmarks, dependent: :destroy
-  # ブックマークした投稿を習得
-  has_many :bookmark_posts, through: :bookmarks, source: :post
+  has_many :likes,         dependent: :destroy
+  has_many :bookmarks,     dependent: :destroy
   has_many :post_comments, dependent: :destroy
-  has_one  :notification, as: :subject, dependent: :destroy
+  # ブックマークした投稿を習得
+  has_many :bookmark_posts,  through: :bookmarks,  source: :post
+  has_many :liked_end_users, through: :likes,      source: :end_user
+  has_one  :notification,         as: :subject, dependent: :destroy
 
-  validate :image_type, :image_size, :image_length
-  
+  validate  :image_type, :image_size, :image_length
+  validates :body, presence: true, length: { in: 3..255, message: "3文字以上、255文字以内にする必要があります" }
+
+
   scope :public_posts, -> { joins(:end_user).where(end_users: { private_status: true}) }
   scope :latest,     -> {order(created_at: :desc)}
   # 一ヶ月以内に作成された投稿を対象にいいねが多い順に並べる

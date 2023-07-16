@@ -3,6 +3,8 @@ class PostComment < ApplicationRecord
   belongs_to :post
   has_one :notification, as: :subject, dependent: :destroy
   
+  validates :body, presence: true
+  validates :body,   length: { in: 3..255 }
   after_create_commit :create_notifications
   
 private
