@@ -11,7 +11,7 @@
       <% if end_user.id == current_end_user.id %>
         <%= link_to "プロフィール編集", edit_end_user_path(current_end_user.id), class:"btn btn-primary btn-lg rounded-pill fs-6" %>
       <% else %>
-        <div class="ml-5" id="follow-<%= current_end_user.id %>">
+        <div class="ml-5" id="follow-<%= @end_user.id %>">
           <%= render 'relationships/btn', end_user: @end_user %>
         </div>
       <% end %>
@@ -23,10 +23,10 @@
 
     <div class="col-5">
       <%= link_to follows_end_user_path(end_user), class:"text-decoration-none" do %>
-        <p class="d-inline-block link-secondary">フォロー <%= @end_user.followers.count %></p>
+        <p class="d-inline-block link-secondary">フォロー <%= @following_end_users.count %></p>
       <% end %>
       <%= link_to followers_end_user_path(end_user), class:"text-decoration-none ml-4" do %>
-        <p class="d-inline-block link-secondary">フォロワー <%= @end_user.followeds.count %></p>
+        <p class="d-inline-block link-secondary">フォロワー <%= @follower_end_users.count %></p>
       <% end %>
     </div>
   </div>

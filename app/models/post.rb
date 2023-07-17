@@ -14,17 +14,13 @@ class Post < ApplicationRecord
 
 
   scope :public_posts, -> { joins(:end_user).where(end_users: { private_status: true}) }
-  scope :latest,     -> {order(created_at: :desc)}
-  # 一ヶ月以内に作成された投稿を対象にいいねが多い順に並べる
-  scope :like_count, -> do
-    to = Time.current.at_end_of_day
-    from = 1.month.ago.beginning_of_day
-    left_outer_joins(:likes)
-    .where(likes: { created_at: from..to })
-    .order(likes_count: :desc)
-    .includes(:end_user)
-    .or(left_outer_joins(:likes).where(likes: { id: nil }))
-  end
+  scope :latest,     -> { order(created_at: :desc) }
+
+  scope :like_count, -> { posts_like_count }
+
+  scope :follows, -> { posts_current_end_user_follow }
+
+
   # likesの中にend_user.idがあるか聞いている
   def liked_by?(end_user)
     likes.exists?(end_user_id: end_user.id)
@@ -62,6 +58,21 @@ class Post < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["body", "created_at"]
+  end
+  # 一ヶ月以内に作成された投稿を対象にいいねが多い順に並べる
+  def self.posts_like_count
+    to   = Time.current.at_end_of_day
+    from = 1.month.ago.beginning_of_day
+    left_outer_joins(:likes).where(likes: { created_at: from..to })
+                            .order(likes_count: :desc)
+                            .includes(:end_user)
+                            .or(left_outer_joins(:likes).where(likes: { id: nil }))
+  end
+
+  def self.posts_current_end_user_follow
+    self.where(end_user_id: [current_end_user.id, *current_end_user.
+               following_end_users_ids]).order(created_at: :desc)
+    
   end
 
 end

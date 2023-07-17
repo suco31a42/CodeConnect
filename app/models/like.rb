@@ -1,6 +1,6 @@
 class Like < ApplicationRecord
   belongs_to :end_user
-  belongs_to :post
+  belongs_to :post, counter_cache: :likes_count
   has_one    :notification, as: :subject, dependent: :destroy
   
   validates :end_user_id, presence: true

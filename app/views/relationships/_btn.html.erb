@@ -1,5 +1,5 @@
 <% if current_end_user.following?(end_user) %>
-  <%= link_to "フォロー中", end_user_relationships_path(end_user.id), method: :delete, remote: :true, class:"btn btn-outline-danger btn-lg rounded-pill fs-6" %>
+  <%= link_to "フォロー中", end_user_relationships_path(end_user), method: :delete, remote: :true, data: {"turbolinks" => false} , class:"btn btn-outline-danger btn-lg rounded-pill fs-6" %>
 <% else %>
-  <%= link_to "フォローする", end_user_relationships_path(end_user.id), method: :post, remote: :true, class:"btn btn-outline-primary btn-lg rounded-pill fs-6" %>
+  <%= link_to "フォローする", end_user_relationships_path(end_user), method: :post, remote: :true, data: {"turbolinks" => false} , class:"btn btn-outline-primary btn-lg rounded-pill fs-6" %>
 <% end %>

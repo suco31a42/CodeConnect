@@ -17,6 +17,9 @@ class PostsController < ApplicationController
     @post = Post.new
     if    params[:latest]
       @posts = Post.public_posts.latest
+    elsif params[:follows]
+      @posts = Post.where(end_user_id: [current_end_user.id, *current_end_user.
+               following_end_user_ids]).order(created_at: :desc)
     elsif params[:like_count]
       @posts = Post.public_posts.like_count
     else

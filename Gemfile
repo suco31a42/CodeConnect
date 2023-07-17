@@ -59,5 +59,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'jquery-rails'
 gem 'ransack'
-gem 'rails-i18n'
+gem 'rails-i18n', '~> 6.0'
 gem 'kaminari'
+gem 'devise-i18n'

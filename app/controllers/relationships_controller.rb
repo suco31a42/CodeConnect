@@ -1,13 +1,13 @@
 class RelationshipsController < ApplicationController
 
   def create
+   @end_user = EndUser.find(params[:end_user_id])
     current_end_user.follow(params[:end_user_id])
-
   end
 
   def destroy
+    @end_user = EndUser.find(params[:end_user_id])
     current_end_user.unfollow(params[:end_user_id])
-
   end
 
   def follows

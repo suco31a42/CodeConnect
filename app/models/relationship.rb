@@ -5,7 +5,6 @@ class Relationship < ApplicationRecord
   validates :follower,    presence: true
   validates :followed,    presence: true
   validates :follower_id, uniqueness: { scope: :followed_id }
-  validate  :cannot_follow_self
   after_create_commit :create_notifications
   
 private
@@ -15,7 +14,7 @@ private
   end
   # フォロー元とフォロー先のユーザーが同じであるか確認する
   def cannot_follow_self
-    if self == followed_end_user
+    if follower_id == followed_id
       errors.add(:base, "自分自身をフォローすることはできません")
     end
   end
