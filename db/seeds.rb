@@ -19,9 +19,15 @@
       )
 end
 
-50.times do |n|
+20.times do |n|
   Post.create!(
   end_user_id: rand(1..10) ,
   body: "#{n + 1}テキストテキストテキストテキスト"
   )
 end
+
+Admin.create!(
+  email: "admin@example.com",
+  login: "admin",
+  password: "password"
+)

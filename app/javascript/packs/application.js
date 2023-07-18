@@ -2,8 +2,6 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
-//= require rails-ujs
-//= require_tree .
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
@@ -12,7 +10,16 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
+import "../plugins/jquery.jscroll.min.js";
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+// 無限スクロールの処理
+$(function() {
+  $('.jscroll').jscroll({
+    contentSelector: '.scroll-list',
+    nextSelector: 'span.next:last a',
+  });
+})

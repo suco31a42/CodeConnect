@@ -1,0 +1,36 @@
+<div class='container'>
+  <div class='row mt-3'>
+    <div>
+      <h4 class="title ml-5 bg-light text-dark">管理者ログイン</h4>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class="col-md-8 mx-auto">
+      <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true, html: { class: 'my-3' }) do |f| %>
+        <div class="form-group row">
+          <%= f.label :login, "管理人ID", class: 'col-sm-3 col-form-label' %>
+          <div class="col-sm-9">
+            <%= f.text_field :login, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "sample@example.com" %>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <%= f.label :password, "パスワード", class: 'col-sm-3 col-form-label' %>
+          <div class="col-sm-9">
+            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <div class="col-sm-9 offset-sm-3">
+            <%= f.submit "ログイン", class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <%= render "admin/shared/links" %>
+
+</div>
