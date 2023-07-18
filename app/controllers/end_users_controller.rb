@@ -3,7 +3,7 @@ class EndUsersController < ApplicationController
     @post = Post.new
     @end_user = EndUser.find(params[:id])
     expires_now
-    @end_user_posts = @end_user.posts.order(created_at: :desc)
+    @end_user_posts = @end_user.posts.order(created_at: :desc).page(params[:page]).per(10)
     @following_end_users = @end_user.following_end_users
     @follower_end_users  = @end_user.follower_end_users
   end
@@ -26,21 +26,27 @@ class EndUsersController < ApplicationController
   end
 
   def confirm
+    @end_user = current_end_user.id
   end
 
   def withdraw
+    @end_user = EndUser.find(current_end_user.id)
+    @end_user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を完了しました"
+    redirect_to root_path
   end
 
   def follows
     @post = Post.new
     @end_user = EndUser.find(params[:id])
-    @end_users = @end_user.following_end_users
+    @end_users = @end_user.following_end_users.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def followers
     @post = Post.new
     @end_user = EndUser.find(params[:id])
-    @end_users = @end_user.follower_end_users
+    @end_users = @end_user.follower_end_users.order(created_at: :desc).ppage(params[:page]).per(10)
   end
 
 private

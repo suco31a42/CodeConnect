@@ -7,8 +7,18 @@ class PostsController < ApplicationController
      redirect_to posts_path
      flash[:notice] = "投稿が成功しました"
     else
-      @posts = Post.all
-      render 'index'
+      if    params[:latest]
+        @posts = Post.public_posts.latest.page(params[:page]).per(10)
+      elsif params[:follows]
+        @posts = Post.where(end_user_id: [current_end_user.id, *current_end_user.
+                 following_end_user_ids]).order(created_at: :desc).page(params[:page]).per(10)
+      elsif params[:like_count]
+        @posts = Post.public_posts.like_count.page(params[:page]).per(10)
+      else
+        @posts = Post.public_posts.order(created_at: :desc).page(params[:page]).per(10)
+      end
+      return render layout: false if params[:no_layout]
+      render 'index'  
       flash[:notice] = "投稿が失敗しました"
     end
   end
@@ -16,15 +26,16 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     if    params[:latest]
-      @posts = Post.public_posts.latest
+      @posts = Post.public_posts.latest.page(params[:page]).per(10)
     elsif params[:follows]
       @posts = Post.where(end_user_id: [current_end_user.id, *current_end_user.
-               following_end_user_ids]).order(created_at: :desc)
+               following_end_user_ids]).order(created_at: :desc).page(params[:page]).per(10)
     elsif params[:like_count]
-      @posts = Post.public_posts.like_count
+      @posts = Post.public_posts.like_count.page(params[:page]).per(10)
     else
-      @posts = Post.public_posts.order(created_at: :desc)
+      @posts = Post.public_posts.order(created_at: :desc).page(params[:page]).per(10)
     end
+    return render layout: false if params[:no_layout]
     expires_now
   end
 
@@ -73,7 +84,7 @@ class PostsController < ApplicationController
 
   def bookmarks
     @post = Post.new
-    @post_id = current_end_user.bookmark_posts.includes(:end_user).order(created_at: :desc)
+    @post_id = current_end_user.bookmark_posts.includes(:end_user).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   private

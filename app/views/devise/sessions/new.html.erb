@@ -3,6 +3,7 @@
     <div class="col-lg-2"></div>
     <div class="col-lg-8 bg-primary rounded mt-5">
       <div class="mx-auto m-5" style="width: 80%;">
+        <%= flash[:notice] %>
         <h2 class="text-center text-light mt-3 mb-5">CodeConnect</h2>
         <%= form_with model: @end_user, url: end_user_session_path do |f| %>
 

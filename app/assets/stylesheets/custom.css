@@ -17,3 +17,11 @@
   .w-34 {
     width: 34%!important;
   }
+  
+  /*nav.pagination {*/
+  /*  display: none;*/
+  /*}*/
+  
+  .scroll-list {
+    padding: 0;
+  }

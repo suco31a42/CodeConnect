@@ -10,11 +10,10 @@ class EndUser < ApplicationRecord
   VALID_EMAIL_REGEX    = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :password,       presence: true, length: { in: 6..20 },  format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります'}, allow_blank: true
   validates :email,          presence: true, length: { minimum: 3 }, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
-  validates :unique_id,      presence: true, length: { in: 6..12 },  uniqueness: { case_sensitive: false }
-  validates :name,           presence: true, length: { in: 3..10 }
-  validates :profile_image, presence: true
+  validates :unique_id,      presence: true, length: { in: 6..20 },  uniqueness: { case_sensitive: false }
+  validates :name,           presence: true, length: { in: 2..10 }
   validates :is_deleted,     inclusion: { in: [true, false] }
-  validates :private_status, inclusion: { in:[true, false] }
+  validates :private_status, inclusion: { in: [true, false] }
   validate  :validate_unique_id
   # unique_idは英数字、アンダースコア、句読点のみ使用できます
   validates_format_of :unique_id, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
@@ -47,12 +46,11 @@ class EndUser < ApplicationRecord
       where(conditions.to_h).first
     end
   end
-  # emailかuniqur_idどちらかあるか？
-  def validate_unique_id
-    if EndUser.where(email: unique_id).exists?
-      errors.add(:unique_id, :invalid)
-    end
+
+  def active_for_authentication?
+    super && (is_deleted == false)
   end
+    
   # ユーザが新規登録される際にデフォルト画像を追加する
   def default_image
     if !self.profile_image.attached?
@@ -72,4 +70,17 @@ class EndUser < ApplicationRecord
     following_end_users.include?(end_user)
   end
   
+  def shot_introduction
+    introduction[0,20] + '...'
+  end
+  
+private
+  
+  # emailかuniqur_idどちらかあるか？
+  def validate_unique_id
+    if EndUser.where(email: unique_id).exists?
+      errors.add(:unique_id, :invalid)
+    end
+  end
+
 end

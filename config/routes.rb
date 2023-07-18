@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   resources :end_users, only: %i[show edit update destroy] do
     member do
-      get 'confirm', 'withdraw', 'follows', 'followers'
+      get 'confirm', 'follows', 'followers'
+      patch 'withdraw'
     end
     resource :relationships, only: %i[create destroy]
 
