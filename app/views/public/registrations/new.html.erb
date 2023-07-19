@@ -1,10 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-2"></div>
-    <div class="col-lg-8 bg-primary rounded mt-5">
+    <div class="col-lg-8 bg-dark rounded mt-5 mb-5">
       <div class="mx-auto m-5" style="width: 80%;">
         <%= flash[:notice] %>
-        <h2 class="text-center text-light mt-3 mb-5">新規登録</h2>
+        <div class="mx-auto m-5 text-center" style="width: 80%;">
+          <%= link_to root_path do %>
+            <%= image_tag 'CodeConnect_top.png',size:"100%x100%" %>
+          <% end %>
+        </div>
         <%= form_with model: @end_user, url: end_user_registration_path do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -33,18 +37,13 @@
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
           </div>
 
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label text-light" for="exampleCheck1">この情報で登録します</label>
-          </div>
-
           <div class="actions mx-auto w-50 mt-5" style="height: 65px;">
-            <%= f.submit "登録する", class: 'btn btn-info btn-lg w-100 h-100 fs-5 text-dark fw-bold' %>
+            <%= f.submit "登録する", class: 'btn btn-primary btn-lg w-100 h-100 fs-5 text-light' %>
           </div>
         <% end %>
         <div class="mx-auto mt-5 text-center" style="width: 260px;">
           <p class="d-inline text-light">
-            登録がお済みの方は　<%= link_to "こちら", new_session_path(resource_name), class: "text-light fw-bold" %>
+            登録がお済みの方は　<%= link_to "こちら", new_session_path(resource_name), class: "text-light " %>
           </p>
         </div>
       </div>

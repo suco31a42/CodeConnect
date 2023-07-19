@@ -1,9 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-2"></div>
-    <div class="col-lg-8 bg-primary rounded mt-5">
+    <div class="col-lg-8 bg-dark rounded mt-5">
       <div class="mx-auto m-5" style="width: 80%;">
-        <h2 class="text-center text-light mt-3 mb-5">CodeConnect</h2>
+        <div class="mx-auto m-5 text-center" style="width: 80%;">
+          <%= link_to root_path do %>
+            <%= image_tag 'CodeConnect_top.png',size:"100%x100%" %>
+          <% end %>
+        </div>
         <%= form_with model: @end_user, url: end_user_session_path do |f| %>
 
           <div class="mb-3">
@@ -24,12 +28,12 @@
           <% end %>
 
           <div class="actions mx-auto w-50 mt-5" style="height: 65px;">
-            <%= f.submit "ログイン", class: 'btn btn-info btn-lg w-100 h-100 fs-5 text-dark fw-bold' %>
+            <%= f.submit "ログイン", class: 'btn btn-primary btn-lg w-100 h-100 fs-5 text-light' %>
           </div>
         <% end %>
         <div class="mx-auto mt-5 text-center" style="width: 250px;">
           <p class="d-inline text-light">
-            登録がまだの方は　<%= link_to "こちら", new_registration_path(resource_name), class: "text-light fw-bold" %>
+            登録がまだの方は　<%= link_to "こちら", new_registration_path(resource_name), class: "text-light" %>
           </p>
           <p class="text-light mt-3">
             <%= link_to "パスワードが分からない", new_password_path(resource_name), class: "text-secondary" %>

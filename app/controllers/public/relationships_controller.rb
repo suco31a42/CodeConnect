@@ -1,5 +1,6 @@
 class Public::RelationshipsController < ApplicationController
-
+  before_action :authenticate_end_user!
+  before_action :ensure_nomal_end_user, only: %i[create]
   def create
    @end_user = EndUser.find(params[:end_user_id])
     current_end_user.follow(params[:end_user_id])
@@ -18,5 +19,13 @@ class Public::RelationshipsController < ApplicationController
   def followers
     @end_user = EndUser.find(params[:id])
     @end_users = @end_user.follower_end_users
+  end
+  
+private
+  
+  def ensure_nomal_end_user
+    if current_end_user.email == 'guest@example.com'
+      redirect_to posts_path, notice: 'ゲストユーザーは閲覧のみ可能です。'
+    end
   end
 end

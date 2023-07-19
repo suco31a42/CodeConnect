@@ -11,7 +11,7 @@
       <%= render 'layouts/errors', obj: @post %>
       <ul id="tab-menu" class="nav-tabs nav">
         <li id="new-tab" class="nav-item text-center w-34" >
-          <%= link_to "新着順", posts_path(latest: "true"), class:"nav-link active bg-light fs-6" %>
+          <%= link_to "新着順", posts_path, class:"nav-link bg-light fs-6" %>
         </li>
         <li id="follow-tab" class="nav-item text-center w-33">
           <%= link_to "フォロー中", posts_path(follows: "true"), class:"nav-link bg-light fs-6" %>

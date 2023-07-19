@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Public::PasswordsController < Devise::PasswordsController
-  before_action
+  before_action :authenticate_end_user!
   # GET /resource/password/new
   # def new
   #   super
