@@ -1,6 +1,7 @@
 <% content_for(:title, '検索結果') %>
 <%= render 'layouts/header' %>
 <%= render 'layouts/navgation' %>
+<%= render 'layouts/back' %>
 
 <div class="container-xl">
   <div class="row">
@@ -10,10 +11,11 @@
       <%= render 'layouts/errors', obj: @post %>
       <ul class="nav nav-tabs mt-3">
         <li class="nav-item text-center w-100">
-          <%= sort_link(@search, :created_at, "投稿順", {default_order: :desc}, {class:"nav-link fs-5 text-dark"}) %>
+          <%= sort_link(@search, :created_at, "投稿順", {default_order: :desc}, {class:"nav-link fs-5 text-dark text-decoration-underline"}) %>
       </ul>
-      
-      <%= render 'index', posts: @post_result %>
+      <div class="scroll-list jscroll">
+        <%= render 'index', posts: @post_result %>
+      </div>
     </div>
   </div>
 </div>

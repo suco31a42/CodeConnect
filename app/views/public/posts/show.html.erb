@@ -1,6 +1,7 @@
 <% content_for(:title, '投稿コメント') %>
 <%= render 'layouts/header' %>
 <%= render 'layouts/navgation' %>
+<%= render 'layouts/back' %>
 
 <div class="container-xl">
   <div class="row">
@@ -9,9 +10,12 @@
       <%= flash[:notice] %>
       <%= render 'layouts/errors', obj: @post %>
       <%= render 'layouts/errors', obj: @post_comment %>
-      
+
       <%= render 'show', post: @post_id %>
-      <%= render 'public/post_comments/comment', post: @post_id %>
+      <div class="scroll-list jscroll">
+        <%= render 'public/post_comments/comment', post_id_comments: @post_id_comments %>
+        <%= paginate @post_id_comments %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,10 +1,10 @@
 <!-- 新規投稿用モーダル -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">新規で投稿する</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <%= form_with model: @post, url: posts_path do |f| %>
       <div class="modal-body">
@@ -14,7 +14,7 @@
         <%= f.text_area :body, class:"form-control", style:"height: 400px;"  %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary fs-6" data-bs-dismiss="modal">閉じる</button>
+        <button type="button" class="btn btn-secondary fs-6" data-dismiss="modal">閉じる</button>
         <%= f.submit '投稿する', class:"btn btn-primary fs-6" %>
       </div>
       <% end %>
@@ -69,7 +69,7 @@
       <hr>
       <div class="dropdown">
          <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg fs-6 w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button type="button" class="btn btn-primary btn-lg fs-6 w-100" data-toggle="modal" data-target="#staticBackdrop">
           新規投稿
         </button>
       </div>

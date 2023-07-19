@@ -2,10 +2,14 @@ class Public::EndUsersController < ApplicationController
   def show
     @post = Post.new
     @end_user = EndUser.find(params[:id])
-    expires_now
-    @end_user_posts = @end_user.posts.order(created_at: :desc).page(params[:page]).per(10)
+    if params[:comment]
+      @end_user_posts = @end_user.post_comments.order(created_at: :desc).page(params[:page]).per(10)
+    else
+      @end_user_posts = @end_user.posts.order(created_at: :desc).page(params[:page]).per(10)
+    end 
     @following_end_users = @end_user.following_end_users
     @follower_end_users  = @end_user.follower_end_users
+    expires_now
   end
 
   def edit

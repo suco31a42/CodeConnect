@@ -17,6 +17,7 @@ class Public::PostsController < ApplicationController
       else
         @posts = Post.public_posts.order(created_at: :desc).page(params[:page]).per(10)
       end
+      expires_now
       return render layout: false if params[:no_layout]
       render 'index'  
       flash[:notice] = "投稿が失敗しました"
@@ -42,6 +43,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.new
     @post_id = Post.find(params[:id])
+    @post_id_comments = @post_id.post_comments.order(created_at: :desc).page(params[:page]).per(10)
     @post_comment = current_end_user.post_comments.new
   end
 

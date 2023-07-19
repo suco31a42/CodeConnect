@@ -19,7 +19,7 @@
       )
 end
 
-20.times do |n|
+50.times do |n|
   Post.create!(
   end_user_id: rand(1..10) ,
   body: "#{n + 1}テキストテキストテキストテキスト"
@@ -31,3 +31,4 @@ Admin.create!(
   login: "admin",
   password: "password"
 )
+

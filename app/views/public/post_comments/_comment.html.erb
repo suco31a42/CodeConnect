@@ -1,4 +1,4 @@
-<% post.post_comments.each do |post_comment| %>
+<% post_id_comments.each do |post_comment| %>
   <div class="container-fuild border p-3 ">
     <div class="row">
       <div class="col-1">
@@ -17,12 +17,12 @@
       </div>
 
       <div class="col-1">
-        <% if post.end_user.id == current_end_user.id %>
+        <% if @post_id.end_user.id == current_end_user.id %>
           <div class="dropdown">
             <a class="text-dark fs-4" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-three-dots fs-4 text-dark"></i>
             </a>
-    
+
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <li><%= link_to "コメントを削除する",post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class:"text-dark dropdown-item fs-6" %></li>
             </ul>

@@ -1,7 +1,25 @@
 <% content_for(:title, 'トップページ') %>
  <%= flash[:notice] %>
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
-<%= link_to 'ログイン', new_end_user_session_path %>
-
-<%= link_to '新規登録', new_end_user_registration_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 bg-dark rounded mt-5">
+      <div class="mx-auto m-5 text-center" style="width: 80%;">
+         <%= image_tag 'CodeConnect_top.png',size:"100%x100%",class:"" %>
+      </div>
+      <div class="text-light text-center lh-lg">
+        <p>
+          CodeConnect はプログラミング知識を気軽に<br>
+          共有することができるエンジニア特化のSNSサイトです。<br>
+        </p>
+        <p>まずは<%= link_to 'ゲスト', end_users_guest_sign_in_path, method: :post, class:"" %>で始めてみませんか？</p>
+      </div>
+      <div class=" text-center">
+        <%= link_to '新規登録', new_end_user_registration_path %>
+      </div>
+      <div class=" text-center">
+        <%= link_to 'ログイン', new_end_user_session_path %>
+      </div>
+    </div>
+  </div>
+</div>

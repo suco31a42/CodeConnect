@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+  def guest_sign_in
+    end_user = EndUser.guest
+    sign_in end_user
+    redirect_to posts_path, notice:'ゲストとしてログインしました。'
+  end
   before_action :reject_end_user, only: [:create]
   
   def after_sign_in_path_for(resource)

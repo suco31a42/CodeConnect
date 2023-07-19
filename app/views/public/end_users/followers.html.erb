@@ -1,6 +1,7 @@
 <% content_for(:title, 'フォローワー一覧') %>
 <%= render 'layouts/header' %>
 <%= render 'layouts/navgation' %>
+<%= render 'layouts/back' %>
 
 <div class="container-xl">
   <div class="row">
@@ -17,7 +18,10 @@
           <a class="nav-link active fs-6 text-secondary" href="#">フォロワー</a>
         </li>
       </ul>
-      <%= render 'follow_index', end_users: @end_users %>
+      <div class="scroll-list jscroll">
+        <%= render 'follow_index', end_users: @end_users %>
+        <%= paginate @end_users %>
+      </div>
     </div>
   </div>
 </div>

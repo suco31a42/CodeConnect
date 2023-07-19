@@ -18,10 +18,22 @@
     width: 34%!important;
   }
   
-  /*nav.pagination {*/
-  /*  display: none;*/
-  /*}*/
+  nav.pagination {
+    display: none;
+  }
   
   .scroll-list {
     padding: 0;
+  }
+  
+  .tab-active {
+    display: block!important;
+  }
+  
+  .back-btn {
+    position: fixed;
+    top: 90%;
+    right: 0px;
+    left: 90%;
+    z-index: 1030;
   }

@@ -17,7 +17,10 @@
       <% if @notifications.present? %>
         <%= link_to "全削除", notifications_path(@notifications), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-light" %>
         <% @notifications.each do |notification| %>
-          <%= render "#{notification.action_type}", notification: notification %>
+          <div class="scroll-list jscroll">
+            <%= render "#{notification.action_type}", notification: notification %>
+            <%= paginate @notifications %>
+          </div>
         <% end %>
       <% else %>
         <p>通知はありません</p>

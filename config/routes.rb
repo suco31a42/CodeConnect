@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_scope :end_user do
+    post 'end_users/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
   namespace :admin do
     get 'end_users/index'
     get 'end_users/show'

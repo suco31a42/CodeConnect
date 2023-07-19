@@ -8,7 +8,7 @@ class EndUser < ApplicationRecord
 
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   VALID_EMAIL_REGEX    = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :password,       presence: true, length: { in: 6..20 },  format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります'}, allow_blank: true
+  validates :password,       presence: true, length: { in: 6..100 },  format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります'}, allow_blank: true
   validates :email,          presence: true, length: { minimum: 3 }, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :unique_id,      presence: true, length: { in: 6..20 },  uniqueness: { case_sensitive: false }
   validates :name,           presence: true, length: { in: 2..10 }
@@ -72,6 +72,14 @@ class EndUser < ApplicationRecord
   
   def shot_introduction
     introduction[0,20] + '...'
+  end
+  
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |end_user|
+      end_user.unique_id = "guest_id"
+      end_user.password = SecureRandom.urlsafe_base64
+      end_user.name = "ゲスト"
+    end
   end
   
 private

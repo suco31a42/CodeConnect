@@ -10,16 +10,10 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
+import "../plugins/back_btn.js";
 import "../plugins/jquery.jscroll.min.js";
+import "../plugins/infinite_scroll.js";
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-// 無限スクロールの処理
-$(function() {
-  $('.jscroll').jscroll({
-    contentSelector: '.scroll-list',
-    nextSelector: 'span.next:last a',
-  });
-})
