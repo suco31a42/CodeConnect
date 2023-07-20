@@ -17,7 +17,7 @@ private
   
   def ensure_nomal_end_user
     if current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, notice: 'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path, flash.now[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
     end
   end
 

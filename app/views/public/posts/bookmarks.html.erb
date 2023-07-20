@@ -7,7 +7,7 @@
   <div class="row">
     <div class="" style="width: 16%; height: 700px;"></div>
     <div class="col-md-8 col-xl-9 ps-0">
-      <%= flash[:notice] %>
+      <%= render 'layouts/flash' %>
       <%= render 'layouts/errors', obj: @post %>
       <% if current_end_user.bookmarks.empty? %>
         <p class="fs-4 text-center mt-5">ブックマークしている投稿はありません。</p>

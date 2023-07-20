@@ -20,6 +20,7 @@ ja:
         private_status: '公開状態'
         is_deleted: '退会状況'
         profile_image: 'プロフィール画像'
+        login: 'メールアドレスか、ユーザー名'
       post: 
         end_user_id: 'ユーザー'
         body: '投稿の文章'
@@ -41,3 +42,7 @@ ja:
         end_user_id: 'ユーザー'
         action_type: '通知の種類'
         checked: '既読判断'
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      shot: "%m/%d %H:%M"

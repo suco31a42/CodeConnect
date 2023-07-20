@@ -1,42 +1,41 @@
+<% content_for(:title, '新規登録') %>
 <div class="container">
   <div class="row">
     <div class="col-lg-2"></div>
     <div class="col-lg-8 bg-dark rounded mt-5 mb-5">
       <div class="mx-auto m-5" style="width: 80%;">
-        <%= flash[:notice] %>
+        <%= render 'layouts/flash' %>
         <div class="mx-auto m-5 text-center" style="width: 80%;">
           <%= link_to root_path do %>
             <%= image_tag 'CodeConnect_top.png',size:"100%x100%" %>
           <% end %>
         </div>
         <%= form_with model: @end_user, url: end_user_registration_path do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
-
           <div class="mb-3">
             <%= f.label :表示名, class: 'form-label text-light' %>
+            <%= render "layouts/form_errors", obj: @end_user, attribute: :name %>
             <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder:"サイトで表示される名前です" %>
           </div>
-
           <div class="mb-3">
             <%= f.label :ユーザー名, class: 'form-label text-light' %>
+            <%= render "layouts/form_errors", obj: @end_user, attribute: :unique_id %>
             <%= f.text_field :unique_id, class: 'form-control', placeholder:"英数字、アンダースコア、句読点のみ使用できます" %>
           </div>
-
           <div class="mb-3">
             <%= f.label :メールアドレス, class: 'form-label text-light' %>
+            <%= render "layouts/form_errors", obj: @end_user, attribute: :email %>
             <%= f.email_field :email, autocomplete: "email", class: 'form-control', placeholder:"name@example.com" %>
           </div>
-
           <div class="mb-3">
             <%= f.label :パスワード, class: 'form-label text-light' %>
+            <%= render "layouts/form_errors", obj: @end_user, attribute: :password %>
             <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder:"6文字以上で、半角英数を両方含む必要があります" %>
           </div>
-
           <div class="mb-3">
             <%= f.label :パスワード（再確認）, class: 'form-label text-light' %>
+            <%= render "layouts/form_errors", obj: @end_user, attribute: :password_confirmation %>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
           </div>
-
           <div class="actions mx-auto w-50 mt-5" style="height: 65px;">
             <%= f.submit "登録する", class: 'btn btn-primary btn-lg w-100 h-100 fs-5 text-light' %>
           </div>

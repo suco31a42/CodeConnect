@@ -2,15 +2,6 @@ Rails.application.routes.draw do
   devise_scope :end_user do
     post 'end_users/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
-  namespace :admin do
-    get 'end_users/index'
-    get 'end_users/show'
-    get 'end_users/edit'
-  end
-  namespace :admin do
-    get 'posts/index'
-    get 'posts/show'
-  end
   devise_for :end_users, controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'

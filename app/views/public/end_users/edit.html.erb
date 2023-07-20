@@ -6,7 +6,7 @@
   <div class="row">
     <div style="width: 16%; height: 700px;"></div>
     <div class="col-md-8 col-xl-9 m-3">
-      <%= flash[:notice] %>
+      <%= render 'layouts/flash' %>
       <%= render 'layouts/errors', obj: @post %>
       <%= render 'layouts/errors', obj: @end_user %>
 
@@ -46,18 +46,6 @@
         </div>
         
         <div class="mb-3">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              公開
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-            <label class="form-check-label" for="flexCheckChecked">
-              Checked checkbox
-            </label>
-          </div>
           <div class="form-check">
             <%= f.radio_button :private_status, 'true', class: 'form-check-input', :type => "checkbox" %>
             <%= f.label :公開, class: 'form-check-label' %>

@@ -1,2 +1,73 @@
-<h1>Admin::EndUsers#edit</h1>
-<p>Find me in app/views/admin/end_users/edit.html.erb</p>
+<% content_for(:title, "管理用：#{@end_user.name} さんのプロフィール編集") %>
+<%= render 'layouts/header' %>
+<%= flash[:notice] %>
+<div class="container-xl">
+  <div class="row">
+    <div style="width: 16%; height: 700px;"></div>
+    <div class="col-md-8 col-xl-9 m-3">
+      <%= flash[:notice] %>
+      <%= render 'layouts/errors', obj: @end_user %>
+
+      <h2 class="text-center">プロフィール編集</h2>
+      <%= form_with model: @end_user,  url: admin_end_user_path(@end_user.id) do |f| %>
+        <div class="mb-3">
+          <%= f.label :表示名, class: 'form-label text-dark' %>
+          <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder:"サイトで表示される名前です" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :ユーザ名, class: 'form-label text-dark' %>
+          <%= f.text_field :unique_id, class: 'form-control', placeholder:"英数字、アンダースコア、句読点のみ使用できます" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.label :プロフィール画像, class: 'form-label text-dark' %>
+          <%= f.file_field :profile_image, class: 'form-control', id: "formFile", accept: "image/*" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :プロフィール文, class: 'form-label text-dark' %>
+          <%= f.text_area :introduction, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :メールアドレス, class: 'form-label text-dark' %>
+          <%= f.email_field :email, autocomplete: "email", class: 'form-control', placeholder:"name@example.com" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :生年月日, class: 'form-label text-dark' %>
+          <div class="form-date-select">
+            <%= f.date_select :date_of_dirth, {use_month_numbers: true,start_year: 1930,
+                end_year: (Time.now.year - 10), default: Date.new(1999,1,1)}, {class: "form-control d-inline-block", style:"width: 20%;" } %>
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <div class="form-check">
+            <%= f.radio_button :private_status, 'true', class: 'form-check-input', :type => "checkbox" %>
+            <%= f.label :公開, class: 'form-check-label' %>
+          </div>
+          <div class="form-check">
+            <%= f.radio_button :private_status, 'false',class: 'form-check-input' %>
+            <%= f.label :非公開, class: 'form-check-label' %>
+          </div>
+        </div>
+        <div class="mb-3">
+           <div class="form-check">
+            <%= f.radio_button :is_deleted, 'true', class: 'form-check-input', :type => "checkbox" %>
+            <%= f.label :有効, class: 'form-check-label' %>
+          </div>
+          <div class="form-check">
+            <%= f.radio_button :is_deleted, 'false',class: 'form-check-input' %>
+            <%= f.label :退会, class: 'form-check-label' %>
+          </div>
+        </div>
+        
+        <div class="actions mx-auto w-50 mt-5 mb-5" style="height: 65px;">
+          <%= f.submit "編集を保存する", class: 'btn btn-primary btn-lg w-100 h-100 fs-5 fw-bold' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

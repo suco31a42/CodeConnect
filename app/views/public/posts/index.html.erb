@@ -7,7 +7,7 @@
   <div class="row">
     <div class="" style="width: 16%; height: 700px;"></div>
     <div class="col-md-8 col-xl-9 ps-0">
-      <%= flash[:notice] %>
+      <%= render 'layouts/flash' %>
       <%= render 'layouts/errors', obj: @post %>
       <ul id="tab-menu" class="nav-tabs nav">
         <li id="new-tab" class="nav-item text-center w-34" >
@@ -20,10 +20,8 @@
           <%= link_to "評価順", posts_path(like_count: "true"), class:"nav-link bg-light fs-6" %>
         </li>
       </ul>
-      <div id="tab-contents" class="scroll-list jscroll">
-        <div id="new-tab">
-          <%= render 'index', posts: @posts %>
-        </div>
+      <div class="scroll-list jscroll">
+        <%= render 'index', posts: @posts %>
         <%= paginate @posts %>
       </div>
     </div>

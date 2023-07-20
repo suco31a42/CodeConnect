@@ -1,2 +1,44 @@
-<h1>Admin::Posts#index</h1>
-<p>Find me in app/views/admin/posts/index.html.erb</p>
+<% content_for(:title, "管理用：投稿一覧") %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/back' %>
+<%= flash[:notice] %>
+<div class="scroll-list jscroll">
+  <% @posts.each do |post_list| %>
+    <div class="container border p-3 ">
+      <div class="row">
+        <div class="col-1">
+          <%= image_tag post_list.end_user.profile_image, size:'60x60', class:"rounded-circle shadow-sm" %>
+        </div>
+        <div class="col-8 pl-3">
+          <div class="post-user">
+            <%= link_to post_list.end_user.name, end_user_path(post_list.end_user_id), class:'link-dark' %>
+            <p class="fs-6 text-secondary d-inline">
+              <%= post_list.end_user.unique_id %>
+            </p>
+          </div>
+  
+          <div class="post-body">
+            <p><%= post_list.body %></p>
+            <div class="d-flex flex-wrap">
+              <% if post_list.post_images.attached? %>
+                <% post_list.post_images.each do |image| %>
+                  <div class="w-50 mb-1">
+                    <%= image_tag(image, size:'380x200') %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <%= link_to "投稿を削除する", admin_post_path(post_list), method: :delete, "data-confirm" => "本当に削除しますか？", class:"link-secondary fs-6" %>
+          <p><%= link_to "投稿の詳細", admin_post_path(post_list.id), class:"link-secondary" %></p>
+          <p class="fs-6">コメント<%= post_list.post_comments.count %></p>
+          <p class="fs-6">いいね数<%= post_list.likes.count %></p>
+          <p class="fs-6">ブックマーク数<%= post_list.bookmarks.count %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<%= paginate @posts %>
+</div>

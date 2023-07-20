@@ -7,10 +7,10 @@ class Public::PostCommentsController < ApplicationController
     @post_comment.end_user_id = current_end_user.id # コメントに投稿するユーザのidを収納
     @post_comment.post_id = @post.id # コメントに投稿idを収納
     if @post_comment.save
-      flash[:notice] = 'コメントを投稿しました'
+      flash.now[:secondary] = 'コメントを投稿しました'
       redirect_to post_path(@post)
     else
-      flash[:notice] = 'コメントを失敗しました'
+      flash.now[:secondary] = 'コメントを失敗しました'
       redirect_to post_path(@post)
     end
   end
@@ -36,7 +36,7 @@ private
   
   def guest_uncreate
     if current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, notice: 'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path, flash.now[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
     end
   end
   

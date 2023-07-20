@@ -1,3 +1,4 @@
+<% content_for(:title, 'ログイン') %>
 <div class="container">
   <div class="row">
     <div class="col-lg-2"></div>
@@ -9,24 +10,21 @@
           <% end %>
         </div>
         <%= form_with model: @end_user, url: end_user_session_path do |f| %>
-
+          <%= render 'layouts/flash' %>
           <div class="mb-3">
             <%= f.label :ユーザー名またはメールアドレス, class: 'form-label text-light' %>
             <%= f.text_field :login, autofocus: true, class: 'form-control' %>
           </div>
-
           <div class="mb-3">
             <%= f.label :パスワード, class: 'form-label text-light' %>
             <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder:"6文字以上、半角英数を両方含む" %>
           </div>
-
           <% if devise_mapping.rememberable? %>
             <div class="field">
               <%= f.check_box :remember_me %>
               <%= f.label :remember_me, class: 'form-label text-light' %>
             </div>
           <% end %>
-
           <div class="actions mx-auto w-50 mt-5" style="height: 65px;">
             <%= f.submit "ログイン", class: 'btn btn-primary btn-lg w-100 h-100 fs-5 text-light' %>
           </div>
@@ -39,7 +37,6 @@
             <%= link_to "パスワードが分からない", new_password_path(resource_name), class: "text-secondary" %>
           </p>
         </div>
-
       </div>
     </div>
   </div>
