@@ -8,45 +8,44 @@
     <div class="col-md-8 col-xl-9 m-3">
       <%= render 'layouts/flash' %>
       <%= render 'layouts/errors', obj: @post %>
-      <%= render 'layouts/errors', obj: @end_user %>
-
       <h2 class="text-center">プロフィール編集</h2>
       <%= form_with model: @end_user do |f| %>
         <div class="mb-3">
           <%= f.label :表示名, class: 'form-label text-dark' %>
+          <%= render "layouts/form_errors", obj: @end_user, attribute: :name %>
           <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder:"サイトで表示される名前です" %>
         </div>
-
         <div class="mb-3">
           <%= f.label :ユーザ名, class: 'form-label text-dark' %>
+          <%= render "layouts/form_errors", obj: @end_user, attribute: :unique_id %>
           <%= f.text_field :unique_id, class: 'form-control', placeholder:"英数字、アンダースコア、句読点のみ使用できます" %>
         </div>
-        
         <div class="mb-3">
           <%= f.label :プロフィール画像, class: 'form-label text-dark' %>
+          <%= render "layouts/form_errors", obj: @end_user, attribute: :profile_image %>
           <%= f.file_field :profile_image, class: 'form-control', id: "formFile", accept: "image/*" %>
         </div>
-
         <div class="mb-3">
           <%= f.label :プロフィール文, class: 'form-label text-dark' %>
+          <%= render "layouts/form_errors", obj: @end_user, attribute: :introduction %>
           <%= f.text_area :introduction, class: 'form-control' %>
         </div>
-
         <div class="mb-3">
           <%= f.label :メールアドレス, class: 'form-label text-dark' %>
+          <%= render "layouts/form_errors", obj: @end_user, attribute: :email %>
           <%= f.email_field :email, autocomplete: "email", class: 'form-control', placeholder:"name@example.com" %>
         </div>
-
         <div class="mb-3">
           <%= f.label :生年月日, class: 'form-label text-dark' %>
           <div class="form-date-select">
+            <%= render "layouts/form_errors", obj: @end_user, attribute: :date_of_dirth %>
             <%= f.date_select :date_of_dirth, {use_month_numbers: true,start_year: 1930,
                 end_year: (Time.now.year - 10), default: Date.new(1999,1,1)}, {class: "form-control d-inline-block", style:"width: 20%;" } %>
           </div>
         </div>
-        
         <div class="mb-3">
           <div class="form-check">
+            <%= render "layouts/form_errors", obj: @end_user, attribute: :private_status %>
             <%= f.radio_button :private_status, 'true', class: 'form-check-input', :type => "checkbox" %>
             <%= f.label :公開, class: 'form-check-label' %>
           </div>
@@ -58,7 +57,6 @@
         <div class="mb-3">
           <%= link_to "退会する", confirm_end_user_path(@end_user), class:'btn btn-light' %> 
         </div>
-        
         <div class="actions mx-auto w-50 mt-5 mb-5" style="height: 65px;">
           <%= f.submit "編集を保存する", class: 'btn btn-primary btn-lg w-100 h-100 fs-5 fw-bold' %>
         </div>
