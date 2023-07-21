@@ -1,0 +1,27 @@
+<% content_for(:title, 'フォローワー一覧') %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/navgation' %>
+<%= render 'layouts/back' %>
+
+<div class="container-xl">
+  <div class="row">
+    <div style="width: 16%; height: 700px;"></div>
+    <div class="col-md-8 col-xl-9 ps-0">
+      <%= render 'layouts/flash' %>
+      <%= render 'layouts/errors', obj: @post %>
+      
+      <ul class="nav nav-tabs mt-3">
+        <li class="nav-item text-center w-50">
+          <%= link_to "フォロワー", follows_end_user_path(@end_user), class:"nav-link" %>
+        </li>
+        <li class="nav-item text-center w-50">
+          <a class="nav-link active fs-6 text-secondary" href="#">フォロワー</a>
+        </li>
+      </ul>
+      <div class="scroll-list jscroll">
+        <%= render 'follow_index', end_users: @end_users %>
+        <%= paginate @end_users %>
+      </div>
+    </div>
+  </div>
+</div>

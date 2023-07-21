@@ -1,0 +1,9 @@
+<% if post.bookmarked_by?(current_end_user) %>
+    <%= link_to post_bookmarks_path(post), remote: true, method: :delete, class:"text-primary fs-5 text-decoration-none"  do %>
+      <i class="bi bi-bookmark-check-fill fs-3 text-primary"></i> <span class="fs-6"><%= post.bookmarks.count %></span>
+    <% end %>
+<% else %>
+    <%= link_to post_bookmarks_path(post), remote: true, method: :post, class:"text-primary fs-5 text-decoration-none" do %>
+      <i class="bi bi-bookmark fs-3 text-primary"></i> <span class="fs-6"><%= post.bookmarks.count %></span>
+    <% end %>
+<% end %>

@@ -1,0 +1,31 @@
+<% if @end_user.id == current_end_user.id %>
+  <% content_for(:title, 'マイページ') %>
+<% else %>
+  <% content_for(:title, "#{@end_user.name} さんのプロフィール") %>
+<% end %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/navgation' %>
+<%= render 'layouts/back' %>
+
+<div class="container-xl">
+  <div class="row">
+    <div style="width: 16%; height: 700px;"></div>
+    <div class="col-md-8 col-xl-9 ps-0">
+      <%= render 'layouts/flash' %>
+      <%= render 'layouts/errors', obj: @post %>
+      <%= render 'profile', end_user: @end_user %>
+      <ul class="nav nav-tabs">
+        <li class="nav-item text-center" style="width: 34%;">
+          <%= link_to "コメント", end_user_path(@end_user.id), class:"nav-link" %>
+        </li>
+        <li class="nav-item text-center" style="width: 33%;">
+          <%= link_to "コメント", end_user_path(@end_user.id, commrnt: true), class:"nav-link" %>
+        </li>
+      </ul>
+      <div class="scroll-list jscroll">
+        <%= render 'show', end_user_posts: @end_user_posts %>
+        <%= paginate @end_user_posts %>
+      </div>
+    </div>
+  </div>
+</div>

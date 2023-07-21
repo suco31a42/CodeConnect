@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-5.times do |n|
+10.times do |n|
   EndUser.create!(
     email:          "test#{n + 1}@test.com",
     name:           "テスト太郎#{n + 1}",
@@ -14,11 +14,21 @@
     date_of_dirth:  "value" "2017-07-19",
     introduction:   "#{n + 1}よろしくお願いします！",
     private_status: true,
-    is_deleted:     false
+    is_deleted:     false,
+    profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/no_image.jpg"),filename: "no_image.jpg")
       )
 end
 
-Post.create(
-  end_user_id: 1,
-  body: "テキストテキストテキストテキスト"
+50.times do |n|
+  Post.create!(
+  end_user_id: rand(1..10) ,
+  body: "#{n + 1}テキストテキストテキストテキスト"
+  )
+end
+
+Admin.create!(
+  email: "admin@example.com",
+  login: "admin",
+  password: "password"
 )
+

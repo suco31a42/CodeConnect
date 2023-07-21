@@ -1,0 +1,25 @@
+<%= flash[:notice] %>
+<div class='container'>
+  <div class='row mt-3'>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 bg-primary rounded mt-5">
+      <div class="mx-auto">
+        <h4 class="text-light text-center m-4">管理者ログイン</h4>
+        <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="mb-3 mx-5">
+            <%= f.label :login, "管理人ID", class: 'text-light form-label' %>
+            <%= f.text_field :login, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "sample@example.com" %>
+          </div>
+          <div class="mb-3 mx-5">
+            <%= f.label :password, "パスワード", class: 'text-light form-label' %>
+            <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+          </div>
+
+          <div class="mb-3 my-5 text-center">
+            <%= f.submit "ログイン", class: 'btn btn-info fs-4 btn-lg' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

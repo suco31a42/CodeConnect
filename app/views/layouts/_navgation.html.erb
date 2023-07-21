@@ -1,69 +1,77 @@
 <!-- 新規投稿用モーダル -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="staticBackdropLabel">新規で投稿する</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
+      <%= form_with model: @post, url: posts_path do |f| %>
       <div class="modal-body">
-        <%= form_with model: @post, url: posts_path do |f| %>
-        <h4>本文</h4>
-        <%= f.text_area :body, class:"form-control" %>
-        <h4>画像</h4>
-        <%= f.file_field :post_image, accept: "image/*", class:"form-control" %>
-        <%= f.submit '投稿する' %>
-      <% end %>
+        <h6>画像</h6>
+        <%= f.file_field :post_images, accept: "image/*", multiple: true, class:"form-control-sm"%>
+        <h6>本文</h6>
+        <%= f.text_area :body, class:"form-control", style:"height: 400px;"  %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-secondary fs-6" data-dismiss="modal">閉じる</button>
+        <%= f.submit '投稿する', class:"btn btn-primary fs-6" %>
       </div>
+      <% end %>
     </div>
   </div>
 </div>
 
-<div class="fixed-top container-xl">
-  <div class="row">
-    <div class="col-lg-1 col-xl-2 d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="height: 700px;">
-      <%= link_to end_user_path(current_end_user.id), class: 'd-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none' do %>
-        <%= image_tag current_end_user.profile_image, size:'60x60', class:"rounded-circle" %>
-        <p class="fs-6 text-secondary pt-3 ps-2">
+
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark fixed-top" style="width: 16%; height: 700px;">
+      <%= link_to end_user_path(current_end_user.id), class:'d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none' do %>
+        <!--画像を加工し、加工済みのデータが有る場合はそのデータを表示する-->
+        <%= image_tag current_end_user.profile_image.variant(resize:'50x50').processed, class:"rounded-circle align-top mb-auto" %>
+        <p class="fs-6 text-secondary mb-0 ml-2">
           <span class="text-light"><%= current_end_user.name %></span>
           <%= current_end_user.unique_id %>
         </p>
       <% end %>
       </a>
       <hr>
-      <ul class="nav flex-column mb-auto">
-        <li class="nav-item">
-          <%= link_to posts_path,  class: 'nav-link', style:'font-size: 15px;', style:'font-size: 15px;' do %>
-            <i class="bi bi-house fs-4"></i>ホーム
+      <ul class="nav flex-column mb-auto mt-2">
+        <li class="nav-item mt-3">
+          <%= link_to posts_path,  class:'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;', style:'font-size: 15px;' do %>
+            <i class="bi bi-house fs-4"></i> ホーム
           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to end_user_path(current_end_user.id),  class: 'nav-link', style:'font-size: 15px;' do %>
-            <i class="bi bi-person-fill fs-4"></i>プロフィール
+          <%= link_to notifications_path, class:'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;', style:'font-size: 15px;'  do %>
+            <% if current_end_user.notifications.where(checked: false).exists? %>
+              <i class="bi bi-bell-fill fs-4"></i>
+              <%= current_end_user.notifications.where(checked: false).count %> 通知
+            <% else %>
+              <i class="bi bi-bell-slash fs-4"></i> 通知
+            <% end %>
+          <% end %>
+          </li>
+        <li class="nav-item">
+          <%= link_to end_user_path(current_end_user.id),  class:'nav-link text-light mb-3 pe-1 ps-1', style:'font-size: 15px;' do %>
+            <i class="bi bi-person fs-3"></i> プロフィール
           <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to end_user_bookmarks_path(current_end_user.id) , class: 'nav-link', style:'font-size: 15px;' do %>
-            <i class="bi bi-bookmarks fs-4"></i>ブックマーク
+          <%= link_to bookmarks_posts_path , class:'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;' do %>
+            <i class="bi bi-bookmarks fs-4"></i> ブックマーク
           <% end %>
         </li>
         <li class="nav-item">
-          <%= button_to destroy_end_user_session_path, method: :delete,  class: 'nav-link', style:'font-size: 15px;' do %>
-            <i class="bi bi-box-arrow-right fs-4"></i>ログアウト
+          <%= button_to destroy_end_user_session_path, method: :delete,  class:'nav-link text-light mb-3 pe-1 ps-2', style:'font-size: 15px;' do %>
+            <i class="bi bi-box-arrow-right fs-4"></i> ログアウト
           <% end %>
         </li>
       </ul>
       <hr>
       <div class="dropdown">
          <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <button type="button" class="btn btn-primary btn-lg fs-6 w-100" data-toggle="modal" data-target="#staticBackdrop">
           新規投稿
         </button>
       </div>
     </div>
-  </div>
-</div>
+

@@ -1,0 +1,29 @@
+<% content_for(:title, 'トップページ') %>
+ <%= flash[:notice] %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8 bg-dark rounded mt-5" style="height: 650px;">
+      <div class="mx-auto m-5 text-center" style="width: 80%;">
+         <%= image_tag 'CodeConnect_top.png',size:"100%x100%",class:"" %>
+      </div>
+      <div class="text-light text-center lh-lg m-5">
+        <p>
+          CodeConnect はプログラミング知識を気軽に<br>
+          共有することができるエンジニア特化のSNSサイトです。<br>
+        </p>
+        <p class="mt-4">
+          まずは<%= link_to 'ゲスト', end_users_guest_sign_in_path, method: :post, class:"link-secondary" %>で始めてみませんか？
+        </p>
+      </div>
+      <%= link_to new_end_user_registration_path, class:"link-light" do %>
+        <div class="bg-primary text-center rounded mx-auto pt-4" style="width: 40%; height: 110px;">
+          <span class="fs-3 mt-5">新規登録</span>
+        </div>
+      <% end %>
+      <div class="text-center mt-4">
+        <p  class="text-light" >ログインは <%= link_to 'こちら', new_end_user_session_path, class:"link-secondary"  %> から</p>
+      </div>
+    </div>
+  </div>
+</div>

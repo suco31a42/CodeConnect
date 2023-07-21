@@ -1,15 +1,55 @@
-  <div class="container-xl">
+<% if admin_signed_in? %>
+  <% if request.fullpath.include? "/admin" %>
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <%= search_form_for @search, url: search_posts_path, class:"d-flex" do |f| %>
+            <%= f.search_field :body_cont, class:"form-control mx-auto", placeholder:"検索…", required:"required" %>
+            <%= f.button :type => "submit", class:"btn btn-primary btn-sm ml-3", style:"width: 20%;"  do %>
+              <i class="bi bi-search fs-6 text-light"></i>
+            <% end %>
+          <% end %>
+
+          <div>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item ml-3" style="border-style:solid; border-width:2px;">
+                <%= link_to "ユーザー一覧", admin_root_path ,class: 'nav-link', style: 'color: black;' %>
+              </li>
+
+              <li class="nav-item ml-3" style="border-style:solid; border-width:2px;">
+                <%= link_to "投稿一覧", admin_posts_path ,class: 'nav-link', style: 'color: black;' %>
+              </li>
+
+              <li class="nav-item ml-3" style="border-style:solid; border-width:2px;">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link', style: 'color: black;' %>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </nav>
+    </header>
+  <% end %>
+<% elsif end_user_signed_in? %>
+  <header class="container-fuild">
     <div class="row">
       <div class="col-12">
-        <nav class="navbar navbar-dark bg-dark">
-          <a class="navbar-brand">Navbar</a>
-          <form class="d-flex mx-auto">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-primary" type="submit">
-              <i class="bi bi-search" style="font-size: 20px;"></i>
-            </button>
-          </form>
+        <nav class="navbar navbar-dark bg-dark" style="height: 90px;">
+          <div class="container-fluid">
+            <div class="mx-auto d-inline-block">
+              <%= search_form_for @search, url: search_posts_path, class:"d-flex" do |f| %>
+                <%= f.search_field :body_cont, class:"form-control mx-auto", placeholder:"検索…", required:"required" %>
+                <%= f.button :type => "submit", class:"btn btn-primary btn-sm ml-3", style:"width: 20%;"  do %>
+                  <i class="bi bi-search fs-6 text-light"></i>
+                <% end %>
+              <% end %>
+            </div>
+            <%= link_to root_path do %>
+              <%= image_tag 'CodeConnect.jpg',size:"100%x100%" %>
+            <% end %>
+          </div>
         </nav>
       </div>
     </div>
-  </div>
+  </header>
+<% end %>

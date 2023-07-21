@@ -1,0 +1,29 @@
+<% content_for(:title, 'ホーム') %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/navgation' %>
+<%= render 'layouts/back' %>
+
+<div class="container-xl">
+  <div class="row">
+    <div class="" style="width: 16%; height: 700px;"></div>
+    <div class="col-md-8 col-xl-9 ps-0">
+      <%= render 'layouts/flash' %>
+      <%= render 'layouts/errors', obj: @post %>
+      <ul id="tab-menu" class="nav-tabs nav">
+        <li id="new-tab" class="nav-item text-center w-34" >
+          <%= link_to "新着順", posts_path, class:"nav-link bg-light fs-6" %>
+        </li>
+        <li id="follow-tab" class="nav-item text-center w-33">
+          <%= link_to "フォロー中", posts_path(follows: "true"), class:"nav-link bg-light fs-6" %>
+        </li>
+        <li id="like-tab" class="nav-item text-center w-33">
+          <%= link_to "評価順", posts_path(like_count: "true"), class:"nav-link bg-light fs-6" %>
+        </li>
+      </ul>
+      <div class="scroll-list jscroll">
+        <%= render 'index', posts: @posts %>
+        <%= paginate @posts %>
+      </div>
+    </div>
+  </div>
+</div>

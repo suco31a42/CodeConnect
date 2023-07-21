@@ -1,0 +1,63 @@
+<% content_for(:title, "管理用：投稿詳細") %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/back' %>
+<%= flash[:notice] %>
+<div class="container border p-3 ">
+  <div class="row">
+    <div class="col-1">
+      <%= image_tag @post.end_user.profile_image, size:'60x60', class:"rounded-circle shadow-sm" %>
+    </div>
+    <div class="col-8 pl-3">
+      <div class="post-user">
+        <%= link_to @post.end_user.name, end_user_path(@post.end_user_id), class:'link-dark' %>
+        <p class="fs-6 text-secondary d-inline">
+          <%= @post.end_user.unique_id %>
+        </p>
+      </div>
+
+      <div class="post-body">
+        <p><%= @post.body %></p>
+        <div class="d-flex flex-wrap">
+          <% if @post.post_images.attached? %>
+            <% @post.post_images.each do |image| %>
+              <!--画像をクリックすると画像のリンクに遷移する-->
+              <div class="w-50">
+                <%= link_to image_tag(image, size:'320x250'), url_for(image) %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <%= link_to "投稿を削除する", admin_post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？", class:"link-secondary fs-6" %>
+      <p><%= link_to "投稿の詳細", admin_post_path(@post.id), class:"link-secondary" %></p>
+      <p class="fs-6">コメント<%= @post.post_comments.count %></p>
+      <p class="fs-6">いいね数<%= @post.likes.count %></p>
+      <p class="fs-6">ブックマーク数<%= @post.bookmarks.count %></p>
+    </div>
+  </div>
+</div>
+<% @post_comments.each do |post_comment| %>
+<div class="container border p-3 ">
+  <div class="row">
+    <div class="col-1">
+      <%= image_tag post_comment.end_user.profile_image, size:'40x40', class:"rounded-circle shadow-sm" %>
+    </div>
+    <div class="col-8">
+      <div class="post-user">
+        <%= link_to post_comment.end_user.name, end_user_path(post_comment.end_user.id), class:'link-dark'  %>
+        <p class="fs-6 text-secondary d-inline">
+          <%= post_comment.end_user.unique_id %>
+        </p>
+      </div>
+      <div class="post-body">
+        <p><%= post_comment.body %></p>
+      </div>
+    </div>
+    <div class="col-3">
+      <%= link_to "コメントを削除する",admin_post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class:"link-secondary fs-6" %>
+    </div>
+  </div>
+</div>
+<% end %>

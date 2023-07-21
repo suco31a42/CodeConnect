@@ -1,0 +1,44 @@
+<% content_for(:title, "管理用：会員一覧") %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/back' %>
+<%= flash[:notice] %>
+  <div class="col-10">
+    <%= link_to "新しい順", admin_root_path, class:"" %>
+    <%= link_to "古い順", admin_root_path(oldest: "true") , class:"" %>
+  </div>
+<div class="scroll-list jscroll">
+  <% @end_users.each do |end_user| %>
+    <div class="container border p-3 ">
+      <div class="row">
+        <div class="col-1">
+          <%= link_to admin_end_user_path(end_user) do %>
+            <%= image_tag end_user.profile_image, size:'50x50', class:"rounded-circle shadow-sm" %>
+          <% end %>
+        </div>
+        <div class="col-7">
+          <div class="post-user">
+            <%= link_to end_user.name, admin_end_user_path(end_user), class:'link-primary' %>
+            <p class="fs-6 text-secondary d-inline">
+              <%= end_user.unique_id %>
+            </p>
+          </div>
+
+          <div class="user-body">
+            <p><%= end_user.introduction.truncate(50) %></p>
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="">
+            <p class="d-inline-block text-secondary">フォロー <%= end_user.following_end_users.count %></p>
+            <p class="d-inline-block text-secondary">フォロワー <%= end_user.follower_end_users.count %></p>
+          </div>
+          <div class="">
+            <p class="d-inline-block text-secondary">投稿した数 <%= end_user.posts.count %></p>
+            <p class="d-inline-block text-secondary">コメントした数 <%= end_user.post_comments.count %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <%= paginate @end_users %>
+</div>

@@ -1,0 +1,70 @@
+<% content_for(:title, "管理用：#{@end_user.name} さんのプロフィール") %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/back' %>
+<%= flash[:notice] %>
+<div class="container-fuild m-3 mb-0">
+  <div class="row">
+    <div class="text-center">
+      <%= image_tag @end_user.profile_image, size:'100%x100%', class:"rounded-circle shadow-sm" %>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-8">
+  
+      <div class="mx-auto">
+        <div class="mb-3">
+          <%= link_to "プロフィール編集", edit_admin_end_user_path(@end_user.id), class:"btn btn-primary btn-lg rounded-pill fs-6" %>
+        </div>
+        <table class="table table-striped">
+            <tr>
+              <th>ID</th>
+              <td><%= @end_user.id %></td>
+            </tr>
+            <tr>
+              <th>表示名</th>
+              <td><%= @end_user.name %></td>
+            </tr>
+            <tr>
+              <th>ユーザー名</th>
+              <td><%= @end_user.unique_id %></td>
+            </tr>
+            <tr>
+              <th>メールアドレス</th>
+              <td><%= @end_user.email %></td>
+            </tr>
+            <tr>
+              <th>生年月日</th>
+              <td><%= @end_user.date_of_dirth %></td>
+            </tr>
+            <tr>
+              <th>プロフィール文</th>
+              <td><%= @end_user.introduction %></td>
+            </tr>
+            <tr>
+              <th>公開状態</th>
+              <% if @end_user.private_status == true %>
+                <td>公開</td>
+              <% else %>
+                <td>非公開</td>
+              <% end %>
+            </tr>
+            <tr>
+              <th>退会状況</th>
+              <% if @end_user.is_deleted == false %>
+                <td>有効</td>
+              <% else %>
+                <td>退会</td>
+              <% end %>
+            </tr>
+            <tr>
+              <th>登録日時</th>
+              <td><%= @end_user.created_at.to_s(:datetime_jp) %></td>
+            </tr>
+            <tr>
+              <th>更新日時</th>
+              <td><%= @end_user.updated_at.to_s(:datetime_jp)  %></td>
+            </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

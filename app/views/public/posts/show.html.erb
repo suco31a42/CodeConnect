@@ -1,0 +1,21 @@
+<% content_for(:title, '投稿コメント') %>
+<%= render 'layouts/header' %>
+<%= render 'layouts/navgation' %>
+<%= render 'layouts/back' %>
+
+<div class="container-xl">
+  <div class="row">
+    <div class="" style="width: 16%; height: 700px;"></div>
+    <div class="col-md-8 col-xl-9 ps-0">
+      <%= render 'layouts/flash' %>
+      <%= render 'layouts/errors', obj: @post %>
+      <%= render 'layouts/errors', obj: @post_comment %>
+
+      <%= render 'show', post: @post_id %>
+      <div class="scroll-list jscroll">
+        <%= render 'public/post_comments/comment', post_id_comments: @post_id_comments %>
+        <%= paginate @post_id_comments %>
+      </div>
+    </div>
+  </div>
+</div>

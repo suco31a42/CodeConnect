@@ -1,0 +1,48 @@
+ja:
+  activerecord:
+    models:
+      end_user: 'ユーザー'
+      post: '投稿'
+      like: 'いいね'
+      bookmark: 'ブックマーク'
+      post_comment: '投稿コメント'
+      notification: '通知'
+      relationship: 'フォロー'
+    attributes:
+      end_user:
+        name: '表示名'
+        unique_id: 'ユーザー名'
+        email: 'メールアドレス'
+        password: 'パスワード'
+        password_confirmation: 'パスワード確認'
+        date_of_dirth: '生年月日'
+        introduction: 'プロフィール文'
+        private_status: '公開状態'
+        is_deleted: '退会状況'
+        profile_image: 'プロフィール画像'
+        login: 'メールアドレスか、ユーザー名'
+      post: 
+        end_user_id: 'ユーザー'
+        body: '投稿の文章'
+        post_image: '投稿画像'
+      like:
+        end_user_id: 'ユーザー'
+        post_id: '投稿'
+      bookmark:
+        end_user_id: 'ユーザー'
+        post_id: '投稿'
+      relationship:
+        follower_id: 'フォローするユーザー'
+        followed_id: 'フォローされるユーザー'
+      post_comment:
+        end_user_id: 'ユーザー'
+        post_id: '投稿'
+        body: 'コメントの文章'
+      notification:
+        end_user_id: 'ユーザー'
+        action_type: '通知の種類'
+        checked: '既読判断'
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      shot: "%m/%d %H:%M"
