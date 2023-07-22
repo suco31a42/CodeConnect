@@ -7,7 +7,7 @@
         <%= render 'layouts/flash' %>
         <div class="mx-auto m-5 text-center" style="width: 80%;">
           <%= link_to root_path do %>
-            <%= image_tag 'CodeConnect_top.png',size:"100%x100%" %>
+            <%= image_tag asset_path'CodeConnect_top.png',size:"100%x100%" %>
           <% end %>
         </div>
         <%= form_with model: @end_user, url: end_user_registration_path do |f| %>
