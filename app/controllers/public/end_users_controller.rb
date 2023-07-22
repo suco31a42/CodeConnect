@@ -7,7 +7,7 @@ class Public::EndUsersController < ApplicationController
     @post = Post.new
     @end_user = EndUser.find(params[:id])
     if params[:comment]
-      @end_user_posts = @end_user.post_comments.order(created_at: :desc).page(params[:page]).per(10)
+      @end_user_posts = @end_user.post_comments.order(created_at: :asc).page(params[:page]).per(10)
     else
       @end_user_posts = @end_user.posts.order(created_at: :desc).page(params[:page]).per(10)
     end
@@ -25,11 +25,11 @@ class Public::EndUsersController < ApplicationController
     @end_user = EndUser.find(params[:id])
     if @end_user.update(end_user_params)
       redirect_to end_user_path(@end_user.id)
-      flash.now[:secondary] = "編集が成功しました"
+      flash[:secondary] = "編集が成功しました"
     else
       @post = Post.new
       render 'edit'
-      flash.now[:secondary] = "編集は失敗しました"
+      flash[:secondary] = "編集は失敗しました"
     end
   end
 
@@ -41,7 +41,7 @@ class Public::EndUsersController < ApplicationController
     @end_user = EndUser.find(current_end_user.id)
     @end_user.update(is_deleted: true)
     reset_session
-    flash.now[:secondary] = "退会処理を完了しました"
+    flash[:secondary] = "退会処理を完了しました"
     redirect_to root_path
   end
 
@@ -68,16 +68,16 @@ private
   def ensure_nomal_end_user
     if current_end_user != EndUser.find(params[:id])
       byebug
-      redirect_to posts_path, flash.now[:secondary] = '他のユーザーの編集はできません。'
+      redirect_to posts_path, flash[:secondary] = '他のユーザーの編集はできません。'
     elsif current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, flash.now[:secondary] =  'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path, flash[:secondary] =  'ゲストユーザーは閲覧のみ可能です。'
     end
   end
 
   def correct_end_user
     @end_user = EndUser.find(params[:id])
     unless @end_user == current_end_user
-      redirect_to posts_path, flash.now[:secondary] = '他のユーザーの編集画面に遷移はできません。'
+      redirect_to posts_path, flash[:secondary] = '他のユーザーの編集画面に遷移はできません。'
     end
   end
 

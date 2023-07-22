@@ -1,10 +1,22 @@
 <% content_for(:title, '退会確認') %>
-<h1>本当に退会しますか？</h1>
- <p>
-    退会すると、会員登録情報や<br>
-  これまでの購入履歴が閲覧できなくなります。<br>
-    退会する場合は、「退会する」をクリックしてください。
-  </p>
+<%= render 'layouts/header' %>
+<%= render 'layouts/navgation' %>
 
-  <%= link_to "退会しない", end_user_path(@end_user), :class => "btn btn-primary ms-3" %>
-  <%= link_to "退会する", withdraw_end_user_path, method: :patch, :class => "btn btn-danger ms-3", data: { confirm: "本当に退会しますか？" }  %>
+<div class="container-xl">
+  <div class="row">
+    <div style="width: 16%; height: 500px;"></div>
+    <div class="col-md-8 col-xl-9 ps-0 text-center border mt-3 bg-light">
+      <%= render 'layouts/flash' %>
+      <%= render 'layouts/errors', obj: @post %>
+      <h1 class="mt-4">本当に退会しますか？</h1>
+       <p class="lh-lg">
+          退会すると、ユーザー登録情報や投稿の編集ができなくなり、<br>
+          他のユーザーからも投稿を閲覧することができなくなります。<br>
+          退会を希望される場合は、「退会する」をクリックしてください。
+        </p>
+
+        <%= link_to "退会しない", end_user_path(@end_user), :class => "btn btn-primary ms-3 fs-6" %>
+        <%= link_to "退会する", withdraw_end_user_path, method: :patch, :class => "btn btn-danger ms-3 fs-6", data: { confirm: "本当に退会しますか？" }  %>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
     @post.end_user_id = current_end_user.id
     if @post.save
      redirect_to posts_path
-     flash.now[:secondary] = "投稿が成功しました"
+     flash[:secondary] = "投稿が成功しました"
     else
       if    params[:latest]
         @posts = Post.public_posts.latest.page(params[:page]).per(10)
@@ -24,7 +24,7 @@ class Public::PostsController < ApplicationController
       expires_now
       return render layout: false if params[:no_layout]
       render 'index'  
-      flash.now[:secondary] = "投稿が失敗しました"
+      flash[:secondary] = "投稿が失敗しました"
     end
   end
 
@@ -59,11 +59,11 @@ class Public::PostsController < ApplicationController
 
     if @post.update(post_params)
       redirect_to edit_post_path(@post.id)
-      flash.now[:secondary] = "編集が成功しました"
+      flash[:secondary] = "編集が成功しました"
     else
       @post = Post.new
       render 'edit'
-      flash.now[:secondary] = "編集は失敗しました"
+      flash[:secondary] = "編集は失敗しました"
     end
   end
 
@@ -71,12 +71,12 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.destroy
       redirect_to posts_path
-      flash.now[:secondary] = "削除に成功しました"
+      flash[:secondary] = "削除に成功しました"
     else
       @post = Post.new
       @posts = Post.all
       render 'index'
-      flash.now[:secondary] = "削除は失敗しました"
+      flash[:secondary] = "削除は失敗しました"
     end
   end
 
@@ -105,15 +105,15 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @end_user = @post.end_user
     if current_end_user != @end_user
-      redirect_to posts_path, flash.now[:secondary] = '他のユーザーの編集はできません。'
+      redirect_to posts_path, flash[:secondary] = '他のユーザーの編集はできません。'
     elsif current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, flash.now[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path, flash[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
     end
   end
   
   def guest_uncreate
     if current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, flash.now[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path, flash[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
     end
   end
 
@@ -121,7 +121,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @end_user = @post.end_user
     unless @end_user == current_end_user
-      redirect_to posts_path, flash.now[:secondary] = '他のユーザーの編集画面に遷移はできません。'
+      redirect_to posts_path, flash[:secondary] = '他のユーザーの編集画面に遷移はできません。'
     end
   end
 

@@ -40,7 +40,7 @@ protected
     @end_user = EndUser.find_by("unique_id = :login OR email = :login", login: login)
     if @end_user&.valid_password?(password)
       if @end_user.is_deleted?
-        flash.now[:secondary] = "このアカウントは退会済みです。"
+        flash[:secondary] = "このアカウントは退会済みです。"
         redirect_to new_end_user_session_path
       end
     end

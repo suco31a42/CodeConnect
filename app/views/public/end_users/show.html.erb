@@ -16,7 +16,7 @@
       <%= render 'profile', end_user: @end_user %>
       <ul class="nav nav-tabs">
         <li class="nav-item text-center" style="width: 34%;">
-          <%= link_to "コメント", end_user_path(@end_user.id), class:"nav-link" %>
+          <%= link_to "投稿", end_user_path(@end_user.id), class:"nav-link" %>
         </li>
         <li class="nav-item text-center" style="width: 33%;">
           <%= link_to "コメント", end_user_path(@end_user.id, commrnt: true), class:"nav-link" %>

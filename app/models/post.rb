@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   has_many :likes,         dependent: :destroy
   has_many :bookmarks,     dependent: :destroy
   has_many :post_comments, dependent: :destroy
-  # ブックマークした投稿を習得
+  # ブックマークした投稿を取得する
   has_many :bookmark_posts,  through: :bookmarks,  source: :post
   has_many :liked_end_users, through: :likes,      source: :end_user
   has_one  :notification,         as: :subject, dependent: :destroy
@@ -12,8 +12,8 @@ class Post < ApplicationRecord
   validate  :image_type, :image_size, :image_length
   validates :body, presence: true, length: { in: 3..255, message: "3文字以上、255文字以内にする必要があります" }
 
-
-  scope :public_posts, -> { joins(:end_user).where(end_users: { private_status: true}) }
+# 公開状態かつ、退会していないユーザーの投稿だけ取得する
+  scope :public_posts, -> { joins(:end_user).where(end_users: { private_status: true, is_deleted: false }) }
   scope :latest,     -> { order(created_at: :desc) }
 
   scope :like_count, -> { posts_like_count }
@@ -72,7 +72,7 @@ class Post < ApplicationRecord
   def self.posts_current_end_user_follow
     self.where(end_user_id: [current_end_user.id, *current_end_user.
                following_end_users_ids]).order(created_at: :desc)
-    
+
   end
 
 end
