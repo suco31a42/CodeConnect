@@ -13,7 +13,7 @@
         </div>
 
         <div class="post-body">
-          <p><%= post_list.body %></p>
+          <p><%= post_list.body.truncate(255) %></p>
           <div class="d-flex flex-wrap">
             <% if post_list.post_images.attached? %>
               <% post_list.post_images.each do |image| %>
@@ -26,9 +26,17 @@
           </div>
         </div>
 
-        <div class="post-actions">
-          <div class="like" id="like-btn-<%= post_list.id %>">
+        <div class="post-actions d-flex mt-3">
+          <div class="comment-btn d-inline-block w-33">
+            <%= link_to post_path(post_list.id), class:"text-primary fs-5 text-decoration-none" do %>
+              <i class="bi bi-chat-left-dots"></i> <span class="fs-6"><%= post_list.post_comments.count %></span>
+            <% end %>
+          </div>
+          <div class="like d-inline-block w-34 text-center" id="like-btn-<%= post_list.id %>">
             <%= render 'public/likes/btn', post: post_list %>
+          </div>
+          <div class="bookmark d-inline-block w-33 text-right" id="bookmark-btn-<%= post_list.id %>">
+            <%= render 'public/bookmarks/btn', post: post_list %>
           </div>
         </div>
       </div>

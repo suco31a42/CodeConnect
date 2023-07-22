@@ -54,7 +54,7 @@ class Public::EndUsersController < ApplicationController
   def followers
     @post = Post.new
     @end_user = EndUser.find(params[:id])
-    @end_users = @end_user.follower_end_users.order(created_at: :desc).ppage(params[:page]).per(10)
+    @end_users = @end_user.follower_end_users.order(created_at: :desc).page(params[:page]).per(10)
   end
 
 private

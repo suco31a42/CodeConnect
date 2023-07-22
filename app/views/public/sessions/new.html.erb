@@ -5,12 +5,12 @@
     <div class="col-lg-8 bg-dark rounded mt-5">
       <div class="mx-auto m-5" style="width: 80%;">
         <div class="mx-auto m-5 text-center" style="width: 80%;">
+          <%= render 'layouts/flash' %>
           <%= link_to root_path do %>
             <%= image_tag 'CodeConnect_top.png',size:"100%x100%" %>
           <% end %>
         </div>
         <%= form_with model: @end_user, url: end_user_session_path do |f| %>
-          <%= render 'layouts/flash' %>
           <div class="mb-3">
             <%= f.label :ユーザー名またはメールアドレス, class: 'form-label text-light' %>
             <%= f.text_field :login, autofocus: true, class: 'form-control' %>

@@ -70,9 +70,6 @@ class EndUser < ApplicationRecord
     following_end_users.include?(end_user)
   end
   
-  def shot_introduction
-    introduction[0,20] + '...'
-  end
   
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |end_user|

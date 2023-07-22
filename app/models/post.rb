@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   has_one  :notification,         as: :subject, dependent: :destroy
 
   validate  :image_type, :image_size, :image_length
-  validates :body, presence: true, length: { in: 3..255, message: "3文字以上、255文字以内にする必要があります" }
+  validates :body, presence: true, length: { in: 2..500, message: "2文字以上、500文字以内にする必要があります" }
 
 # 公開状態かつ、退会していないユーザーの投稿だけ取得する
   scope :public_posts, -> { joins(:end_user).where(end_users: { private_status: true, is_deleted: false }) }
