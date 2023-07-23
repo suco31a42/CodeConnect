@@ -7,17 +7,16 @@ class EndUser < ApplicationRecord
   attr_writer   :login
 
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  VALID_EMAIL_REGEX    = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :password,       presence: true, length: { in: 6..100 },  format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります'}, allow_blank: true
+  VALID_EMAIL_REGEX    = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email,          presence: true, length: { minimum: 3 }, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
-  validates :unique_id,      presence: true, length: { in: 6..20 },  uniqueness: { case_sensitive: false }
-  validates :name,           presence: true, length: { in: 2..10 }
+  VALID_UNIQUE_ID_REGEX = /\A[a-zA-Z0-9_\.]+\z/i
+  validates :unique_id,       presence: true, length: { in: 6..20 }, uniqueness:{ case_sensitive: false }, format: { with: VALID_UNIQUE_ID_REGEX, message: 'は英数字、アンダースコア、句読点のみ使用できます'}
+  validates :name,            presence: true, length: { in: 2..10 }
   validates :is_deleted,     inclusion: { in: [true, false] }
   validates :private_status, inclusion: { in: [true, false] }
   validate  :validate_unique_id
-  # unique_idは英数字、アンダースコア、句読点のみ使用できます
-  validates_format_of :unique_id, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
-  
+
   has_one_attached :profile_image
   has_many :posts,             dependent: :destroy
   has_many :likes,             dependent: :destroy
@@ -32,12 +31,12 @@ class EndUser < ApplicationRecord
   # 公開、非公開に切り替える
   scope :pulished,   -> { where(private_status: true) }
   scope :unpulished, -> { where(private_status: false) }
-  
+
   # emailかuniqur_idどちらか選べるようにしている
   def login
     @login || self.unique_id || self.email
   end
-  
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if (login = conditions.delete(:login))
@@ -50,7 +49,7 @@ class EndUser < ApplicationRecord
   def active_for_authentication?
     super && (is_deleted == false)
   end
-    
+
   # ユーザが新規登録される際にデフォルト画像を追加する
   def default_image
     if !self.profile_image.attached?
@@ -69,18 +68,19 @@ class EndUser < ApplicationRecord
   def following?(end_user)
     following_end_users.include?(end_user)
   end
-  
-  
+
+
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |end_user|
       end_user.unique_id = "guest_id"
       end_user.password = SecureRandom.urlsafe_base64
-      end_user.name = "ゲスト"
+      end_user.name = "ゲストさん"
+      end_user.introduction = "このアカウントは閲覧用です"
     end
   end
-  
+
 private
-  
+
   # emailかuniqur_idどちらかあるか？
   def validate_unique_id
     if EndUser.where(email: unique_id).exists?

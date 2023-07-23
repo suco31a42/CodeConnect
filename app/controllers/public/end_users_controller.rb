@@ -6,14 +6,18 @@ class Public::EndUsersController < ApplicationController
   def show
     @post = Post.new
     @end_user = EndUser.find(params[:id])
-    if params[:comment]
-      @end_user_posts = @end_user.post_comments.order(created_at: :asc).page(params[:page]).per(10)
-    else
-      @end_user_posts = @end_user.posts.order(created_at: :desc).page(params[:page]).per(10)
-    end
+    @end_user_posts = @end_user.posts.order(created_at: :desc).page(params[:page]).per(10)
     @following_end_users = @end_user.following_end_users
     @follower_end_users  = @end_user.follower_end_users
     expires_now
+  end
+
+  def post_comment
+    @post = Post.new
+    @end_user = EndUser.find(params[:id])
+    @end_user_comments = PostComment.where(end_user_id: @end_user.id).order(created_at: :desc).page(params[:page]).per(10)
+    @following_end_users = @end_user.following_end_users
+    @follower_end_users  = @end_user.follower_end_users
   end
 
   def edit
@@ -25,7 +29,7 @@ class Public::EndUsersController < ApplicationController
     @end_user = EndUser.find(params[:id])
     if @end_user.update(end_user_params)
       redirect_to end_user_path(@end_user.id)
-      flash[:secondary] = "編集が成功しました"
+      flash[:secondary] = "編集が完了しました"
     else
       @post = Post.new
       render 'edit'

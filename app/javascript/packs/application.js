@@ -10,10 +10,11 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application"; 
+import "../stylesheets/application";
 import "../plugins/back_btn.js";
 import "../plugins/jquery.jscroll.min.js";
 import "../plugins/infinite_scroll.js";
+import "../plugins/preview.js";
 
 Rails.start()
 Turbolinks.start()

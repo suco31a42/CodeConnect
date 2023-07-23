@@ -23,58 +23,64 @@
 <div class="container-fuild border p-3 ">
   <div class="row">
     <div class="col-1">
-      <%= image_tag post.end_user.profile_image, size:'60x60', class:"rounded-circle shadow-sm" %>
+      <%= image_tag post_list.end_user.profile_image.variant(resize:'60x60!^').processed, class:"rounded-circle shadow-sm" %>
     </div>
     <div class="col-10 pl-3">
       <div class="post-user">
-        <%= link_to post.end_user.name, end_user_path(post.end_user_id), class:'link-dark' %>
+        <%= link_to post_list.end_user.name, end_user_path(post_list.end_user_id), class:'link-dark' %>
         <p class="fs-6 text-secondary d-inline">
-          <%= post.end_user.unique_id %>
+          <%= post_list.end_user.unique_id %>
         </p>
       </div>
+
       <div class="post-body">
-        <p><%= post.body %></p>
-        <div class="d-flex flex-wrap mt-3">
-          <% if post.post_images.attached? %>
-            <% post.post_images.each do |image| %>
+        <%= link_to post_path(post_list.id) , class:"link-dark text-decoration-none" do %>
+          <p><%= post_list.body %></p>
+        <% end %>
+        <div class="d-flex flex-wrap">
+          <% if post_list.post_images.attached? %>
+            <% post_list.post_images.each do |image| %>
               <!--画像をクリックすると画像のリンクに遷移する-->
-              <div class="w-50">
-                <%= link_to image_tag(image, size:'320x250'), url_for(image) %>
+              <div class="mb-1 mr-1" style="width: 320px;">
+                <%= link_to image_tag image.variant(resize:'320x200>').processed %>
               </div>
             <% end %>
           <% end %>
         </div>
       </div>
-        <div class="post-actions d-flex mt-3">
-          <div class="comment-btn d-inline-block w-33">
-            <%= link_to post_path(post.id), class:"text-primary fs-5 text-decoration-none" do %>
-              <i class="bi bi-chat-left-dots"></i> <span class="fs-6"><%= post.post_comments.count %></span>
-            <% end %>
-          </div>
-          <div class="like d-inline-block w-34 text-center" id="like-btn-<%= post.id %>">
-            <%= render 'public/likes/btn', post: @post_id %>
-          </div>
-          <div class="bookmark d-inline-block w-33 text-right" id="bookmark-btn-<%= post.id %>">
-            <%= render 'public/bookmarks/btn', post: @post_id %>
-          </div>
-        </div>
-      </div>
-      <div class="col-1">
-        <% if post.end_user.id == current_end_user.id %>
-        <div class="dropdown">
-          <a class="text-dark fs-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-three-dots fs-4 text-dark"></i>
-          </a>
 
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><%= link_to "投稿を編集する", edit_post_path(post), class:"text-dark dropdown-item fs-6" %></li>
-            <li><%= link_to "投稿を削除する", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？", class:"text-dark dropdown-item fs-6" %></li>
-          </ul>
+      <div class="post-actions d-flex mt-3">
+        <div class="comment-btn d-inline-block w-33">
+          <%= link_to post_path(post_list.id), class:"text-primary fs-5 text-decoration-none" do %>
+            <i class="bi bi-chat-left-dots"></i> <span class="fs-6"><%= post_list.post_comments.count %></span>
+          <% end %>
         </div>
-        <% end %>
+        <div class="like d-inline-block w-34 text-center" id="like-btn-<%= post_list.id %>">
+          <%= render 'public/likes/btn', post: post_list %>
+        </div>
+        <div class="bookmark d-inline-block w-33 text-right" id="bookmark-btn-<%= post_list.id %>">
+          <%= render 'public/bookmarks/btn', post: post_list %>
+        </div>
       </div>
-    <div class="btn btn-lg btn-primary w-25 mx-auto" data-toggle="modal" data-target="#modalPostComment">
-      <i class="bi bi-chat-left-dots-fill fs-5">コメントする</i>
     </div>
+    <div class="col-1">
+      <% if post_list.end_user.id == current_end_user.id %>
+      <div class="dropdown">
+        <a class="text-dark fs-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-three-dots fs-4 text-dark"></i>
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li><%= link_to "編集する", edit_post_path(post_list), class:"text-dark dropdown-item fs-6" %></li>
+          <li><%= link_to "削除する", post_path(post_list), method: :delete, "data-confirm" => "本当に投稿を削除しますか？", class:"text-dark dropdown-item fs-6" %></li>
+        </ul>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="w-100 text-center border">
+  <div class="btn btn-outline-primary w-25" data-toggle="modal" data-target="#modalPostComment">
+    <i class="bi bi-chat-left-dots-fill fs-6"> コメントする</i>
   </div>
 </div>

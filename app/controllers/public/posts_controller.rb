@@ -1,9 +1,9 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_end_user!
-  before_action :ensure_nomal_end_user, only: %i[update destroy delete_image]
+  before_action :ensure_nomal_end_user, only: %i[update destroy]
   before_action :correct_end_user, only: [:edit]
   before_action :guest_uncreate, only: [:create]
-  
+
   def create
     @post = Post.new(post_params)
     @post.end_user_id = current_end_user.id
@@ -23,7 +23,7 @@ class Public::PostsController < ApplicationController
       end
       expires_now
       return render layout: false if params[:no_layout]
-      render 'index'  
+      render 'index'
       flash[:secondary] = "投稿が失敗しました"
     end
   end
@@ -55,15 +55,23 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
-
-    if @post.update(post_params)
-      redirect_to edit_post_path(@post.id)
-      flash[:secondary] = "編集が成功しました"
+    @post_edit = Post.find(params[:id])
+     #添付画像を個別に削除
+    if params[:post][:image_ids]
+      params[:post][:image_ids].each do |image_id|
+        image = @post_edit.post_images.find(image_id)
+        image.purge
+        flash[:secondary] = "選択した画像が削除されました"
+      end
+    end
+    
+    if @post_edit.update(post_params)
+      redirect_to edit_post_path(@post_edit.id)
+      flash[:secondary] = "編集が完了しました"
     else
       @post = Post.new
       render 'edit'
-      flash[:secondary] = "編集は失敗しました"
+      flash.now[:secondary] = "編集は失敗しました"
     end
   end
 
@@ -80,15 +88,9 @@ class Public::PostsController < ApplicationController
     end
   end
 
-  def delete_image
-    @post = ActiveStorage::Blob.find_signed(params[:id])
-    @post.purge
-    redirect_to 'edit'
-  end
-
   def bookmarks
     @post = Post.new
-    @post_id = current_end_user.bookmark_posts.includes(:end_user).order(created_at: :desc).page(params[:page]).per(10)
+    @posts = current_end_user.bookmark_posts.includes(:end_user).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   private
@@ -100,20 +102,23 @@ class Public::PostsController < ApplicationController
   def post_comment_params
     params.require(:post_comment).permit(:body)
   end
-  
+
   def ensure_nomal_end_user
     @post = Post.find(params[:id])
     @end_user = @post.end_user
     if current_end_user != @end_user
-      redirect_to posts_path, flash[:secondary] = '他のユーザーの編集はできません。'
+      redirect_to posts_path
+      flash[:secondary] = '他のユーザーの編集はできません'
     elsif current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, flash[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path
+      flash[:secondary] = 'ゲストユーザーは閲覧のみ可能です'
     end
   end
-  
+
   def guest_uncreate
     if current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, flash[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path
+      flash[:secondary] = 'ゲストユーザーは閲覧のみ可能です'
     end
   end
 
@@ -121,7 +126,8 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @end_user = @post.end_user
     unless @end_user == current_end_user
-      redirect_to posts_path, flash[:secondary] = '他のユーザーの編集画面に遷移はできません。'
+      redirect_to posts_path
+      flash[:secondary] = '他のユーザーの編集画面に遷移はできません'
     end
   end
 

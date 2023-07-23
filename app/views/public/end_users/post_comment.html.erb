@@ -16,17 +16,15 @@
       <%= render 'profile', end_user: @end_user %>
       <ul class="nav nav-tabs">
         <li class="nav-item text-center w-50">
-          <a class="nav-link active fs-6 text-secondary" aria-current="page" href="#">投稿</a>
+          <%= link_to "投稿", end_user_path(@end_user.id), class:"nav-link bg-light fs-6" %>
         </li>
         <li class="nav-item text-center w-50">
-          <%= link_to "コメント", post_comment_end_user_path(@end_user.id), class:"nav-link bg-light fs-6" %>
+          <a class="nav-link active fs-6 text-secondary" aria-current="page" href="#">コメント</a>
         </li>
       </ul>
       <div class="scroll-list jscroll">
-        <% @end_user_posts.each do |post_list| %>
-          <%= render 'public/posts/index', post_list: post_list %>
-        <% end %>
-        <%= paginate @end_user_posts %>
+        <%= render 'post_comment', end_user_comments: @end_user_comments %>
+        <%= paginate @end_user_comments %>
       </div>
     </div>
   </div>

@@ -10,8 +10,8 @@ ja:
       relationship: 'フォロー'
     attributes:
       end_user:
-        name: '表示名'
-        unique_id: 'ユーザー名'
+        name: '名前'
+        unique_id: 'ユーザーID'
         email: 'メールアドレス'
         password: 'パスワード'
         password_confirmation: 'パスワード確認'

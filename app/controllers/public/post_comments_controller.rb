@@ -7,17 +7,18 @@ class Public::PostCommentsController < ApplicationController
     @post_comment.end_user_id = current_end_user.id # コメントに投稿するユーザのidを収納
     @post_comment.post_id = @post.id # コメントに投稿idを収納
     if @post_comment.save
-      flash.now[:secondary] = 'コメントを投稿しました'
+      flash[:secondary] = 'コメントを投稿しました'
       redirect_to post_path(@post)
     else
-      flash.now[:secondary] = 'コメントを失敗しました'
       redirect_to post_path(@post)
+      flash[:secondary] = 'コメントを失敗しました'
     end
   end
 
   def destroy
     PostComment.find(params[:id]).destroy
     redirect_to post_path(params[:post_id])
+    flash[:secondary] = 'コメントを削除しました'
   end
 
 private
@@ -27,7 +28,8 @@ private
   end
   
   def ensure_nomal_end_user
-    if current_end_user.id != EndUser.find(params[:id])
+    @post_comment = PostComment.find(params[:id])
+    if current_end_user != @post_comment.end_user
       redirect_to posts_path, alert: '他のユーザーのコメントは削除できません。'
     elsif current_end_user.email == 'guest@example.com'
       redirect_to posts_path, alert: 'ゲストユーザーは閲覧のみ可能です。'

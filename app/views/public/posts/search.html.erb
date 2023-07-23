@@ -10,11 +10,18 @@
       <%= flash[:notice] %>
       <%= render 'layouts/errors', obj: @post %>
       <ul class="nav nav-tabs mt-3">
-        <li class="nav-item text-center w-100">
+        <li class="nav-item text-center w-50">
           <%= sort_link(@search, :created_at, "投稿順", {default_order: :desc}, {class:"nav-link fs-5 text-dark text-decoration-underline"}) %>
+        </li>
+        <li class="nav-item text-center w-50">
+          <%= sort_link(@search, :likes_count, "評価順", {default_order: :desc}, {class:"nav-link fs-5 text-dark text-decoration-underline"}) %>
+        </li>
       </ul>
       <div class="scroll-list jscroll">
-        <%= render 'index', posts: @post_result %>
+        <% @post_result.each do |post_list| %>
+          <%= render 'index', post_list: post_list %>
+        <% end %>
+        <%= paginate @post_result %>
       </div>
     </div>
   </div>

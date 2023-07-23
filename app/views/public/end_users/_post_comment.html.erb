@@ -1,8 +1,8 @@
-<% post_id_comments.each do |post_comment| %>
+<% end_user_comments.each do |post_comment| %>
   <div class="container-fuild border p-3 ">
     <div class="row">
       <div class="col-1">
-        <%= image_tag post_comment.end_user.profile_image.variant(resize:'60x60').processed, class:"rounded-circle shadow-sm" %>
+        <%= image_tag post_comment.end_user.profile_image.variant(resize:'50x50').processed, class:"rounded-circle shadow-sm" %>
       </div>
       <div class="col-10">
         <div class="post-user">
@@ -14,10 +14,15 @@
         <div class="post-body">
           <p><%= post_comment.body %></p>
         </div>
+        <div class="">
+          <%= link_to post_path(post_comment.post.id), class:"link-dark" do %>
+            <i class="bi bi-file-earmark-richtext">元記事</i>
+          <% end %>
+        </div>
       </div>
 
       <div class="col-1">
-        <% if post_comment.end_user.id == current_end_user.id %>
+        <% if @end_user.id == current_end_user.id %>
           <div class="dropdown">
             <a class="text-dark fs-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-three-dots fs-4 text-dark"></i>

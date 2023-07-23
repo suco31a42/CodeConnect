@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
     resources :end_users, only: %i[show edit update destroy] do
       member do
-        get 'confirm', 'follows', 'followers'
+        get 'confirm', 'follows', 'followers','post_comment'
         patch 'withdraw'
       end
       resource :relationships, only: %i[create destroy]

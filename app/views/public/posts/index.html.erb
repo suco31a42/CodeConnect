@@ -21,7 +21,9 @@
         </li>
       </ul>
       <div class="scroll-list jscroll">
-        <%= render 'index', posts: @posts %>
+        <% @posts.each do |post_list| %>
+          <%= render 'index', post_list: post_list %>
+        <% end %>
         <%= paginate @posts %>
       </div>
     </div>

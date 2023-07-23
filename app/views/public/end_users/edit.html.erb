@@ -11,12 +11,12 @@
       <h2 class="text-center">プロフィール編集</h2>
       <%= form_with model: @end_user do |f| %>
         <div class="mb-3">
-          <%= f.label :表示名, class: 'form-label text-dark' %>
+          <%= f.label :名前, class: 'form-label text-dark' %>
           <%= render "layouts/form_errors", obj: @end_user, attribute: :name %>
           <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder:"サイトで表示される名前です" %>
         </div>
         <div class="mb-3">
-          <%= f.label :ユーザ名, class: 'form-label text-dark' %>
+          <%= f.label "ユーザーID", class: 'form-label text-dark' %>
           <%= render "layouts/form_errors", obj: @end_user, attribute: :unique_id %>
           <%= f.text_field :unique_id, class: 'form-control', placeholder:"英数字、アンダースコア、句読点のみ使用できます" %>
         </div>
@@ -55,7 +55,7 @@
           </div>
         </div>
         <div class="mb-3 text-right">
-          <%= link_to "退会する", confirm_end_user_path(@end_user), class:'link-primary' %> 
+          <%= link_to "退会する", confirm_end_user_path(@end_user), class:'link-primary' %>
         </div>
         <div class="actions mx-auto w-50 mt-5 mb-5" style="height: 65px;">
           <%= f.submit "編集を保存する", class: 'btn btn-primary btn-lg w-100 h-100 fs-5 fw-bold' %>
