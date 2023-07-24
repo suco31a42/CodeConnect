@@ -12,6 +12,12 @@
     display: none;
   }
   
+  div.pageantion-on 
+  nav.pagination {
+    display: block;
+    font-size: 1rem!important;
+  }
+  
   .scroll-list {
     padding: 0;
   }

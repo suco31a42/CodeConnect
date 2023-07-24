@@ -1,11 +1,10 @@
 <% content_for(:title, "管理用：#{@end_user.name} さんのプロフィール") %>
 <%= render 'layouts/header' %>
-<%= render 'layouts/back' %>
-<%= flash[:notice] %>
+<%= render 'layouts/flash' %>
 <div class="container-fuild m-3 mb-0">
   <div class="row">
     <div class="text-center">
-      <%= image_tag @end_user.profile_image, size:'100%x100%', class:"rounded-circle shadow-sm" %>
+      <%= link_to image_tag(@end_user.profile_image, size:'200x200'), url_for(@end_user.profile_image), class:"rounded-circle shadow-sm" %>
     </div>
     <div class="col-2"></div>
     <div class="col-8">

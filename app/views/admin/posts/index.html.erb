@@ -1,8 +1,7 @@
 <% content_for(:title, "管理用：投稿一覧") %>
 <%= render 'layouts/header' %>
 <%= render 'layouts/back' %>
-<%= flash[:notice] %>
-<div class="scroll-list jscroll">
+<%= render 'layouts/flash' %>
   <% @posts.each do |post_list| %>
     <div class="container border p-3 ">
       <div class="row">
@@ -23,14 +22,14 @@
               <% if post_list.post_images.attached? %>
                 <% post_list.post_images.each do |image| %>
                   <div class="w-50 mb-1">
-                    <%= image_tag(image, size:'380x200') %>
+                    <%= image_tag image.variant(resize:'320x200>').processed %>
                   </div>
                 <% end %>
               <% end %>
             </div>
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-3 border-left">
           <%= link_to "投稿を削除する", admin_post_path(post_list), method: :delete, "data-confirm" => "本当に削除しますか？", class:"link-secondary fs-6" %>
           <p><%= link_to "投稿の詳細", admin_post_path(post_list.id), class:"link-secondary" %></p>
           <p class="fs-6">コメント<%= post_list.post_comments.count %></p>
@@ -40,5 +39,6 @@
       </div>
     </div>
   <% end %>
-<%= paginate @posts %>
-</div>
+  <div class="pageantion-on text-center m-3">
+    <%= paginate @posts %>
+  </div>

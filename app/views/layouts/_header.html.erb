@@ -1,31 +1,16 @@
 <% if admin_signed_in? %>
   <% if request.fullpath.include? "/admin" %>
-    <header>
+    <header class="bg-dark mb-5 border-bottom">
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <%= search_form_for @search, url: search_posts_path, class:"d-flex" do |f| %>
-            <%= f.search_field :body_cont, class:"form-control mx-auto", placeholder:"検索…", required:"required" %>
-            <%= f.button :type => "submit", class:"btn btn-primary btn-sm ml-3", style:"width: 20%;"  do %>
-              <i class="bi bi-search fs-6 text-light"></i>
-            <% end %>
+          <%= link_to root_path do %>
+            <%= image_tag 'CodeConnect.jpg',size:"100%x100%" %>
           <% end %>
-
-          <div>
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item ml-3" style="border-style:solid; border-width:2px;">
-                <%= link_to "ユーザー一覧", admin_root_path ,class: 'nav-link', style: 'color: black;' %>
-              </li>
-
-              <li class="nav-item ml-3" style="border-style:solid; border-width:2px;">
-                <%= link_to "投稿一覧", admin_posts_path ,class: 'nav-link', style: 'color: black;' %>
-              </li>
-
-              <li class="nav-item ml-3" style="border-style:solid; border-width:2px;">
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link', style: 'color: black;' %>
-              </li>
-            </ul>
+          <div class="w-100 text-center">
+            <%= link_to "ユーザー一覧", admin_root_path ,class: 'btn btn-primary fs-6' %>
+            <%= link_to "投稿一覧", admin_posts_path ,class: 'btn btn-primary mx-5 fs-6' %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'btn btn-primary fs-6' %>
           </div>
-
         </div>
       </nav>
     </header>
@@ -45,7 +30,7 @@
               <% end %>
             </div>
             <%= link_to root_path do %>
-              <%= image_tag asset_path'CodeConnect.jpg',size:"100%x100%" %>
+              <%= image_tag 'CodeConnect.jpg',size:"100%x100%" %>
             <% end %>
           </div>
         </nav>
