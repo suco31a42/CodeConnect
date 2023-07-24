@@ -20,7 +20,7 @@
             <% post_list.post_images.each do |image| %>
               <!--画像をクリックすると画像のリンクに遷移する-->
               <div class="mb-1 mr-1" style="width: 320px;">
-                <%= link_to image_tag image.variant(resize:'320x200>').processed %>
+                <%= image_tag image.variant(resize:'320x200>').processed %>
               </div>
             <% end %>
           <% end %>

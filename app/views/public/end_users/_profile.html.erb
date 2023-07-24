@@ -14,7 +14,7 @@
     </div>
     <div class="col-4">
       <% if end_user.id == current_end_user.id %>
-        <%= link_to "プロフィール編集", edit_end_user_path(current_end_user.id), class:"btn btn-primary btn-lg rounded-pill fs-6" %>
+        <%= link_to "プロフィール編集", edit_end_user_path(current_end_user.id), class:"btn btn-outline-primary btn-lg rounded-pill fs-6" %>
       <% else %>
         <div class="ml-5" id="follow-<%= @end_user.id %>">
           <%= render 'public/relationships/btn', end_user: @end_user %>
