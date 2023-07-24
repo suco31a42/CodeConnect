@@ -14,17 +14,21 @@
           </p>
         </div>
 
+      <% if end_user.is_deleted %>
+        <p class="bg-light">このユーザーは退会しました。</p>
+      <% else %>
         <div class="user-body">
           <p><%= end_user.introduction.truncate(30) %></p>
         </div>
+      <% end %>
       </div>
-      <div class="col-3">
-        <% if end_user.id != current_end_user.id %>
-          <div class="ml-5" id="follow-<%= @end_user.id %>">
-            <%= render 'public/relationships/btn', end_user: @end_user %>
-          </div>
-        <% end %>
-      </div>
+        <div class="col-3">
+          <% if end_user.id != current_end_user.id %>
+            <div class="ml-5" id="follow-<%= end_user.id %>">
+              <%= render 'public/relationships/btn', end_user: end_user %>
+            </div>
+          <% end %>
+        </div>
     </div>
   </div>
 <% end %>

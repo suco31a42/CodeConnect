@@ -13,19 +13,38 @@
     <div class="col-md-8 col-xl-9 ps-0">
       <%= render 'layouts/flash' %>
       <%= render 'layouts/errors', obj: @post %>
-      <%= render 'profile', end_user: @end_user %>
-      <ul class="nav nav-tabs">
-        <li class="nav-item text-center w-50">
-          <%= link_to "投稿", end_user_path(@end_user.id), class:"nav-link bg-light fs-6" %>
-        </li>
-        <li class="nav-item text-center w-50">
-          <a class="nav-link active fs-6 text-secondary" aria-current="page" href="#">コメント</a>
-        </li>
-      </ul>
-      <div class="scroll-list jscroll">
-        <%= render 'post_comment', end_user_comments: @end_user_comments %>
-        <%= paginate @end_user_comments %>
-      </div>
+      <% if @end_user.is_deleted %>
+        <p class="fs-5 text-center border h-25 pt-5">このユーザーは退会しました。</p>
+      <% elsif @end_user.private_status || (current_end_user.following?(@end_user) && @end_user.following?(current_end_user)) || @end_user.id == current_end_user.id %>
+        <%= render 'profile', end_user: @end_user %>
+        <ul class="nav nav-tabs">
+          <li class="nav-item text-center w-50">
+            <%= link_to "投稿", end_user_path(@end_user.id), class:"nav-link bg-light fs-6" %>
+          </li>
+          <li class="nav-item text-center w-50">
+            <a class="nav-link active fs-6 text-secondary" aria-current="page" href="#">コメント</a>
+          </li>
+        </ul>
+        <% if @end_user_comments.empty? %>
+          <p class="fs-5 text-center border h-25 pt-5">投稿したコメントはありません</p>
+        <% else %>
+          <div class="scroll-list jscroll">
+            <%= render 'post_comment', end_user_comments: @end_user_comments %>
+            <%= paginate @end_user_comments %>
+          </div>
+        <% end %>
+      <% else %>
+        <%= render 'profile', end_user: @end_user %>
+        <ul class="nav nav-tabs">
+          <li class="nav-item text-center w-50">
+            <%= link_to "投稿", end_user_path(@end_user.id), class:"nav-link bg-light fs-6" %>
+          </li>
+          <li class="nav-item text-center w-50">
+            <a class="nav-link active fs-6 text-secondary" aria-current="page" href="#">コメント</a>
+          </li>
+        </ul>
+        <p class="fs-5 text-center border h-25 pt-5">非公開状態です</p>
+      <% end %>
     </div>
   </div>
 </div>

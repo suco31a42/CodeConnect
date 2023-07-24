@@ -4,7 +4,12 @@
       <%= image_tag end_user.profile_image, size:'150x150', class:"rounded-circle shadow-sm" %>
     </div>
     <div class="col-5">
-      <p class="fs-4 text-dark"><%= end_user.name %></p>
+      <p class="fs-4 text-dark">
+        <%= end_user.name %>
+        <% if @end_user.private_status == false %>
+          <i class="bi bi-lock"></i>
+        <% end %>
+      </p>
       <p class="fs-6 text-secondary"><%= end_user.unique_id %></p>
     </div>
     <div class="col-4">

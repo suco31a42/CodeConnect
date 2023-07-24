@@ -6,17 +6,18 @@ class Public::LikesController < ApplicationController
     @like = current_end_user.likes.new(post_id: @post.id)
     @like.save
   end
-  
+
   def destroy
     @post = Post.find(params[:post_id])
     @like = current_end_user.likes.find_by(post_id: @post.id)
     @like.destroy
   end
-  
+
 private
   def ensure_nomal_end_user
     if current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, flash.now[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path
+      flash[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
     end
   end
 end

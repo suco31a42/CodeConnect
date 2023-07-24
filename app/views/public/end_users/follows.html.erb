@@ -18,10 +18,14 @@
           <%= link_to "フォロワー", followers_end_user_path(@end_user), class:"nav-link" %>
         </li>
       </ul>
-      <div class="scroll-list jscroll">
-        <%= render 'follow_index', end_users: @end_users %>
-        <%= paginate @end_users %>
-      </div>
+      <% if @end_users.empty? %>
+        <p class="fs-5 text-center border h-25 pt-5">まだ誰もフォローしていません</p>
+      <% else %>
+        <div class="scroll-list jscroll">
+          <%= render 'follow_index', end_users: @end_users %>
+          <%= paginate @end_users %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -22,7 +22,7 @@ class Post < ApplicationRecord
   def liked_by?(end_user)
     likes.exists?(end_user_id: end_user.id)
   end
-  
+
   def bookmarked_by?(end_user)
     bookmarks.exists?(end_user_id: end_user.id)
   end

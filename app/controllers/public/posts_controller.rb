@@ -32,7 +32,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new
     expires_now
     if    params[:follows]
-      @posts = Post.where(end_user_id: [current_end_user.id, *current_end_user.
+      @posts = Post.public_posts.where(end_user_id: [current_end_user.id, *current_end_user.
                following_end_user_ids]).order(created_at: :desc).page(params[:page]).per(10)
     elsif params[:like_count]
       @posts = Post.public_posts.like_count.page(params[:page]).per(10)
@@ -64,7 +64,7 @@ class Public::PostsController < ApplicationController
         flash[:secondary] = "選択した画像が削除されました"
       end
     end
-    
+
     if @post_edit.update(post_params)
       redirect_to edit_post_path(@post_edit.id)
       flash[:secondary] = "編集が完了しました"

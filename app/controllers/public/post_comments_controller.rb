@@ -26,20 +26,23 @@ private
   def post_comment_params
     params.require(:post_comment).permit(:body)
   end
-  
+
   def ensure_nomal_end_user
     @post_comment = PostComment.find(params[:id])
     if current_end_user != @post_comment.end_user
-      redirect_to posts_path, alert: '他のユーザーのコメントは削除できません。'
+      redirect_to posts_path
+      flash[:secondary] =  '他のユーザーのコメントは削除できません。'
     elsif current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, alert: 'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path
+      flash[:secondary] =  'ゲストユーザーは閲覧のみ可能です。'
     end
   end
-  
+
   def guest_uncreate
     if current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, flash.now[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path
+      flash[:secondary] = 'ゲストユーザーは閲覧のみ可能です。'
     end
   end
-  
+
 end
