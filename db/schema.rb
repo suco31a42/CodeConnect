@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(version: 2023_07_18_075004) do
     t.datetime "remember_created_at"
     t.string "name", null: false
     t.string "unique_id", null: false
-    t.date "date_of_dirth"
-    t.string "introduction"
+    t.date "date_of_birth"
+    t.string "introduction", default: "よろしくお願いします"
     t.boolean "private_status", default: true, null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false

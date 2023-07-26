@@ -11,7 +11,7 @@ class EndUser < ApplicationRecord
   VALID_EMAIL_REGEX    = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email,          presence: true, length: { minimum: 3 }, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   VALID_UNIQUE_ID_REGEX = /\A[a-zA-Z0-9_\.]+\z/i
-  validates :unique_id,       presence: true, length: { in: 6..20 }, uniqueness:{ case_sensitive: false }, format: { with: VALID_UNIQUE_ID_REGEX, message: 'は英数字、アンダースコア、句読点のみ使用できます'}
+  validates :unique_id,       presence: true, length: { in: 4..20 }, uniqueness:{ case_sensitive: false }, format: { with: VALID_UNIQUE_ID_REGEX, message: 'は英数字、アンダースコア、句読点のみ使用できます'}
   validates :name,            presence: true, length: { in: 2..10 }
   validates :is_deleted,     inclusion: { in: [true, false] }
   validates :private_status, inclusion: { in: [true, false] }
@@ -73,7 +73,7 @@ class EndUser < ApplicationRecord
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |end_user|
       end_user.unique_id = "guest_id"
-      end_user.password = SecureRandom.alphanumeric(20)
+      end_user.password = SecureRandom.alphanumeric(20) # 英数字20文字をランダムで形成
       end_user.name = "ゲストさん"
       end_user.introduction = "このアカウントは閲覧用です"
     end

@@ -45,7 +45,7 @@
 <div class="container-fuild border p-3 ">
   <div class="row">
     <div class="col-1">
-      <%= image_tag post.end_user.profile_image.variant(resize:'60x60!^').processed, class:"rounded-circle shadow-sm" %>
+      <%= image_tag post.end_user.profile_image.variant(resize:'60x60!>').processed, class:"rounded-circle shadow-sm" %>
     </div>
     <div class="col-10 pl-3">
       <div class="post-user">
