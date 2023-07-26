@@ -38,8 +38,8 @@
         <div class="mb-3">
           <%= f.label :生年月日, class: 'form-label text-dark' %>
           <div class="form-date-select">
-            <%= render "layouts/form_errors", obj: @end_user, attribute: :date_of_dirth %>
-            <%= f.date_select :date_of_dirth, {use_month_numbers: true,start_year: 1930,
+            <%= render "layouts/form_errors", obj: @end_user, attribute: :date_of_birth %>
+            <%= f.date_select :date_of_birth, {use_month_numbers: true,start_year: 1930,
                 end_year: (Time.now.year - 10), default: Date.new(1999,1,1)}, {class: "form-control d-inline-block", style:"width: 20%;" } %>
           </div>
         </div>
