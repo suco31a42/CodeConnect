@@ -9,7 +9,7 @@
     </div>
     <div class="col-8 pl-3">
       <div class="post-user">
-        <%= link_to @post.end_user.name, end_user_path(@post.end_user_id), class:'link-dark' %>
+        <%= link_to @post.end_user.name, admin_end_user_path(@post.end_user_id), class:'link-dark' %>
         <p class="fs-6 text-secondary d-inline">
           <%= @post.end_user.unique_id %>
         </p>
@@ -48,7 +48,7 @@
     </div>
     <div class="col-8">
       <div class="post-user">
-        <%= link_to post_comment.end_user.name, end_user_path(post_comment.end_user.id), class:'link-dark'  %>
+        <%= link_to post_comment.end_user.name, admin_end_user_path(post_comment.end_user.id), class:'link-dark'  %>
         <p class="fs-6 text-secondary d-inline">
           <%= post_comment.end_user.unique_id %>
         </p>
@@ -57,7 +57,7 @@
         <p><%= post_comment.body %></p>
       </div>
     </div>
-    <div class="col-3">
+    <div class="col-3 border-left">
       <%= link_to "コメントを削除する",admin_post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class:"link-secondary fs-6" %>
     </div>
   </div>
