@@ -9,6 +9,9 @@
         <p class="fs-6 text-secondary d-inline">
           <%= post_list.end_user.unique_id %>
         </p>
+        <p class="fs-6 text-secondary d-inline">
+          ・<%= l post_list.created_at, format: :shot %>
+        </p>
       </div>
 
       <div class="post-body">

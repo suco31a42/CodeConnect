@@ -45,7 +45,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.new
     @post_id = Post.find(params[:id])
-    @post_id_comments = @post_id.post_comments.order(created_at: :desc).page(params[:page]).per(10)
+    @post_id_comments = @post_id.post_comments.page(params[:page]).per(10)
     @post_comment = current_end_user.post_comments.new
   end
 
@@ -56,22 +56,21 @@ class Public::PostsController < ApplicationController
 
   def update
     @post_edit = Post.find(params[:id])
+
+    if @post_edit.update(post_params)
+      redirect_to edit_post_path(@post_edit.id)
+      flash[:secondary] = "編集を保存しました"
+    else
+      @post = Post.new
+      render 'edit'
+      flash[:secondary] = "編集は失敗しました"
+    end
      #添付画像を個別に削除
     if params[:post][:image_ids]
       params[:post][:image_ids].each do |image_id|
         image = @post_edit.post_images.find(image_id)
         image.purge
-        flash[:secondary] = "選択した画像が削除されました"
       end
-    end
-
-    if @post_edit.update(post_params)
-      redirect_to edit_post_path(@post_edit.id)
-      flash[:secondary] = "編集が完了しました"
-    else
-      @post = Post.new
-      render 'edit'
-      flash.now[:secondary] = "編集は失敗しました"
     end
   end
 

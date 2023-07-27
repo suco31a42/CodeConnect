@@ -94,7 +94,12 @@ posts = Post.create!(
     {
       end_user_id:  1,
       body: "もくもく会に興味があるんだけどどこで募集しているんだろう？"
+    },
+    {
+      end_user_id: 1,
+      body: "なるほど、参加することしか考えていなかったけど主催もありかな"
     }
+    
   ]
 )
 
@@ -173,6 +178,14 @@ Like.create!(
     },
     {
       end_user_id: 1,
+      post_id: 5
+    },
+    {
+      end_user_id: 1,
+      post_id: 4
+    },
+    {
+      end_user_id: 3,
       post_id: 5
     },
   ]

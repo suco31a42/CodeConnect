@@ -79,6 +79,14 @@ class EndUser < ApplicationRecord
     end
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "name"]
+  end
+  
+  def self.ransackable_associations(auth_object = nil)
+    ["posts"]
+  end
+
 private
 
   # emailかuniqur_idどちらかあるか？

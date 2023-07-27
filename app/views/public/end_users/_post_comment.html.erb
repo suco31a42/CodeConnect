@@ -10,13 +10,16 @@
           <p class="fs-6 text-secondary d-inline">
             <%= post_comment.end_user.unique_id %>
           </p>
+          <p class="fs-6 text-secondary d-inline">
+            ・<%= l post_comment.created_at, format: :shot %>
+          </p>
         </div>
         <div class="post-body">
           <p><%= post_comment.body %></p>
         </div>
         <div class="">
           <%= link_to post_path(post_comment.post.id), class:"link-dark" do %>
-            <i class="bi bi-file-earmark-richtext">コメント元</i>
+            <i class="bi bi-file-earmark-richtext">コメントした投稿</i>
           <% end %>
         </div>
       </div>

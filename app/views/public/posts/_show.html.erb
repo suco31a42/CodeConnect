@@ -53,6 +53,9 @@
         <p class="fs-6 text-secondary d-inline">
           <%= post.end_user.unique_id %>
         </p>
+        <p class="fs-6 text-secondary d-inline">
+          ・<%= l post.created_at, format: :shot %>
+        </p>
       </div>
 
       <div class="post-body">

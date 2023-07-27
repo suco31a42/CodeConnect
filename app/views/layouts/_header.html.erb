@@ -1,6 +1,6 @@
 <% if admin_signed_in? %>
   <% if request.fullpath.include? "/admin" %>
-    <header class="bg-dark mb-5 border-bottom">
+    <header class="bg-dark border-bottom">
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <%= link_to root_path do %>
@@ -22,12 +22,22 @@
         <nav class="navbar navbar-dark bg-dark" style="height: 90px;">
           <div class="container-fluid">
             <div class="mx-auto d-inline-block">
-              <%= search_form_for @search, url: search_posts_path, class:"d-flex" do |f| %>
-                <%= f.search_field :body_cont, class:"form-control mx-auto", placeholder:"検索…", required:"required" %>
-                <%= f.button :type => "submit", class:"btn btn-primary btn-sm ml-3", style:"width: 20%;"  do %>
-                  <i class="bi bi-search fs-6 text-light"></i>
+              <div class="d-inline-block">
+                <%= search_form_for @q_posts, url: search_posts_path, class:"d-flex" do |f| %>
+                  <%= f.search_field :body_cont, class:"form-control mx-auto", placeholder:"投稿検索…", required:"required" %>
+                  <%= f.button :type => "submit", class:"btn btn-primary btn-sm ml-3", style:"width: 20%;"  do %>
+                    <i class="bi bi-search fs-6 text-light"></i>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
+              <div class="d-inline-block ml-5">
+                <%= search_form_for @q_end_users, url: search_end_users_path, class:"d-flex" do |f| %>
+                  <%= f.search_field :name_cont, class:"form-control mx-auto", placeholder:"ユーザー検索…", required:"required" %>
+                  <%= f.button :type => "submit", class:"btn btn-primary btn-sm ml-3", style:"width: 20%;"  do %>
+                    <i class="bi bi-search fs-6 text-light"></i>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
             <%= link_to root_path do %>
               <%= image_tag 'CodeConnect.jpg',size:"100%x100%" %>

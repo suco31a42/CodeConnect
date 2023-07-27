@@ -26,6 +26,9 @@ Rails.application.routes.draw do
         get 'confirm', 'follows', 'followers','post_comment'
         patch 'withdraw'
       end
+      collection do
+        get 'search'
+      end
       resource :relationships, only: %i[create destroy]
 
     end

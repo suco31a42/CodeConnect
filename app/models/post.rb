@@ -59,6 +59,10 @@ class Post < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["body", "created_at", "likes_count"]
   end
+  
+  def self.ransackable_associations(auth_object = nil)
+    ["end_user"]
+  end
   # 一ヶ月以内に作成された投稿を対象にいいねが多い順に並べる
   def self.posts_like_count
     to   = Time.current.at_end_of_day

@@ -11,6 +11,7 @@
         <% end %>
       </p>
       <p class="fs-6 text-secondary"><%= end_user.unique_id %></p>
+      <p class="fs-6 text-secondary"><%= l end_user.created_at, format: :day %>に登録しました</p>
     </div>
     <div class="col-4">
       <% if end_user.id == current_end_user.id %>
