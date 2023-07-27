@@ -290,7 +290,6 @@ DEPENDENCIES
   jquery-rails
   kaminari
   listen (~> 3.3)
-  mini_magick (~> 4.8)
   mysql2
   net-imap
   net-pop
