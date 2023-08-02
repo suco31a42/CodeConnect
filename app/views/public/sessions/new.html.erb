@@ -12,11 +12,11 @@
         <%= render 'layouts/flash' %>
         <%= form_with model: @end_user, url: end_user_session_path do |f| %>
           <div class="mb-3">
-            <%= f.label "ユーザーIDまたはメールアドレス", class: 'form-label text-light' %>
+            <%= f.label :login, "ユーザーIDまたはメールアドレス", class: 'form-label text-light' %>
             <%= f.text_field :login, autofocus: true, class: 'form-control' %>
           </div>
           <div class="mb-3">
-            <%= f.label :パスワード, class: 'form-label text-light' %>
+            <%= f.label :password, "パスワード", class: 'form-label text-light' %>
             <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder:"6文字以上、半角英数を両方含む" %>
           </div>
           <% if devise_mapping.rememberable? %>

@@ -24,7 +24,7 @@
       </ul>
       <% if @end_user.is_deleted %>
         <p class="fs-5 text-center border h-25 pt-5">このユーザーは退会しました。</p>
-      <% elsif @end_user.private_status || (current_end_user.following?(@end_user) && @end_user.following?(current_end_user)) || @end_user.id == current_end_user.id %>
+      <% elsif end_user_status_by? %>
         <% if @end_user_comments.empty? %>
           <p class="fs-5 text-center border h-25 pt-5">投稿したコメントはありません</p>
         <% else %>

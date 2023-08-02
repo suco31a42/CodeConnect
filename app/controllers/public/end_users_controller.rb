@@ -2,6 +2,7 @@ class Public::EndUsersController < ApplicationController
   before_action :authenticate_end_user!
   before_action :ensure_nomal_end_user, only: %i[create update destroy withdraw edit]
   before_action :correct_end_user, only: %i[edit]
+  helper_method :end_user_status_by?
 
   def show
     @post = Post.new
@@ -86,6 +87,12 @@ private
       redirect_to posts_path
       flash[:secondary] = '他のユーザーの編集画面に遷移はできません。'
     end
+  end
+  
+  def end_user_status_by?
+    @end_user.private_status ||
+    (current_end_user.following?(@end_user) && @end_user.following?(current_end_user)) || 
+    @end_user.id == current_end_user.id 
   end
 
 end

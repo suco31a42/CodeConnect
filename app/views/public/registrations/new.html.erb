@@ -17,7 +17,7 @@
             <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder:"サイトで表示される名前です" %>
           </div>
           <div class="mb-3">
-            <%= f.label "ユーザーID", class: 'form-label text-light' %>
+            <%= f.label :unique_id, "ユーザーID", class: 'form-label text-light' %>
             <%= render "layouts/form_errors", obj: @end_user, attribute: :unique_id %>
             <%= f.text_field :unique_id, class: 'form-control', placeholder:"英数字、アンダースコア、句読点のみ使用できます" %>
           </div>
