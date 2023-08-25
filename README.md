@@ -29,8 +29,16 @@
 
 ## 設計書
 <!--テーマを設定・提出する時点では不要です-->
-​後程記載
-
+- UI Flows <br>
+https://drive.google.com/file/d/1InVIu520ftd-udmob5V23UMUBSeL5rUX/view?usp=sharing
+- アプリケーション詳細設計<br>
+https://docs.google.com/spreadsheets/d/1Em1rKX0biqEPAGN8BXXLHwsdcglRONPx0dRFHN9eMgA/edit?usp=sharing
+- ER図<br>
+https://drive.google.com/file/d/1h1D6Sm1jY4OM3beu4BBySVY9pHD3c_NF/view?usp=sharing
+- テーブル設計書<br>
+https://docs.google.com/spreadsheets/d/1z0eeo5Xztx6NuZx0YfIM6f9iMaCuWdIRIROkPH9r9ag/edit?usp=sharing
+- 完成イメージ図 <br>
+https://www.figma.com/file/PxEM75MF2jfGGirZtlGCFP/CodeConnect?type=design&node-id=0%3A1&mode=design&t=kWgGmheGaK9EqZck-1
 ## 開発環境
 - OS：Linux(CantOS)
 - 言語：HTML,CSS,JavaScript,Ruby,MySQL
@@ -39,4 +47,5 @@
 - IDE：Cloud9
 ​
 ## 使用素材
-- Wix(https://www.wix.com/)
+- Wix(サイトのロゴ、ファビコンの作成に使用)<br>
+https://www.wix.com/
