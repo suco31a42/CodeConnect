@@ -9,7 +9,7 @@
       <div class="col-8">
         <div class="post-user">
           <%= link_to end_user.name, end_user_path(end_user), class:'link-primary' %>
-          <% if end_user.private_status == false %>
+          <% if end_user.private_status == true %>
             <i class="bi bi-lock"></i>
           <% end %>
           <p class="fs-6 text-secondary d-inline">

@@ -10,7 +10,7 @@
         <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="mb-3 mx-5">
             <%= f.label :login, "管理人ID", class: 'text-light form-label' %>
-            <%= f.text_field :login, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "sample@example.com" %>
+            <%= f.text_field :login, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "ログイン用ID" %>
           </div>
           <div class="mb-3 mx-5">
             <%= f.label :password, "パスワード", class: 'text-light form-label' %>

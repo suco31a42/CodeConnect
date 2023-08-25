@@ -40,7 +40,7 @@
             </tr>
             <tr>
               <th>公開状態</th>
-              <% if @end_user.private_status == true %>
+              <% if @end_user.private_status == false %>
                 <td>公開</td>
               <% else %>
                 <td>非公開</td>

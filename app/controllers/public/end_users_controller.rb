@@ -19,6 +19,7 @@ class Public::EndUsersController < ApplicationController
     @end_user_comments = PostComment.where(end_user_id: @end_user.id).order(created_at: :desc).page(params[:page]).per(10)
     @following_end_users = @end_user.following_end_users
     @follower_end_users  = @end_user.follower_end_users
+    expires_now
   end
 
   def edit
@@ -72,7 +73,6 @@ private
 
   def ensure_nomal_end_user
     if current_end_user != EndUser.find(params[:id])
-      byebug
       redirect_to posts_path
       flash[:secondary] = '他のユーザーの編集はできません。'
     elsif current_end_user.email == 'guest@example.com'
@@ -90,7 +90,7 @@ private
   end
   
   def end_user_status_by?
-    @end_user.private_status ||
+    @end_user.private_status == false ||
     (current_end_user.following?(@end_user) && @end_user.following?(current_end_user)) || 
     @end_user.id == current_end_user.id 
   end

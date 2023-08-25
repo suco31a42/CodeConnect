@@ -6,7 +6,7 @@
     <div class="col-5">
       <p class="fs-4 text-dark">
         <%= end_user.name %>
-        <% if @end_user.private_status == false %>
+        <% if @end_user.private_status == true %>
           <i class="bi bi-lock"></i>
         <% end %>
       </p>

@@ -1,7 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_end_user!
   before_action :ensure_nomal_end_user, only: %i[update destroy]
-  before_action :correct_end_user, only: [:edit]
+  before_action :correct_end_user, only: %i[edit]
   before_action :guest_uncreate, only: [:create]
 
   def create
