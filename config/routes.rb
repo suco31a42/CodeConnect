@@ -47,8 +47,6 @@ Rails.application.routes.draw do
       resource :bookmarks, only: %i[create destroy]
       resources :post_comments, only: %i[create destroy]
     end
-    resources :informations, only: %i[index show]
-
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
