@@ -44,6 +44,7 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'letter_opener_web', '~> 2.0'
 end
 
 group :test do

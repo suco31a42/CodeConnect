@@ -1,4 +1,3 @@
-<!--tesu-->
 # CodeConnect
 ​
 ## サイト概要
