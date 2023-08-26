@@ -26,6 +26,10 @@ class Post < ApplicationRecord
   def bookmarked_by?(end_user)
     bookmarks.exists?(end_user_id: end_user.id)
   end
+  
+  def latest_comment
+    post_comments.order(created_at: :desc).first
+  end
 
   private
 

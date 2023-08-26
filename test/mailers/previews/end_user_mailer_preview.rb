@@ -1,4 +1,4 @@
 # Preview all emails at http://localhost:3000/rails/mailers/notification_mailser_mailer
-class NotificationMailserMailerPreview < ActionMailer::Preview
+class EndUserMailerPreview < ActionMailer::Preview
 
 end

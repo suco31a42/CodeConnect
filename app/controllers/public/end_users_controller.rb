@@ -88,11 +88,11 @@ private
       flash[:secondary] = '他のユーザーの編集画面に遷移はできません。'
     end
   end
-  
+
   def end_user_status_by?
     @end_user.private_status == false ||
-    (current_end_user.following?(@end_user) && @end_user.following?(current_end_user)) || 
-    @end_user.id == current_end_user.id 
+    (current_end_user.following?(@end_user) && @end_user.following?(current_end_user)) ||
+    @end_user.id == current_end_user.id
   end
 
 end
