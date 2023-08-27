@@ -1,0 +1,49 @@
+@use '~bootstrap/scss/bootstrap';
+
+  .w-33 {
+    width: 33%!important;
+  }
+
+  .w-34 {
+    width: 34%!important;
+  }
+
+  nav.pagination {
+    display: none;
+  }
+
+  div.pageantion-on
+  nav.pagination {
+    display: block;
+    font-size: 1rem!important;
+  }
+
+  .pagination {
+    justify-content: center;
+  }
+
+  .page-item.active .page-link {
+    background-color: #325d88;
+    border-color: #325d88;
+}
+
+  .scroll-list {
+    padding: 0;
+  }
+
+  .tab-active {
+    display: block!important;
+  }
+
+  .back-btn {
+    position: fixed;
+    top: 90%;
+    right: 0px;
+    left: 90%;
+    z-index: 1030;
+  }
+
+  .new-img {
+    width: 300px;
+    object-fit: cover;
+  }

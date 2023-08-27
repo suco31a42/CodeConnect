@@ -1,4 +1,4 @@
-<% content_for(:title, '検索結果') %>
+<% content_for(:title, '投稿検索結果') %>
 <%= render 'layouts/header' %>
 <%= render 'layouts/navgation' %>
 <%= render 'layouts/back' %>
@@ -10,12 +10,24 @@
       <%= flash[:notice] %>
       <%= render 'layouts/errors', obj: @post %>
       <ul class="nav nav-tabs mt-3">
-        <li class="nav-item text-center w-100">
-          <%= sort_link(@search, :created_at, "投稿順", {default_order: :desc}, {class:"nav-link fs-5 text-dark text-decoration-underline"}) %>
+        <li class="nav-item text-center w-50">
+          <%= sort_link(@q_posts, :created_at, "投稿順", {default_order: :desc}, {class:"nav-link fs-5 text-dark text-decoration-underline"}) %>
+        </li>
+        <li class="nav-item text-center w-50">
+          <%= sort_link(@q_posts, :likes_count, "評価順", {default_order: :desc}, {class:"nav-link fs-5 text-dark text-decoration-underline"}) %>
+        </li>
       </ul>
-      <div class="scroll-list jscroll">
-        <%= render 'index', posts: @post_result %>
-      </div>
+      <% if @posts.empty? %>
+        <p class="fs-5 text-center border h-25 pt-5">検索内容と一致する投稿はありませんでした</p>
+      <% else %>
+        <div class="scroll-list jscroll">
+          <% @posts.each do |post_list| %>
+            <%= render 'index', post_list: post_list %>
+          <% end %>
+          <%= paginate @posts %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
+<%= render 'layouts/footer' %>

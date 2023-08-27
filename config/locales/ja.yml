@@ -10,8 +10,8 @@ ja:
       relationship: 'フォロー'
     attributes:
       end_user:
-        name: '表示名'
-        unique_id: 'ユーザー名'
+        name: '名前'
+        unique_id: 'ユーザーID'
         email: 'メールアドレス'
         password: 'パスワード'
         password_confirmation: 'パスワード確認'
@@ -21,7 +21,7 @@ ja:
         is_deleted: '退会状況'
         profile_image: 'プロフィール画像'
         login: 'メールアドレスか、ユーザー名'
-      post: 
+      post:
         end_user_id: 'ユーザー'
         body: '投稿の文章'
         post_image: '投稿画像'
@@ -46,3 +46,4 @@ ja:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
       shot: "%m/%d %H:%M"
+      day: "%Y/%m/%d"

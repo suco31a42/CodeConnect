@@ -1,32 +1,54 @@
 <!-- 新規投稿用モーダル -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">新規で投稿する</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+<% if current_end_user.email == 'guest@example.com' %>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">新規で投稿する</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            ゲストは新規投稿することはできません。<br>
+            投稿を希望する場合は<%= link_to "新規登録",destroy_end_user_session_path, method: :delete, class:"link-primary" %>をお願いします。
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        </div>
       </div>
-      <%= form_with model: @post, url: posts_path do |f| %>
-      <div class="modal-body">
-        <h6>画像</h6>
-        <%= f.file_field :post_images, accept: "image/*", multiple: true, class:"form-control-sm"%>
-        <h6>本文</h6>
-        <%= f.text_area :body, class:"form-control", style:"height: 400px;"  %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary fs-6" data-dismiss="modal">閉じる</button>
-        <%= f.submit '投稿する', class:"btn btn-primary fs-6" %>
-      </div>
-      <% end %>
     </div>
   </div>
-</div>
-
+<% else %>
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">新規で投稿する</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <%= form_with model: @post, url: posts_path do |f| %>
+        <div class="modal-body">
+          <h6>本文</h6>
+          <%= f.text_area :body, class:"form-control border", style:"height: 400px;" %>
+          <h6>画像(１つの投稿に付き4個まで)</h6>
+          <%= f.file_field :post_images, accept: "image/*", multiple: true, class:"form-control-sm border"%>
+          <div id="new-image"><!-- アップロードした画像があれば表示する--></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary fs-6" data-dismiss="modal">閉じる</button>
+          <%= f.submit '投稿する', class:"btn btn-primary fs-6" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
 
     <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark fixed-top" style="width: 16%; height: 700px;">
       <%= link_to end_user_path(current_end_user.id), class:'d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none' do %>
         <!--画像を加工し、加工済みのデータが有る場合はそのデータを表示する-->
-        <%= image_tag current_end_user.profile_image.variant(resize:'50x50').processed, class:"rounded-circle align-top mb-auto" %>
+        <%= image_tag current_end_user.profile_image.variant(resize:'60x60!>').processed, class:"rounded-circle align-top mb-auto" %>
         <p class="fs-6 text-secondary mb-0 ml-2">
           <span class="text-light"><%= current_end_user.name %></span>
           <%= current_end_user.unique_id %>
@@ -68,10 +90,15 @@
       </ul>
       <hr>
       <div class="dropdown">
-         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg fs-6 w-100" data-toggle="modal" data-target="#staticBackdrop">
-          新規投稿
-        </button>
+        <% if current_end_user.email == 'guest@example.com' %>
+          <button type="button" class="btn btn-primary btn-lg fs-6 w-100" data-toggle="modal" data-target="#exampleModal">
+            新規投稿
+          </button>
+        <% else %>
+          <button type="button" class="btn btn-primary btn-lg fs-6 w-100" data-toggle="modal" data-target="#staticBackdrop">
+            新規投稿
+          </button>
+        <% end %>
       </div>
     </div>
 

@@ -1,16 +1,21 @@
 class Public::EndUsersController < ApplicationController
   before_action :authenticate_end_user!
-  before_action :ensure_nomal_end_user, only: %i[create update destroy withdraw]
-  before_action :correct_end_user, only: %i[edit]
+  before_action :ensure_nomal_end_user, only: %i[edit update destroy confirm withdraw]
+  helper_method :end_user_status_by?
 
   def show
     @post = Post.new
     @end_user = EndUser.find(params[:id])
-    if params[:comment]
-      @end_user_posts = @end_user.post_comments.order(created_at: :desc).page(params[:page]).per(10)
-    else
-      @end_user_posts = @end_user.posts.order(created_at: :desc).page(params[:page]).per(10)
-    end
+    @end_user_posts = @end_user.posts.order(created_at: :desc).page(params[:page]).per(10)
+    @following_end_users = @end_user.following_end_users
+    @follower_end_users  = @end_user.follower_end_users
+    expires_now
+  end
+
+  def post_comment
+    @post = Post.new
+    @end_user = EndUser.find(params[:id])
+    @end_user_comments = PostComment.where(end_user_id: @end_user.id).order(created_at: :desc).page(params[:page]).per(10)
     @following_end_users = @end_user.following_end_users
     @follower_end_users  = @end_user.follower_end_users
     expires_now
@@ -25,11 +30,11 @@ class Public::EndUsersController < ApplicationController
     @end_user = EndUser.find(params[:id])
     if @end_user.update(end_user_params)
       redirect_to end_user_path(@end_user.id)
-      flash.now[:secondary] = "編集が成功しました"
+      flash[:secondary] = "編集が完了しました"
     else
       @post = Post.new
       render 'edit'
-      flash.now[:secondary] = "編集は失敗しました"
+      flash[:secondary] = "編集は失敗しました"
     end
   end
 
@@ -41,7 +46,7 @@ class Public::EndUsersController < ApplicationController
     @end_user = EndUser.find(current_end_user.id)
     @end_user.update(is_deleted: true)
     reset_session
-    flash.now[:secondary] = "退会処理を完了しました"
+    flash[:secondary] = "退会処理を完了しました"
     redirect_to root_path
   end
 
@@ -54,7 +59,7 @@ class Public::EndUsersController < ApplicationController
   def followers
     @post = Post.new
     @end_user = EndUser.find(params[:id])
-    @end_users = @end_user.follower_end_users.order(created_at: :desc).ppage(params[:page]).per(10)
+    @end_users = @end_user.follower_end_users.order(created_at: :desc).page(params[:page]).per(10)
   end
 
 private
@@ -67,18 +72,18 @@ private
 
   def ensure_nomal_end_user
     if current_end_user != EndUser.find(params[:id])
-      byebug
-      redirect_to posts_path, flash.now[:secondary] = '他のユーザーの編集はできません。'
+      redirect_to posts_path
+      flash[:secondary] = '他のユーザーの編集はできません。'
     elsif current_end_user.email == 'guest@example.com'
-      redirect_to posts_path, flash.now[:secondary] =  'ゲストユーザーは閲覧のみ可能です。'
+      redirect_to posts_path
+      flash[:secondary] =  'ゲストユーザーは閲覧のみ可能です。'
     end
   end
 
-  def correct_end_user
-    @end_user = EndUser.find(params[:id])
-    unless @end_user == current_end_user
-      redirect_to posts_path, flash.now[:secondary] = '他のユーザーの編集画面に遷移はできません。'
-    end
+  def end_user_status_by?
+    @end_user.private_status == false ||
+    (current_end_user.following?(@end_user) && @end_user.following?(current_end_user)) ||
+    @end_user.id == current_end_user.id
   end
 
 end

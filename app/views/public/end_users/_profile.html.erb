@@ -4,12 +4,18 @@
       <%= image_tag end_user.profile_image, size:'150x150', class:"rounded-circle shadow-sm" %>
     </div>
     <div class="col-5">
-      <p class="fs-4 text-dark"><%= end_user.name %></p>
+      <p class="fs-4 text-dark">
+        <%= end_user.name %>
+        <% if @end_user.private_status == true %>
+          <i class="bi bi-lock"></i>
+        <% end %>
+      </p>
       <p class="fs-6 text-secondary"><%= end_user.unique_id %></p>
+      <p class="fs-6 text-secondary"><%= l end_user.created_at, format: :day %>に登録しました</p>
     </div>
     <div class="col-4">
       <% if end_user.id == current_end_user.id %>
-        <%= link_to "プロフィール編集", edit_end_user_path(current_end_user.id), class:"btn btn-primary btn-lg rounded-pill fs-6" %>
+        <%= link_to "プロフィール編集", edit_end_user_path(current_end_user.id), class:"btn btn-outline-primary btn-lg rounded-pill fs-6" %>
       <% else %>
         <div class="ml-5" id="follow-<%= @end_user.id %>">
           <%= render 'public/relationships/btn', end_user: @end_user %>

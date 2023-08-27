@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+  before_action :reject_end_user, only: [:create]
+  
   def guest_sign_in
     end_user = EndUser.guest
     sign_in end_user
-    redirect_to posts_path, notice:'ゲストとしてログインしました。'
+    redirect_to posts_path
+    flash[:secondary] = "ゲストとしてログインしました。"
   end
-  before_action :reject_end_user, only: [:create]
 
   def after_sign_in_path_for(resource)
     posts_path
@@ -40,7 +42,7 @@ protected
     @end_user = EndUser.find_by("unique_id = :login OR email = :login", login: login)
     if @end_user&.valid_password?(password)
       if @end_user.is_deleted?
-        flash.now[:secondary] = "このアカウントは退会済みです。"
+        flash[:secondary] = "このアカウントは退会済みです。"
         redirect_to new_end_user_session_path
       end
     end

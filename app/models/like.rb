@@ -13,6 +13,8 @@ class Like < ApplicationRecord
   private
   
   def create_notifications
+    # 自分自身に対するいいねなら通知を作成しない
+    return if end_user == post.end_user
     Notification.create(subject: self, end_user: self.post.end_user, action_type: :liked_to_own_post)
   end
 end

@@ -5,17 +5,18 @@
 <div class="container-xl">
   <div class="row">
     <div style="width: 16%; height: 700px;"></div>
-    <div class="col-md-8 col-xl-9 ps-0">
+    <div class="col-md-7 col-xl-8 ps-0">
       <%= flash[:notice] %>
       <%= render 'layouts/errors', obj: @post %>
-
+      <% if @notifications.present? %>
+      <div class="w-100 text-right m-2 pr-2">
+        <%= link_to "全削除", notifications_path(@notifications), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-outline-primary fs-6" %>
+      </div>
       <ul class="nav nav-tabs">
         <li class="nav-item text-center w-100">
-          <a class="nav-link active fs-6 text-secondary" aria-current="page" href="#">通知一覧</a>
+          <p class="nav-link active fs-6 bg-light text-secondary" aria-current="page" href="#">通知一覧</p>
         </li>
       </ul>
-      <% if @notifications.present? %>
-        <%= link_to "全削除", notifications_path(@notifications), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-light" %>
         <% @notifications.each do |notification| %>
           <div class="scroll-list jscroll">
             <%= render "#{notification.action_type}", notification: notification %>
@@ -23,8 +24,9 @@
           </div>
         <% end %>
       <% else %>
-        <p>通知はありません</p>
+        <p class="text-center fs-5 mt-3">通知はありません</p>
       <% end %>
     </div>
   </div>
 </div>
+<%= render 'layouts/footer' %>

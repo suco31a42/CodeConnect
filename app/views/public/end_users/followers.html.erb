@@ -12,16 +12,21 @@
       
       <ul class="nav nav-tabs mt-3">
         <li class="nav-item text-center w-50">
-          <%= link_to "フォロワー", follows_end_user_path(@end_user), class:"nav-link" %>
+          <%= link_to "フォロー", follows_end_user_path(@end_user), class:"nav-link" %>
         </li>
         <li class="nav-item text-center w-50">
           <a class="nav-link active fs-6 text-secondary" href="#">フォロワー</a>
         </li>
       </ul>
-      <div class="scroll-list jscroll">
-        <%= render 'follow_index', end_users: @end_users %>
-        <%= paginate @end_users %>
-      </div>
+      <% if @end_users.empty? %>
+        <p class="fs-5 text-center border h-25 pt-5">まだ誰にもフォローされていません</p>
+      <% else %>
+        <div class="scroll-list jscroll">
+          <%= render 'follow_index', end_users: @end_users %>
+          <%= paginate @end_users %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
+<%= render 'layouts/footer' %>

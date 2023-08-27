@@ -1,0 +1,42 @@
+<% end_user_comments.each do |post_comment| %>
+  <div class="container-fuild border p-3 ">
+    <div class="row">
+      <div class="col-1">
+        <%= image_tag post_comment.end_user.profile_image.variant(resize:'50x50').processed, class:"rounded-circle shadow-sm" %>
+      </div>
+      <div class="col-10">
+        <div class="post-user">
+          <%= link_to post_comment.end_user.name, end_user_path(post_comment.end_user.id), class:'link-dark'  %>
+          <p class="fs-6 text-secondary d-inline">
+            <%= post_comment.end_user.unique_id %>
+          </p>
+          <p class="fs-6 text-secondary d-inline">
+            ・<%= l post_comment.created_at, format: :shot %>
+          </p>
+        </div>
+        <div class="post-body">
+          <p><%= post_comment.body %></p>
+        </div>
+        <div class="">
+          <%= link_to post_path(post_comment.post.id), class:"link-dark" do %>
+            <i class="bi bi-file-earmark-richtext">コメントした投稿</i>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-1">
+        <% if @end_user.id == current_end_user.id %>
+          <div class="dropdown">
+            <a class="text-dark fs-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-three-dots fs-4 text-dark"></i>
+            </a>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><%= link_to "コメントを削除する",post_post_comment_path(post_comment.post, post_comment), method: :delete, "data-confirm" => "コメントを削除しますか？", class:"text-dark dropdown-item fs-6" %></li>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

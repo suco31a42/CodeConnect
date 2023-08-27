@@ -6,10 +6,14 @@
 ​エンジニアがエラーの解決法や、新しく学んだ知識を気軽に投稿出来るSNSサイト
 ### テーマを選んだ理由
 <!--なぜこのようなテーマにしたかを説明する-->
- エンジニア同士で情報共有するとき、記事を探したり書くときがあると思うのですが、
- 自分も書こうと思ったとき記事方式だと中々ハードルが高いと感じるときがありました。<br>
- そこで情報を300文字以内に端的に書くことで気軽に情報を発信し、また読むことが出来るのではと考えました。<br>
- またエンジニア同士でつながりを持ちたいと思う人の交流の切っ掛けにもなるのでは、と思いこのテーマにしました。​
+ プログラミングの勉強をするとき、プログラミングの記事を探したり書くときがあると思うのですが、<br>
+ 自分もアウトプットしてみようと思ったとき、記事方式だと中々ハードルが高いと感じるときがありました。<br>
+ そこで情報を500文字以内にアウトプットできる専用のサイトがあれば<br>
+ 手軽にアウトプット、インプットが出来るのではと考えました。<br>
+
+ また、近年ではTwitterを離脱し、Twitterの代替えとして類似のSNSプラットフォームを探してしている人も増えてきています。<br>
+ その中で専用のSNSサイトである、キャンプ専用SNSの「Cantera」や創作専用SNS「くるっぷ」などのSNSサイトが増えており、<br>
+ エンジニア同士が集まり、情報共有出来る専用のSNSにも需要があるのではないかと考えこのテーマにしました。
 
 ### ターゲットユーザ
 <!--誰に使ってもらうかを具体的に記載する-->
@@ -25,16 +29,24 @@
 
 ## 設計書
 <!--テーマを設定・提出する時点では不要です-->
-​後程記載
-
+- UI Flows <br>
+https://drive.google.com/file/d/1InVIu520ftd-udmob5V23UMUBSeL5rUX/view?usp=sharing
+- アプリケーション詳細設計<br>
+https://docs.google.com/spreadsheets/d/1Em1rKX0biqEPAGN8BXXLHwsdcglRONPx0dRFHN9eMgA/edit?usp=sharing
+- ER図<br>
+https://drive.google.com/file/d/1h1D6Sm1jY4OM3beu4BBySVY9pHD3c_NF/view?usp=sharing
+- テーブル設計書<br>
+https://docs.google.com/spreadsheets/d/1z0eeo5Xztx6NuZx0YfIM6f9iMaCuWdIRIROkPH9r9ag/edit?usp=sharing
+- 完成イメージ図 <br>
+https://www.figma.com/file/PxEM75MF2jfGGirZtlGCFP/CodeConnect?type=design&node-id=0%3A1&mode=design&t=kWgGmheGaK9EqZck-1
 ## 開発環境
-- OS：Windows 11 Home (22H2)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- OS：Linux(CantOS)
+- 言語：HTML,CSS,JavaScript,Ruby,MySQL
+- CI/cD：github actions
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
 ​
 ## 使用素材
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+- Wix(サイトのロゴ、ファビコンの作成に使用)<br>
+https://www.wix.com/

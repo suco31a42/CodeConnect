@@ -7,17 +7,17 @@
         <%= render 'layouts/flash' %>
         <div class="mx-auto m-5 text-center" style="width: 80%;">
           <%= link_to root_path do %>
-            <%= image_tag 'CodeConnect_top.png',size:"100%x100%" %>
+            <%= image_tag asset_path'CodeConnect_top.png',size:"100%x100%" %>
           <% end %>
         </div>
         <%= form_with model: @end_user, url: end_user_registration_path do |f| %>
           <div class="mb-3">
-            <%= f.label :表示名, class: 'form-label text-light' %>
+            <%= f.label :名前, class: 'form-label text-light' %>
             <%= render "layouts/form_errors", obj: @end_user, attribute: :name %>
             <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder:"サイトで表示される名前です" %>
           </div>
           <div class="mb-3">
-            <%= f.label :ユーザー名, class: 'form-label text-light' %>
+            <%= f.label :unique_id, "ユーザーID", class: 'form-label text-light' %>
             <%= render "layouts/form_errors", obj: @end_user, attribute: :unique_id %>
             <%= f.text_field :unique_id, class: 'form-control', placeholder:"英数字、アンダースコア、句読点のみ使用できます" %>
           </div>

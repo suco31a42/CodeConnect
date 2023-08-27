@@ -6,17 +6,17 @@
       <div class="mx-auto m-5" style="width: 80%;">
         <div class="mx-auto m-5 text-center" style="width: 80%;">
           <%= link_to root_path do %>
-            <%= image_tag 'CodeConnect_top.png',size:"100%x100%" %>
+            <%= image_tag asset_path'CodeConnect_top.png',size:"100%x100%" %>
           <% end %>
         </div>
+        <%= render 'layouts/flash' %>
         <%= form_with model: @end_user, url: end_user_session_path do |f| %>
-          <%= render 'layouts/flash' %>
           <div class="mb-3">
-            <%= f.label :ユーザー名またはメールアドレス, class: 'form-label text-light' %>
+            <%= f.label :login, "ユーザーIDまたはメールアドレス", class: 'form-label text-light' %>
             <%= f.text_field :login, autofocus: true, class: 'form-control' %>
           </div>
           <div class="mb-3">
-            <%= f.label :パスワード, class: 'form-label text-light' %>
+            <%= f.label :password, "パスワード", class: 'form-label text-light' %>
             <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder:"6文字以上、半角英数を両方含む" %>
           </div>
           <% if devise_mapping.rememberable? %>
@@ -32,9 +32,6 @@
         <div class="mx-auto mt-5 text-center" style="width: 250px;">
           <p class="d-inline text-light">
             登録がまだの方は　<%= link_to "こちら", new_registration_path(resource_name), class: "text-light" %>
-          </p>
-          <p class="text-light mt-3">
-            <%= link_to "パスワードが分からない", new_password_path(resource_name), class: "text-secondary" %>
           </p>
         </div>
       </div>

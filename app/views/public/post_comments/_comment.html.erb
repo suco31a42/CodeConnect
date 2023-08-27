@@ -2,7 +2,7 @@
   <div class="container-fuild border p-3 ">
     <div class="row">
       <div class="col-1">
-        <%= image_tag post_comment.end_user.profile_image, size:'40x40', class:"rounded-circle shadow-sm" %>
+        <%= image_tag post_comment.end_user.profile_image.variant(resize:'60x60!>').processed, class:"rounded-circle shadow-sm" %>
       </div>
       <div class="col-10">
         <div class="post-user">
@@ -10,16 +10,19 @@
           <p class="fs-6 text-secondary d-inline">
             <%= post_comment.end_user.unique_id %>
           </p>
+          <p class="fs-6 text-secondary d-inline">
+            ・<%= l post_comment.created_at, format: :shot %>
+          </p>
         </div>
         <div class="post-body">
-          <p><%= post_comment.body %></p>
+          <p class="text-break"><%= post_comment.body %></p>
         </div>
       </div>
 
       <div class="col-1">
-        <% if @post_id.end_user.id == current_end_user.id %>
+        <% if post_comment.end_user.id == current_end_user.id %>
           <div class="dropdown">
-            <a class="text-dark fs-4" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="text-dark fs-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-three-dots fs-4 text-dark"></i>
             </a>
 

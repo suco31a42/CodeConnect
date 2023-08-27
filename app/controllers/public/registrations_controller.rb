@@ -15,12 +15,13 @@ protected
   end
 
   def after_sign_up_path_for(_resource)
-     posts_path
+    end_user_path(current_end_user.id)
   end
 
   def ensure_nomal_end_user
     if current_end_user.email == 'guest@example.com'
-      redirect_to root_path, flash.now[:secondary] = 'ゲストユーザーは閲覧のみ可能となっています。'
+      redirect_to root_path
+      flash[:secondary] = 'ゲストユーザーは閲覧のみ可能となっています。'
     end
   end
 

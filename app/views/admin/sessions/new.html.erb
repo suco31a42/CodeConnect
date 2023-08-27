@@ -1,14 +1,16 @@
-<%= flash[:notice] %>
+<%= render 'layouts/flash' %>
 <div class='container'>
   <div class='row mt-3'>
     <div class="col-lg-2"></div>
     <div class="col-lg-8 bg-primary rounded mt-5">
       <div class="mx-auto">
-        <h4 class="text-light text-center m-4">管理者ログイン</h4>
+        <%= link_to root_path do %>
+          <h4 class="text-light text-center m-4">管理者ログイン</h4>
+        <% end %>
         <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="mb-3 mx-5">
             <%= f.label :login, "管理人ID", class: 'text-light form-label' %>
-            <%= f.text_field :login, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "sample@example.com" %>
+            <%= f.text_field :login, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "ログイン用ID" %>
           </div>
           <div class="mb-3 mx-5">
             <%= f.label :password, "パスワード", class: 'text-light form-label' %>
