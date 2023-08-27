@@ -16,18 +16,17 @@
 
       <div class="post-body">
         <%= link_to post_path(post_list.id) , class:"link-dark text-decoration-none" do %>
-          <p><%= post_list.body.truncate(255) %></p>
-        <% end %>
-        <div class="d-flex flex-wrap">
-          <% if post_list.post_images.attached? %>
-            <% post_list.post_images.each do |image| %>
-              <!--画像をクリックすると画像のリンクに遷移する-->
-              <div class="mb-1 mr-1" style="width: 320px;">
-                <%= image_tag image.variant(resize:'320x200>').processed %>
-              </div>
+            <p><%= post_list.body.truncate(255) %></p>
+          <div class="d-flex flex-wrap">
+            <% if post_list.post_images.attached? %>
+              <% post_list.post_images.each do |image| %>
+                <div class="mb-1 mr-1" style="width: 320px;">
+                  <%= image_tag image.variant(resize:'320x200>').processed %>
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
 
       <div class="post-actions d-flex mt-3">
