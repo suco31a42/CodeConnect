@@ -12,7 +12,7 @@ private
     # 自分自身に対するコメントなら通知を作成しない
     return if end_user == post.end_user
     Notification.create(subject: self, end_user: post.end_user, action_type: :commented_to_own_post)
-    if post.end_user.email_status == ("0" || "2")
+    if post.end_user.email_status == ("0" || "1")
       EndUserMailer.notification_comment_email(post.end_user, post).deliver_now
     end
   end
