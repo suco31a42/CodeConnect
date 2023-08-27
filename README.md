@@ -42,6 +42,7 @@ https://www.figma.com/file/PxEM75MF2jfGGirZtlGCFP/CodeConnect?type=design&node-i
 ## 開発環境
 - OS：Linux(CantOS)
 - 言語：HTML,CSS,JavaScript,Ruby,MySQL
+- CI/cD：github actions
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
