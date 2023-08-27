@@ -1,6 +1,6 @@
 class Public::BookmarksController < ApplicationController
   before_action :authenticate_end_user!
-  before_action :ensure_nomal_end_user, only: %i[create update destroy]
+  before_action :ensure_nomal_end_user, only: %i[create destroy]
   def create
     @post = Post.find(params[:post_id])
     @bookmark = current_end_user.bookmarks.new(post_id: @post.id)

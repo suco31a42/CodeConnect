@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_search
 
-
   def set_search
     @post = Post.new
     @q_posts = Post.ransack(params[:q])

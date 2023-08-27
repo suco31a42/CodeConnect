@@ -1,6 +1,6 @@
 class Public::LikesController < ApplicationController
   before_action :authenticate_end_user!
-  before_action :ensure_nomal_end_user, only: %i[create]
+  before_action :ensure_nomal_end_user, only: %i[create destroy]
   def create
     @post = Post.find(params[:post_id])
     @like = current_end_user.likes.new(post_id: @post.id)

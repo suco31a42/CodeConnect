@@ -1,7 +1,6 @@
 class Public::EndUsersController < ApplicationController
   before_action :authenticate_end_user!
-  before_action :ensure_nomal_end_user, only: %i[create update destroy withdraw edit]
-  before_action :correct_end_user, only: %i[edit]
+  before_action :ensure_nomal_end_user, only: %i[edit update destroy confirm withdraw]
   helper_method :end_user_status_by?
 
   def show
@@ -78,14 +77,6 @@ private
     elsif current_end_user.email == 'guest@example.com'
       redirect_to posts_path
       flash[:secondary] =  'ゲストユーザーは閲覧のみ可能です。'
-    end
-  end
-
-  def correct_end_user
-    @end_user = EndUser.find(params[:id])
-    unless @end_user == current_end_user
-      redirect_to posts_path
-      flash[:secondary] = '他のユーザーの編集画面に遷移はできません。'
     end
   end
 

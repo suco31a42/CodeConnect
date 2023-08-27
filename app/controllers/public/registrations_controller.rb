@@ -15,7 +15,7 @@ protected
   end
 
   def after_sign_up_path_for(_resource)
-     end_user_path(current_end_user.id)
+    end_user_path(current_end_user.id)
   end
 
   def ensure_nomal_end_user

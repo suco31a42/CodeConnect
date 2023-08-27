@@ -1,15 +1,14 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_end_user!
-  before_action :ensure_nomal_end_user, only: %i[update destroy]
-  before_action :correct_end_user, only: %i[edit]
+  before_action :ensure_nomal_end_user, only: %i[edit update destroy]
   before_action :guest_uncreate, only: [:create]
 
   def create
     @post = Post.new(post_params)
     @post.end_user_id = current_end_user.id
     if @post.save
-     redirect_to posts_path
-     flash[:secondary] = "投稿が成功しました"
+      redirect_to posts_path
+      flash[:secondary] = "投稿が成功しました"
     else
       if    params[:latest]
         @posts = Post.public_posts.latest.page(params[:page]).per(10)
@@ -92,7 +91,7 @@ class Public::PostsController < ApplicationController
     @posts = current_end_user.bookmark_posts.includes(:end_user).order(created_at: :desc).page(params[:page]).per(10)
   end
 
-  private
+private
 
   def post_params
     params.require(:post).permit(:body, post_images: [])
@@ -118,15 +117,6 @@ class Public::PostsController < ApplicationController
     if current_end_user.email == 'guest@example.com'
       redirect_to posts_path
       flash[:secondary] = 'ゲストユーザーは閲覧のみ可能です'
-    end
-  end
-
-  def correct_end_user
-    @post = Post.find(params[:id])
-    @end_user = @post.end_user
-    unless @end_user == current_end_user
-      redirect_to posts_path
-      flash[:secondary] = '他のユーザーの編集画面に遷移はできません'
     end
   end
 
