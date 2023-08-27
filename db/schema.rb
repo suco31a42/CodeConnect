@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2023_07_18_075004) do
     t.string "introduction", default: "よろしくお願いします"
     t.boolean "private_status", default: false, null: false
     t.boolean "is_deleted", default: false, null: false
+    t.string "email_status", default: "0", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_end_users_on_email", unique: true

@@ -16,6 +16,7 @@ EndUser.create!(
       introduction:   "よろしくお願いします！私はプログラミングが大好きで、特にWeb開発に興味があります。趣味はアニメを観ることとカフェ巡りです。よろしくお願いしますね！",
       private_status: false,
       is_deleted:     false,
+      email_status:   0,
       profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("db/images/end_user/NCG154.jpg"),filename: "NCG154.jpg")
     },
     {
@@ -27,6 +28,7 @@ EndUser.create!(
       introduction:   "こんにちは、ジョンです！クールなアプリを作り、複雑な問題を解決することに情熱を燃やすソフトウェアエンジニアです。余暇にはビデオゲームを楽しんだり、街の新しいレストランを試してみたりしています。ここで他の開発者とつながることを楽しみにしています！",
       private_status: false,
       is_deleted:     false,
+      email_status:   2,
       profile_image:  ActiveStorage::Blob.create_and_upload!(io: File.open("db/images/end_user/pccat.jpg"), filename: "pccat.jpg")
     },
     {
@@ -38,6 +40,7 @@ EndUser.create!(
       introduction:   "こんにちは！さくらといいます。まだプログラミングを初めて1ヶ月の初心者ですがエンジニアになる夢に向かって頑張ります！",
       private_status: false,
       is_deleted:     false,
+      email_status:   3,
       profile_image:  ActiveStorage::Blob.create_and_upload!(io: File.open("db/images/end_user/溶けちゃったアイスさん.png"), filename: "溶けちゃったアイスさん.png")
     },
     {
@@ -49,6 +52,7 @@ EndUser.create!(
       introduction:   "体調不良のため現在休職中です。",
       private_status: true,
       is_deleted:     false,
+      email_status:   3,
       profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("db/images/end_user/car.jpg"),filename: "car.jpg")
     },
     {
@@ -60,6 +64,7 @@ EndUser.create!(
       introduction:   "趣味は音ゲーとソシャゲ",
       private_status: false,
       is_deleted:     false,
+      email_status:   0,
       profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("app/assets/images/no_image.jpg"), filename: "no_image.jpg")
     }
   ]

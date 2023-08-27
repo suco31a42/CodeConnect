@@ -7,7 +7,7 @@ class EndUser < ApplicationRecord
   attr_writer   :login
 
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  validates :password,       presence: true, length: { in: 6..100 },  format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります'}, allow_blank: true
+  validates :password,        presence: true, length: { in: 6..100 },  format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数を両方含む必要があります'}, allow_blank: true
   VALID_EMAIL_REGEX    = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email,          presence: true, length: { minimum: 3 }, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   VALID_UNIQUE_ID_REGEX = /\A[a-zA-Z0-9_\.]+\z/i
@@ -31,6 +31,7 @@ class EndUser < ApplicationRecord
   # 公開、非公開に切り替える
   scope :pulished,   -> { where(private_status: true) }
   scope :unpulished, -> { where(private_status: false) }
+  enum action_type: { receive_all: 0, comment_receive: 1, follow_receive: 2, receive_block: 3 }
 
   # emailかuniqur_idどちらか選べるようにしている
   def login

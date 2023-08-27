@@ -11,7 +11,9 @@ private
 
   def create_notifications
     Notification.create(subject: self, end_user: followed, action_type: :follwed_me)
-    EndUserMailer.notification_follow_email(followed, follower).deliver_now
+    if followed.email_status == ("0" || "2")
+      EndUserMailer.notification_follow_email(followed, follower).deliver_now
+    end
   end
   # フォロー元とフォロー先のユーザーが同じであるか確認する
   def cannot_follow_self

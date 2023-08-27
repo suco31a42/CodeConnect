@@ -37,7 +37,7 @@ class DeviseCreateEndUsers < ActiveRecord::Migration[6.1]
       t.string         :introduction,    default: "よろしくお願いします"
       t.boolean        :private_status,  null: false, default: false
       t.boolean        :is_deleted,      null: false, default: false
-
+      t.string         :email_status,    null: false, default: 0
 
       t.timestamps null: false
     end

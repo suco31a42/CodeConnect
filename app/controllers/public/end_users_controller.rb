@@ -66,8 +66,8 @@ private
 
   def end_user_params
     params.require(:end_user)
-    .permit(:name, :unique_id, :email, :date_of_dirth,
-            :introduction, :private_status, :is_deleted, :profile_image)
+    .permit(:name, :unique_id, :email, :date_of_birth,
+            :introduction, :private_status, :is_deleted, :email_status, :profile_image)
   end
 
   def ensure_nomal_end_user
