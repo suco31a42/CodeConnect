@@ -36,7 +36,8 @@
 - ブックマーク機能
 - いいね機能
 - 検索機能
-- 通知メール機能(受信設定可)
+- ユーザーの非公開設定
+- 通知メール機能(受信ON-OFF設定可)
 
 ## 設計書
 <!--テーマを設定・提出する時点では不要です-->
@@ -53,7 +54,7 @@ https://www.figma.com/file/PxEM75MF2jfGGirZtlGCFP/CodeConnect?type=design&node-i
 ## 開発環境
 - OS：Linux(CantOS)
 - 言語：HTML,CSS,JavaScript,Ruby,MySQL
-- CI/cD：github actions
+- CI/CD：github actions
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
